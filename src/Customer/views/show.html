@@ -57,18 +57,22 @@
         <button class="button-secondary place-center-end">save</button>
       </div>
     </form>
-    <div class="mt-5 overflow-y-auto">
-      <div
-              class="odd-child-bg-body-light odd-child-text-white pl-2"
-              partial="Person/views/contactCard.html"
-              n-if="persons.length > 0"
-              n-for="persons as i => person"></div>
-      <a href="/person/new/{{id}}" class="button-primary flex gap-x-2 place-end-end">
-        <svg class="w-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-        </svg>
-        add person
-      </a>
+    <div class="mt-5 overflow-y-auto" style="max-height: 320px">
+      <div>
+        <a href="/person/new/{{id}}" class="button-primary flex gap-x-2 place-end-end">
+          <svg class="w-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          add person
+        </a>
+        <div
+                class="odd-child-bg-body-light odd-child-text-white pl-2"
+                partial="Person/views/contactCard.html"
+                n-if="persons.length > 0"
+                n-for="persons as i => person"></div>
+      </div>
+
+
     </div>
 
   </div>

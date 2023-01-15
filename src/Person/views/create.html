@@ -1,3 +1,49 @@
 <section class="w-3/5 mx-auto mt-5">
+    <form action="/person/new" method="post" class="border-1 border-neutral border-rounded p-3 relative mt-5">
+        <h3 class="absolute -top-11 p-2 bg-white-light">New Person</h3>
+        <div class="grid grid-cols-5 gap-x-2">
+            <div class="input">
+                <select id="gender" name="gender" required>
+                    <option value="0">Mrs.</option>
+                    <option value="1">Mr.</option>
+                    <option value="2">Mx.</option>
+                </select>
+                <label for="gender">Gender</label>
+            </div>
+            <div class="input span-x-2">
+                <input type="text" id="firstName" name="firstName" required>
+                <label for="firstName">First Name</label>
+            </div>
+            <div class="input span-x-2">
+                <input type="text" id="middleName" name="middleName" placeholder="Middle name">
+                <label for="middleName">Middle Name</label>
+            </div>
+            <div class="input span-x-2">
+                <input type="text" id="lastName" name="lastName" required>
+                <label for="lastName">Last Name</label>
+            </div>
+            <div class="input span-x-3">
+                <input list="customers" type="text" id="customer" name="customer" placeholder="customer" value="{{customer}}">
+                <label for="customer">Customer</label>
+                <datalist id="customers">
+                    <option n-for="customers as c" value="{{c.customerNumber}} | {{c.title}}">
+                </datalist>
+            </div>
+        </div>
 
+        <div class="grid grid-cols-2 gap-x-2">
+            <div class="input">
+                <input type="email" id="email" name="email" placeholder="Email">
+                <label for="email">Email</label>
+            </div>
+            <div class="input">
+                <input type="tel" id="phone" name="phone" placeholder="phone">
+                <label for="phone">Phone</label>
+            </div>
+
+        </div>
+        <div class="grid">
+            <button class="button-secondary place-center-end">save</button>
+        </div>
+    </form>
 </section>
