@@ -1,0 +1,79 @@
+<form action="/settings/company" method="post">
+  <article class="border-1 border-neutral border-rounded p-3 relative mt-5">
+    <h3 class="absolute -top-11 p-2 bg-white-light">Company</h3>
+    <div>
+      <input type="hidden" name="id" value="{{data.id}}">
+      <div class="input">
+        <input id="name" type="text" name="name" value="{{data.name}}" required>
+        <label for="name">Name</label>
+      </div>
+      <div class="input">
+        <input id="street" type="text" name="street" value="{{data.street}}" required>
+        <label for="street">Street</label>
+      </div>
+      <div class="grid grid-cols-3 gap-3">
+        <div class="input">
+          <input id="state" type="text" name="state" value="{{data.state}}" required>
+          <label for="state">State</label>
+        </div>
+        <div class="input">
+          <input id="place" type="text" name="place" value="{{data.place}}" required>
+          <label for="place">Place</label>
+        </div>
+        <div class="input">
+          <input id="postalCode" type="text" name="postalCode" value="{{data.postalCode}}"
+                 required>
+          <label for="postalCode">Postal code</label>
+        </div>
+      </div>
+      <div class="input">
+        <select id="country" name="country" data-selected="{{data.country}}" required>
+          <option value="" disabled selected></option>
+          <option n-for="countries as country => name" value="{{country}}">{{name}}</option>
+
+        </select>
+        <label for="country">Country</label>
+      </div>
+
+
+    </div>
+  </article>
+  <article class="border-1 border-neutral border-rounded p-3 relative mt-5">
+    <h3 class="absolute -top-11 p-2 bg-white-light">Bank</h3>
+    <div>
+      <div class="input">
+        <input id="bankName" type="text" name="bankName" value="{{data.bankName}}" required>
+        <label for="bankName">Bank Name</label>
+      </div>
+      <div class="input">
+        <input id="accountName" type="text" name="accountName" value="{{data.accountName}}"
+               required>
+        <label for="accountName">Account Name (usually company name)</label>
+      </div>
+      <div class="input">
+        <input id="swiftBic" type="text" name="swiftBic" value="{{data.swiftBic}}" required>
+        <label for="swiftBic">BIC / SWIFT</label>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="input">
+          <input id="account" type="text" name="accountNumber" value="{{data.accountNumber}}"
+                 required>
+          <label for="account">Account Number</label>
+        </div>
+        <div class="input">
+          <input id="routingNumber" type="text" name="routingNumber"
+                 value="{{data.routingNumber}}"
+                 required>
+          <label for="routingNumber">Routing Number</label>
+        </div>
+
+      </div>
+
+    </div>
+  </article>
+  <div class="grid mt-5">
+    <div class="place-end-end">
+      <button class="button-primary">Save</button>
+    </div>
+  </div>
+</form>

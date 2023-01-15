@@ -1,0 +1,15 @@
+{
+    "require": {
+        "neoan.io/core": "^0.2.2",
+        "neoan3-apps/session": "^1.0",
+        "sroehrl/php-i18n-translate": "^2.0",
+      "ext-dom": "*",
+      "ext-libxml": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "./src/",
+            "Config\\": "./config/"
+        }
+    }
+}

@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+
+
+use Neoan\Cli\Application;
+use Neoan\Helper\Setup;
+use Neoan\NeoanApp;
+
+require_once __DIR__ . '/vendor/autoload.php';
+$setup = new Setup();
+$setup->setPublicPath(__DIR__ . '/public')->setLibraryPath(__DIR__ . '/src');
+
+new \Config\Config($app = new NeoanApp($setup, __DIR__));
+
+$console = new Application($app);
+$console->run();

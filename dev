@@ -1,0 +1,5 @@
+#!/usr/bin/env php
+<?php
+ini_set('session.gc_maxlifetime', 5600);
+session_set_cookie_params(5600);
+shell_exec('php -S localhost:8080 public/index.php');

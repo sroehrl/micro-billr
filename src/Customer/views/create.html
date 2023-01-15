@@ -1,0 +1,27 @@
+<section class="w-3/5 mx-auto mt-5">
+  <form action="/customer/new" method="post" class="border-1 border-neutral border-rounded p-3 relative mt-5">
+    <h3 class="absolute -top-11 p-2 bg-white-light">New Customer</h3>
+    <div class="flex gap-x-3">
+      <div class="input w-12">
+        <input type="text" id="number" name="customerNumber" value="{{customerNumber}}" required>
+        <label for="number">Number</label>
+      </div>
+      <div class="input">
+        <input id="title" type="text" name="title" required>
+        <label for="title">Name</label>
+      </div>
+      <div class="input">
+        <input id="email" type="email" name="emailAddress" required>
+        <label for="email">Email</label>
+      </div>
+      <div class="input">
+        <input id="registry" type="text" name="registry" placeholder="s">
+        <label for="registry">Registry</label>
+      </div>
+
+    </div>
+    <div class="grid">
+      <button class="button-secondary place-center-end">create</button>
+    </div>
+  </form>
+</section>

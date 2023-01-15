@@ -1,0 +1,60 @@
+@import "mixins";
+$displays: ("block", "inline", "inline-block", "flex", "inline-flex", "none");
+
+@each $display in $displays {
+  @include mapBreakPoints("#{$display}"){
+    display: unquote($display) !important;
+  }
+  .#{$display}{
+    display: unquote($display);
+  }
+}
+
+$positions: ("absolute", "sticky", "fixed", "relative");
+
+@each $position in $positions {
+  .#{$position}{
+    position: unquote($position);
+  }
+  @include mapBreakPoints("#{$position}"){
+    position: unquote($position);
+  }
+}
+$cursors: ("pointer");
+
+@each $cursor in $cursors{
+  .cursor-#{$cursor}{
+    cursor: pointer;
+  }
+
+}
+
+$overflows: ("auto", "scroll", "hidden");
+
+@each $overflow in $overflows{
+  .overflow-#{$overflow}{
+    overflow: unquote($overflow);
+  }
+  .overflow-x-#{$overflow}{
+    overflow-x: unquote($overflow);
+  }
+  .overflow-y-#{$overflow}{
+    overflow-y: unquote($overflow);
+  }
+}
+
+// scrollbar
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: map-get($colors, "secondary");
+}
+::-webkit-scrollbar-thumb:hover {
+  background: map-get($colors, "secondary-dark");;
+}

@@ -1,0 +1,97 @@
+<div>
+  <section class="p-2">
+    <h1 class="font-lg">Products</h1>
+    <table class="w-full">
+      <thead>
+      <tr>
+        <th>Number</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Type</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="" n-for="data as i => product">
+        <td class="text-center">{{product.productNumber}}</td>
+        <td class="text-center">
+          <strong data-toggle-hover="#info-{{i}}">{{product.name}}</strong>
+          <div class="relative" style="min-width: 160px">
+            <em id="info-{{i}}"
+                class="absolute bg-white p-2 left-0 z-1 border-1 border-rounded none">{{product.description}}</em>
+          </div>
+
+        </td>
+        <td style="text-align: right">
+                            <span data-toggle-hover="#taxable-{{i}}"
+                                  i18n-currency="{{currency}}">{{product.price}}</span>
+          <div class="relative">
+            <p id="taxable-{{i}}" style="width: 120px"
+               class="absolute text-center bg-white p-2 left-0 z-1 border-1 border-rounded none">
+              Product is <strong n-if="!product.taxable">not</strong> taxable
+            </p>
+          </div>
+        </td>
+        <td class="text-center">{{product.billingType}}</td>
+        <td class="text-center relative">
+          <button class="button-danger font-md" data-toggle-show="#confirm-{{i}}">delete</button>
+          <div id="confirm-{{i}}" class="text-danger p-2 bg-white absolute top-0 z-1 none"
+               style="min-width: 120px">
+            Are you sure? <br>
+            <div class="inline-flex gap-x-2">
+              <button class="button-danger font-md" data-delete-id="{{product.id}}"
+                      data-delete="/api/product">delete
+              </button>
+              <button class="button-primary font-md" data-toggle-show="#confirm-{{i}}">no!
+              </button>
+            </div>
+
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </section>
+  <form action="/settings/products" method="post">
+    <article class="border-1 border-neutral border-rounded p-3 relative mt-5">
+      <h3 class="absolute -top-11 p-2 bg-white-light">New Product</h3>
+      <div class="grid grid-cols-3 gap-3">
+        <div class="input">
+          <input id="productNumber" type="text" name="productNumber" required>
+          <label for="productNumber">Product Number</label>
+        </div>
+        <div class="input">
+          <input id="name" type="text" name="name" required>
+          <label for="name">Name</label>
+        </div>
+        <div class="input">
+          <input id="price" step="0.01" type="number" name="price" required>
+          <label for="price">Price</label>
+        </div>
+        <div class="input">
+          <input id="taxable" type="checkbox" name="taxable">
+          <label for="taxable">Is Taxable?</label>
+        </div>
+
+        <div class="input">
+          <select id="type" name="billingType" required>
+            <option value="" disabled selected></option>
+            <option value="hourly">Hourly</option>
+            <option value="flatrate">Flatrate</option>
+          </select>
+          <label for="type">Rate type</label>
+        </div>
+        <div class="input">
+          <textarea rows="1" id="description" name="description" required></textarea>
+          <label for="description">Description</label>
+        </div>
+      </div>
+      <div class="grid mt-5">
+        <div class="place-end-end">
+          <button class="button-primary">Create</button>
+        </div>
+      </div>
+    </article>
+  </form>
+</div>

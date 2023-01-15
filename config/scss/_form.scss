@@ -1,0 +1,27 @@
+.input {
+  @extend .mb-3, .mt-4, .relative;
+  label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80%;
+    display: initial;
+    transition: 0.2s;
+  }
+
+  input, select, textarea{
+    &::placeholder{
+      color:transparent;
+    }
+
+    @extend .w-full, .border-b-1, .border-l-0, .border-t-0, .border-r-0;
+    &:focus + label {
+      top: -1.2rem;
+    }
+    &:valid:not(:placeholder-shown) + label {
+      top: -1.2rem;
+    }
+
+
+  }
+}

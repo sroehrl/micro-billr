@@ -1,0 +1,14 @@
+@import "mixins";
+
+@each $name, $color in $colors {
+  @include withHover("bg-#{$name}") {
+    background-color: $color;
+  }
+  @include withHover("even-child-bg-#{$name}:nth-child(even)") {
+    background-color: $color;
+  }
+  @include withHover("odd-child-bg-#{$name}:nth-child(odd)") {
+    background-color: $color;
+  }
+
+}

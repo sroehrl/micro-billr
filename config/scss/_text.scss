@@ -1,0 +1,28 @@
+@import "mixins";
+@each $name, $color in $colors {
+  @include withHover("text-#{$name}") {
+    color: $color;
+  }
+  @include withHover("odd-child-text-#{$name}:nth-child(odd)") {
+    color: $color;
+  }
+  @include withHover("even-child-text-#{$name}:nth-child(even)") {
+    color: $color;
+  }
+}
+
+$fontSizes: ("sm": .6rem, "md": .8rem, "lg": 1.4rem, "xl": 2.2rem);
+
+@each $name, $size in $fontSizes{
+  .font-#{$name}{
+    font-size: $size;
+  }
+}
+
+$aligns: ("center", "right", "justify", "inherit", "start", "end");
+
+@each $name in $aligns{
+  .text-#{$name}{
+    text-align: unquote($name);
+  }
+}

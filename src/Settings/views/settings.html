@@ -1,0 +1,34 @@
+<section class="flex gap-3">
+    <nav class="border-r-1 border-secondary m-0">
+        <a href="/settings/company" class="block p-3 bg-secondary-light text-white border-b-1">Your company</a>
+        <a href="/settings/products" class="block p-3 bg-secondary-light text-white border-b-1">Your products</a>
+        <a href="/settings/billing" class="block p-3 bg-secondary-light text-white border-b-1">Billing</a>
+        <a href="/settings/mailing" class="block p-3 bg-secondary-light text-white border-b-1">Mailing</a>
+
+    </nav>
+    <div>
+        <div>
+            <div n-if="tab == 'company'" partial="Settings/views/company.html"></div>
+        </div>
+        <div>
+            <div n-if="tab == 'products'" partial="Settings/views/products.html"></div>
+        </div>
+        <div>
+            <div n-if="tab == 'billing'">
+                Kommt Zeit, kommt Rat
+            </div>
+        </div>
+        <div>
+            <div n-if="tab == 'mailing'">
+                Kommt Zeit, kommt Rat : Mailing
+            </div>
+        </div>
+
+    </div>
+    <script type="module">
+        import Toast from "/js/toast.js";
+
+        new Toast('{{feedback}}').show(5)
+    </script>
+
+</section>
