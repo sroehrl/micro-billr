@@ -12,7 +12,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr class="" n-for="data as i => product">
+      <tr class="" n-if="data.length>0" n-for="data as i => product">
         <td class="text-center">{{product.productNumber}}</td>
         <td class="text-center">
           <strong data-toggle-hover="#info-{{i}}">{{product.name}}</strong>

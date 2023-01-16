@@ -18,8 +18,8 @@ class Login implements Routable
     public function __invoke(): array
     {
         /*$newUser = new UserModel([
-            'email' => 'stefan@retech-software.de',
-            'password' => 'STR8682',
+            'email' => 'stefan.roehrl@outlook.com',
+            'password' => '123123',
         ]);
         $newUser->privilege = Privilege::ADMIN;
         $newUser->store();*/

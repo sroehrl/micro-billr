@@ -32,7 +32,6 @@ class Config
 
         $this->typeSetup($app->injectionProvider->get(Setup::class))
             ->setUseSkeleton(true)
-            ->setDefaultOutput(ResponseOutput::HTML)
             ->setSkeletonHTML('config/skeleton.html')
             ->setSkeletonComponentPlacement('content')
             ->setSkeletonVariables($skeletonVariables)

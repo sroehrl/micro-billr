@@ -1,0 +1,37 @@
+<section class="w-3/5 mx-auto mt-5">
+  <form action="/project/new" method="post" class="border-1 border-neutral border-rounded p-3 relative mt-5">
+    <h3 class="absolute -top-11 p-2 bg-white-light">New Project</h3>
+    <div class="input">
+      <input type="text" id="title" required>
+      <label for="title">Title</label>
+    </div>
+    <div class="grid grid-cols-2 gap-3">
+      <div class="input relative">
+        <input type="hidden" name="customerId" id="customerId">
+        <input type="text" id="customer" required>
+        <label for="customer">Customer</label>
+      </div>
+      <div class="input relative">
+        <input type="hidden" name="personId" id="personId">
+        <input type="text" id="person" required>
+        <label for="person">Person</label>
+      </div>
+    </div>
+  </form>
+  <script type="module">
+    import Autocomplete from "/js/autocomplete.js";
+    let personSelection;
+    new Autocomplete('#customer', '#customerId')
+            .setEndpoint('/api/customer?search=')
+            .setDisplayProperty('title')
+            .onSelect(()=>{
+              if(!personSelection){
+                personSelection = new Autocomplete('#person','#personId')
+              }
+              const customerId = _('#customerId').value;
+              personSelection
+                      .setEndpoint(`/api/person?customerId=${customerId}&personId=`)
+                      .setDisplayProperty('firstName')
+            })
+  </script>
+</section>
