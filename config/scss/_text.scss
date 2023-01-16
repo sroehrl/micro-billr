@@ -26,3 +26,11 @@ $aligns: ("center", "right", "justify", "inherit", "start", "end");
     text-align: unquote($name);
   }
 }
+
+$decorations: ("underline");
+
+@each $name in $decorations{
+  .text-#{$name}{
+    text-decoration: unquote($name);
+  }
+}

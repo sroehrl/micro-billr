@@ -17,12 +17,6 @@ class Login implements Routable
 {
     public function __invoke(): array
     {
-        /*$newUser = new UserModel([
-            'email' => 'stefan.roehrl@outlook.com',
-            'password' => '123123',
-        ]);
-        $newUser->privilege = Privilege::ADMIN;
-        $newUser->store();*/
 
 
         Store::write('pageTitle', 'Login');
