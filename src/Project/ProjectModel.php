@@ -4,15 +4,17 @@ namespace App\Project;
 
 use App\Customer\CustomerModel;
 use App\Person\PersonModel;
+use Config\TargetDate;
+use Neoan\Model\Attributes\IsEnum;
 use Neoan\Model\Attributes\IsForeignKey;
 use Neoan\Model\Attributes\IsPrimaryKey;
-use Neoan\Model\Attributes\Transform;
-use Neoan\Model\Attributes\Type;
-use Neoan\Model\Helper\DateTimeProperty;
 use Neoan\Model\Model;
 use Neoan\Model\Traits\TimeStamps;
-use Neoan\Model\Transformers\LockedTimeIn;
 
+/**
+ * @method ProjectModel withCustomer()
+ * @method ProjectModel withPerson()
+ */
 class ProjectModel extends Model
 {
     #[IsPrimaryKey]
@@ -26,12 +28,35 @@ class ProjectModel extends Model
 
     public string $title;
 
-    #[
-        Type('datetime'),
-        Transform(LockedTimeIn::class)
-    ]
-    public ?DateTimeProperty $targetedAt = null;
+    #[IsEnum(ProjectStatus::class)]
+    public ProjectStatus $status = ProjectStatus::PLANNED;
 
-    use TimeStamps;
+    public function calendarEvent(): array
+    {
+        $event = [
+            'id' => 'project-' . $this->id,
+            'allDay' => true,
+            'title' => $this->customer()->title . ' - ' . $this->title,
+            'url' => '/project/' . $this->id
+        ];
+        if(isset($this->startedAt->dateTime)){
+            $event['start'] = $this->startedAt->dateTime->format("Y-m-d\\TH:i:sO");
+        }
+        if(isset($this->targetedAt->dateTime)){
+            $event['end'] = $this->targetedAt->dateTime->format("Y-m-d\\TH:i:sO");
+        }
+        return $event;
+    }
 
+   use TimeStamps;
+   use TargetDate;
+
+   protected function afterStore(): void
+   {
+       if(!$this->startedAt->value && $this->status === ProjectStatus::IN_PROGRESS) {
+
+           $this->startedAt->set('now');
+           $this->store();
+       }
+   }
 }

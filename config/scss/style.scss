@@ -1,14 +1,15 @@
 $colors: (
-        "primary": #0c34b5,
+        "primary": #1be1db,
         "secondary": #27b3e1,
         "warning": #ca921a,
-        "danger": #bc2828,
+        "danger": #e84040,
         "smug": #f1f1f1,
         "white": #ffffff,
         "neutral" : #373737,
         "body": #373434,
         "accent": rgb(117, 193, 129),
-        "contrast": rgb(73, 77, 85)
+        "contrast": rgb(73, 77, 85),
+        "transparent": transparent
 );
 $breakPoints: (
         "sm": 576px,

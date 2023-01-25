@@ -1,0 +1,62 @@
+<section class="flex gap-3">
+    <nav class="border-r-1 border-secondary m-0">
+        <a href="/project/{{project.id}}/overview" class="block p-3 bg-secondary-light text-white border-b-1" data-class="{'shadow-primary border-primary': '{{tab}}' === 'overview'}">Overview</a>
+        <a href="/project/{{project.id}}/estimate" class="block p-3 bg-secondary-light text-white border-b-1" data-class="{'shadow-primary border-primary': '{{tab}}' === 'estimate'}">Estimate</a>
+        <a href="/project/{{project.id}}/milestones" class="block p-3 bg-secondary-light text-white border-b-1" data-class="{'shadow-primary border-primary': '{{tab}}' === 'milestones'}">Milestones</a>
+        <a href="/project/{{project.id}}/tracking" class="block p-3 bg-secondary-light text-white border-b-1" data-class="{'shadow-primary border-primary': '{{tab}}' === 'tracking'}">Tracking</a>
+        <a href="/project/{{project.id}}/communication" class="block p-3 bg-secondary-light text-white border-b-1" data-class="{'shadow-primary border-primary': '{{tab}}' === 'communication'}">Communication</a>
+        <a href="/project/{{project.id}}/bill" class="block p-3 bg-secondary-light text-white border-b-1" data-class="{'shadow-primary border-primary': '{{tab}}' === 'bill'}">Billing</a>
+
+    </nav>
+    <div class="w-4/5 mx-auto mt-5 flex-1">
+        <form method="post" action="/project/{{project.id}}" class="border-1 border-neutral border-rounded p-3 relative mt-5 ">
+            <h3 class="absolute -top-11 p-2 bg-white-light">Project: {{project.title}}</h3>
+            <div class="grid grid-cols-4 gap-3 mb-3 border-b-1 pb-3">
+                <div class="">Customer:</div>
+                <div class="place-center-start">
+                    <a href="/customer/{{project.customer.id}}">{{project.customer.title}}</a>
+                </div>
+                <div>Responsible:</div>
+                <div class="place-center" >{{project.person.firstName}} {{project.person.lastName}}</div>
+            </div>
+            <div class="grid grid-cols-3 gap-3">
+                <div class="input">
+                    <input type="date" name="startedAt" id="startedAt" placeholder="today" value="{{project.startDate}}">
+                    <label for="startedAt">Start date</label>
+                </div>
+                <div class="input">
+                    <input type="date" name="targetedAt" id="targetedAt" placeholder="today" value="{{project.targetDate}}">
+                    <label for="targetedAt">Target date</label>
+                </div>
+                <div class="input">
+                    <select name="status" id="status" required data-selected="{{project.status}}">
+                        <option n-for="stati as status" value="{{status}}">{{status}}</option>
+                    </select>
+                    <label for="status">Status</label>
+                </div>
+            </div>
+            <div class="grid">
+                <button class="button-secondary-light place-end">update</button>
+            </div>
+        </form>
+        <div>
+            <div n-if="tab === 'overview'" partial="Project/views/overview.html"></div>
+        </div>
+        <div>
+            <div n-if="tab === 'milestones'" partial="Project/views/milestones.html"></div>
+        </div>
+        <div>
+            <div n-if="tab === 'tracking'" partial="Project/views/timesheet.html"></div>
+        </div>
+        <div>
+            <div n-if="tab === 'bill'" partial="Project/views/bill.html"></div>
+        </div>
+
+    </div>
+    <script type="module">
+        import Toast from "/js/toast.js";
+
+        new Toast(queryParameter.feedback).show(5)
+        window.history.pushState({},null,window.location.pathname);
+    </script>
+</section>

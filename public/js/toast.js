@@ -8,7 +8,7 @@ export default class Toast{
         this.backGround = className;
     }
     show(seconds = 4) {
-        if(this.content.length<1){
+        if(!this.content || this.content.length<1){
             return
         }
 

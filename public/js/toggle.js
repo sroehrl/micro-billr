@@ -23,3 +23,14 @@ function toggleOnEvent(actionEvent, element, target) {
         })
     })
 }
+
+// class
+__('[data-class]').forEach(element => {
+    console.log(element.dataset.class)
+    const classConditions = eval('(' +element.dataset.class+')')
+    Object.keys(classConditions).forEach(className => {
+        if(classConditions[className]){
+            element.className += ' ' +className;
+        }
+    })
+})

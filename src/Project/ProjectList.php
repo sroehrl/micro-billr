@@ -14,8 +14,20 @@ class ProjectList implements Routable
     {
         $page = Request::getQuery('page') ?? 1;
         $sort = Request::getQuery('sort') ?? 'title';
-        return ProjectModel::paginate($page, 30)
-            ->ascending($sort)
+        $sortDirection = 'ascending';
+        if(str_starts_with($sort, '-')){
+            $sort = substr($sort, 1);
+            $sortDirection = 'descending';
+        }
+        $filter = Request::getQuery('filter') ? ['status' => Request::getQuery('filter')] : [];
+        $pagination =  ProjectModel::paginate($page, 30)
+            ->where($filter)
+            ->{$sortDirection}($sort)
             ->get();
+        $pagination['collection']->each(function (ProjectModel $item){
+            $item->projectStatus = $item->status->value;
+        });
+
+        return $pagination;
     }
 }

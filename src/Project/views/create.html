@@ -2,20 +2,23 @@
   <form action="/project/new" method="post" class="border-1 border-neutral border-rounded p-3 relative mt-5">
     <h3 class="absolute -top-11 p-2 bg-white-light">New Project</h3>
     <div class="input">
-      <input type="text" id="title" required>
+      <input type="text" id="title" name="title" required>
       <label for="title">Title</label>
     </div>
     <div class="grid grid-cols-2 gap-3">
       <div class="input relative">
-        <input type="hidden" name="customerId" id="customerId">
+        <input type="hidden" name="customerId" id="customerId" required>
         <input type="text" id="customer" required>
         <label for="customer">Customer</label>
       </div>
       <div class="input relative">
-        <input type="hidden" name="personId" id="personId">
+        <input type="hidden" name="personId" id="personId" required>
         <input type="text" id="person" required>
         <label for="person">Person</label>
       </div>
+    </div>
+    <div class="grid">
+      <button class="button-secondary place-center-end">create</button>
     </div>
   </form>
   <script type="module">
@@ -25,13 +28,16 @@
             .setEndpoint('/api/customer?search=')
             .setDisplayProperty('title')
             .onSelect(()=>{
+              _('#personId').value = null;
+              _('#person').value = '';
+
               if(!personSelection){
                 personSelection = new Autocomplete('#person','#personId')
               }
               const customerId = _('#customerId').value;
               personSelection
-                      .setEndpoint(`/api/person?customerId=${customerId}&personId=`)
-                      .setDisplayProperty('firstName')
+                      .setEndpoint(`/api/person?customerId=${customerId}&search=`)
+                      .setDisplayProperty('fullName')
             })
   </script>
 </section>

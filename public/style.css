@@ -357,6 +357,11 @@ body {
   line-height: 1.6;
 }
 
+::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 0;
+}
+
 h1 {
   line-height: 1.2;
   font-size: 2.4rem;
@@ -406,17 +411,17 @@ h6 {
 }
 
 pre {
-  border-left: 0.3rem solid #0c34b5;
+  border-left: 0.3rem solid #1be1db;
   padding: 1em;
   border-radius: 0.3em;
 }
 
 a {
-  color: #0c34b5;
+  color: #1be1db;
   text-decoration: none;
 }
 a:hover {
-  color: #2f5df1;
+  color: #5eece7;
 }
 
 blockquote {
@@ -427,12 +432,31 @@ blockquote {
 }
 
 input, textarea, select {
+  background: transparent;
+  color: inherit;
+  min-height: 30px;
   outline: none;
   padding: 0;
 }
 
 select {
   padding-bottom: 3px;
+  transform: translateY(-1px);
+}
+
+input[type=date] {
+  transform: translateY(-1px);
+}
+
+.button-transparent-opaque {
+  border-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+}
+.button-transparent-opaque:hover {
+  background-color: transparent;
+  border-color: rgba(0, 0, 0, 0);
+  color: rgba(0, 0, 0, 0);
 }
 
 .button-contrast-opaque {
@@ -502,14 +526,14 @@ select {
 }
 
 .button-danger-opaque {
-  border-color: rgba(188, 40, 40, 0.5);
-  background-color: rgba(188, 40, 40, 0.5);
+  border-color: rgba(232, 64, 64, 0.5);
+  background-color: rgba(232, 64, 64, 0.5);
   color: white;
 }
 .button-danger-opaque:hover {
   background-color: transparent;
-  border-color: rgba(188, 40, 40, 0.5);
-  color: rgba(188, 40, 40, 0.5);
+  border-color: rgba(232, 64, 64, 0.5);
+  color: rgba(232, 64, 64, 0.5);
 }
 
 .button-warning-opaque {
@@ -535,36 +559,36 @@ select {
 }
 
 .button-primary-opaque {
-  border-color: rgba(12, 52, 181, 0.5);
-  background-color: rgba(12, 52, 181, 0.5);
+  border-color: rgba(27, 225, 219, 0.5);
+  background-color: rgba(27, 225, 219, 0.5);
   color: white;
 }
 .button-primary-opaque:hover {
   background-color: transparent;
-  border-color: rgba(12, 52, 181, 0.5);
-  color: rgba(12, 52, 181, 0.5);
+  border-color: rgba(27, 225, 219, 0.5);
+  color: rgba(27, 225, 219, 0.5);
 }
 
 .button-primary-dark-opaque {
-  border-color: rgba(12, 39, 127, 0.5);
-  background-color: rgba(12, 39, 127, 0.5);
+  border-color: rgba(27, 158, 154, 0.5);
+  background-color: rgba(27, 158, 154, 0.5);
   color: white;
 }
 .button-primary-dark-opaque:hover {
   background-color: transparent;
-  border-color: rgba(12, 39, 127, 0.5);
-  color: rgba(12, 39, 127, 0.5);
+  border-color: rgba(27, 158, 154, 0.5);
+  color: rgba(27, 158, 154, 0.5);
 }
 
 .button-primary-light-opaque {
-  border-color: rgba(47, 93, 241, 0.5);
-  background-color: rgba(47, 93, 241, 0.5);
+  border-color: rgba(94, 236, 231, 0.5);
+  background-color: rgba(94, 236, 231, 0.5);
   color: white;
 }
 .button-primary-light-opaque:hover {
   background-color: transparent;
-  border-color: rgba(47, 93, 241, 0.5);
-  color: rgba(47, 93, 241, 0.5);
+  border-color: rgba(94, 236, 231, 0.5);
+  color: rgba(94, 236, 231, 0.5);
 }
 
 .button-secondary-dark-opaque {
@@ -612,25 +636,25 @@ select {
 }
 
 .button-danger-dark-opaque {
-  border-color: rgba(132, 40, 40, 0.5);
-  background-color: rgba(132, 40, 40, 0.5);
+  border-color: rgba(162, 64, 64, 0.5);
+  background-color: rgba(162, 64, 64, 0.5);
   color: white;
 }
 .button-danger-dark-opaque:hover {
   background-color: transparent;
-  border-color: rgba(132, 40, 40, 0.5);
-  color: rgba(132, 40, 40, 0.5);
+  border-color: rgba(162, 64, 64, 0.5);
+  color: rgba(162, 64, 64, 0.5);
 }
 
 .button-danger-light-opaque {
-  border-color: rgba(220, 92, 92, 0.5);
-  background-color: rgba(220, 92, 92, 0.5);
+  border-color: rgba(239, 121, 121, 0.5);
+  background-color: rgba(239, 121, 121, 0.5);
   color: white;
 }
 .button-danger-light-opaque:hover {
   background-color: transparent;
-  border-color: rgba(220, 92, 92, 0.5);
-  color: rgba(220, 92, 92, 0.5);
+  border-color: rgba(239, 121, 121, 0.5);
+  color: rgba(239, 121, 121, 0.5);
 }
 
 .button-smug-dark-opaque {
@@ -763,6 +787,50 @@ select {
   background-color: transparent;
   border-color: rgba(122, 129, 141, 0.5);
   color: rgba(122, 129, 141, 0.5);
+}
+
+.button-transparent-dark-opaque {
+  border-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+}
+.button-transparent-dark-opaque:hover {
+  background-color: transparent;
+  border-color: rgba(0, 0, 0, 0);
+  color: rgba(0, 0, 0, 0);
+}
+
+.button-transparent-light-opaque {
+  border-color: rgba(77, 77, 77, 0);
+  background-color: rgba(77, 77, 77, 0);
+  color: white;
+}
+.button-transparent-light-opaque:hover {
+  background-color: transparent;
+  border-color: rgba(77, 77, 77, 0);
+  color: rgba(77, 77, 77, 0);
+}
+
+.button-transparent-light {
+  border-color: rgba(77, 77, 77, 0);
+  background-color: rgba(77, 77, 77, 0);
+  color: white;
+}
+.button-transparent-light:hover {
+  background-color: transparent;
+  border-color: rgba(77, 77, 77, 0);
+  color: rgba(77, 77, 77, 0);
+}
+
+.button-transparent-dark {
+  border-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+}
+.button-transparent-dark:hover {
+  background-color: transparent;
+  border-color: rgba(0, 0, 0, 0);
+  color: rgba(0, 0, 0, 0);
 }
 
 .button-contrast-light {
@@ -898,25 +966,25 @@ select {
 }
 
 .button-danger-light {
-  border-color: #dc5c5c;
-  background-color: #dc5c5c;
+  border-color: #ef7979;
+  background-color: #ef7979;
   color: white;
 }
 .button-danger-light:hover {
   background-color: transparent;
-  border-color: #dc5c5c;
-  color: #dc5c5c;
+  border-color: #ef7979;
+  color: #ef7979;
 }
 
 .button-danger-dark {
-  border-color: #842828;
-  background-color: #842828;
+  border-color: #a24040;
+  background-color: #a24040;
   color: white;
 }
 .button-danger-dark:hover {
   background-color: transparent;
-  border-color: #842828;
-  color: #842828;
+  border-color: #a24040;
+  color: #a24040;
 }
 
 .button-warning-light {
@@ -964,36 +1032,36 @@ select {
 }
 
 .button-primary-light {
-  border-color: #2f5df1;
-  background-color: #2f5df1;
+  border-color: #5eece7;
+  background-color: #5eece7;
   color: white;
 }
 .button-primary-light:hover {
   background-color: transparent;
-  border-color: #2f5df1;
-  color: #2f5df1;
+  border-color: #5eece7;
+  color: #5eece7;
 }
 
 .button-primary-dark {
-  border-color: #0c277f;
-  background-color: #0c277f;
+  border-color: #1b9e9a;
+  background-color: #1b9e9a;
   color: white;
 }
 .button-primary-dark:hover {
   background-color: transparent;
-  border-color: #0c277f;
-  color: #0c277f;
+  border-color: #1b9e9a;
+  color: #1b9e9a;
 }
 
 .button-primary {
-  border-color: #0c34b5;
-  background-color: #0c34b5;
+  border-color: #1be1db;
+  background-color: #1be1db;
   color: white;
 }
 .button-primary:hover {
   background-color: transparent;
-  border-color: #0c34b5;
-  color: #0c34b5;
+  border-color: #1be1db;
+  color: #1be1db;
 }
 
 .button-secondary {
@@ -1019,14 +1087,14 @@ select {
 }
 
 .button-danger {
-  border-color: #bc2828;
-  background-color: #bc2828;
+  border-color: #e84040;
+  background-color: #e84040;
   color: white;
 }
 .button-danger:hover {
   background-color: transparent;
-  border-color: #bc2828;
-  color: #bc2828;
+  border-color: #e84040;
+  color: #e84040;
 }
 
 .button-smug {
@@ -1095,6 +1163,17 @@ select {
   color: rgb(73, 77, 85);
 }
 
+.button-transparent {
+  border-color: transparent;
+  background-color: transparent;
+  color: white;
+}
+.button-transparent:hover {
+  background-color: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
 [class^=button-] {
   border-width: 1px;
   border-radius: 5px;
@@ -1103,6 +1182,30 @@ select {
   cursor: pointer;
   text-wrap: none;
   border-color: transparent;
+}
+
+.bg-transparent-opaque {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.hover\:bg-transparent-opaque:hover {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.even-child-bg-transparent-opaque:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.hover\:even-child-bg-transparent-opaque:nth-child(even):hover {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.odd-child-bg-transparent-opaque:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.hover\:odd-child-bg-transparent-opaque:nth-child(odd):hover {
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .bg-contrast-opaque {
@@ -1250,27 +1353,27 @@ select {
 }
 
 .bg-danger-opaque {
-  background-color: rgba(188, 40, 40, 0.5);
+  background-color: rgba(232, 64, 64, 0.5);
 }
 
 .hover\:bg-danger-opaque:hover {
-  background-color: rgba(188, 40, 40, 0.5);
+  background-color: rgba(232, 64, 64, 0.5);
 }
 
 .even-child-bg-danger-opaque:nth-child(even) {
-  background-color: rgba(188, 40, 40, 0.5);
+  background-color: rgba(232, 64, 64, 0.5);
 }
 
 .hover\:even-child-bg-danger-opaque:nth-child(even):hover {
-  background-color: rgba(188, 40, 40, 0.5);
+  background-color: rgba(232, 64, 64, 0.5);
 }
 
 .odd-child-bg-danger-opaque:nth-child(odd) {
-  background-color: rgba(188, 40, 40, 0.5);
+  background-color: rgba(232, 64, 64, 0.5);
 }
 
 .hover\:odd-child-bg-danger-opaque:nth-child(odd):hover {
-  background-color: rgba(188, 40, 40, 0.5);
+  background-color: rgba(232, 64, 64, 0.5);
 }
 
 .bg-warning-opaque {
@@ -1322,75 +1425,75 @@ select {
 }
 
 .bg-primary-opaque {
-  background-color: rgba(12, 52, 181, 0.5);
+  background-color: rgba(27, 225, 219, 0.5);
 }
 
 .hover\:bg-primary-opaque:hover {
-  background-color: rgba(12, 52, 181, 0.5);
+  background-color: rgba(27, 225, 219, 0.5);
 }
 
 .even-child-bg-primary-opaque:nth-child(even) {
-  background-color: rgba(12, 52, 181, 0.5);
+  background-color: rgba(27, 225, 219, 0.5);
 }
 
 .hover\:even-child-bg-primary-opaque:nth-child(even):hover {
-  background-color: rgba(12, 52, 181, 0.5);
+  background-color: rgba(27, 225, 219, 0.5);
 }
 
 .odd-child-bg-primary-opaque:nth-child(odd) {
-  background-color: rgba(12, 52, 181, 0.5);
+  background-color: rgba(27, 225, 219, 0.5);
 }
 
 .hover\:odd-child-bg-primary-opaque:nth-child(odd):hover {
-  background-color: rgba(12, 52, 181, 0.5);
+  background-color: rgba(27, 225, 219, 0.5);
 }
 
 .bg-primary-dark-opaque {
-  background-color: rgba(12, 39, 127, 0.5);
+  background-color: rgba(27, 158, 154, 0.5);
 }
 
 .hover\:bg-primary-dark-opaque:hover {
-  background-color: rgba(12, 39, 127, 0.5);
+  background-color: rgba(27, 158, 154, 0.5);
 }
 
 .even-child-bg-primary-dark-opaque:nth-child(even) {
-  background-color: rgba(12, 39, 127, 0.5);
+  background-color: rgba(27, 158, 154, 0.5);
 }
 
 .hover\:even-child-bg-primary-dark-opaque:nth-child(even):hover {
-  background-color: rgba(12, 39, 127, 0.5);
+  background-color: rgba(27, 158, 154, 0.5);
 }
 
 .odd-child-bg-primary-dark-opaque:nth-child(odd) {
-  background-color: rgba(12, 39, 127, 0.5);
+  background-color: rgba(27, 158, 154, 0.5);
 }
 
 .hover\:odd-child-bg-primary-dark-opaque:nth-child(odd):hover {
-  background-color: rgba(12, 39, 127, 0.5);
+  background-color: rgba(27, 158, 154, 0.5);
 }
 
 .bg-primary-light-opaque {
-  background-color: rgba(47, 93, 241, 0.5);
+  background-color: rgba(94, 236, 231, 0.5);
 }
 
 .hover\:bg-primary-light-opaque:hover {
-  background-color: rgba(47, 93, 241, 0.5);
+  background-color: rgba(94, 236, 231, 0.5);
 }
 
 .even-child-bg-primary-light-opaque:nth-child(even) {
-  background-color: rgba(47, 93, 241, 0.5);
+  background-color: rgba(94, 236, 231, 0.5);
 }
 
 .hover\:even-child-bg-primary-light-opaque:nth-child(even):hover {
-  background-color: rgba(47, 93, 241, 0.5);
+  background-color: rgba(94, 236, 231, 0.5);
 }
 
 .odd-child-bg-primary-light-opaque:nth-child(odd) {
-  background-color: rgba(47, 93, 241, 0.5);
+  background-color: rgba(94, 236, 231, 0.5);
 }
 
 .hover\:odd-child-bg-primary-light-opaque:nth-child(odd):hover {
-  background-color: rgba(47, 93, 241, 0.5);
+  background-color: rgba(94, 236, 231, 0.5);
 }
 
 .bg-secondary-dark-opaque {
@@ -1490,51 +1593,51 @@ select {
 }
 
 .bg-danger-dark-opaque {
-  background-color: rgba(132, 40, 40, 0.5);
+  background-color: rgba(162, 64, 64, 0.5);
 }
 
 .hover\:bg-danger-dark-opaque:hover {
-  background-color: rgba(132, 40, 40, 0.5);
+  background-color: rgba(162, 64, 64, 0.5);
 }
 
 .even-child-bg-danger-dark-opaque:nth-child(even) {
-  background-color: rgba(132, 40, 40, 0.5);
+  background-color: rgba(162, 64, 64, 0.5);
 }
 
 .hover\:even-child-bg-danger-dark-opaque:nth-child(even):hover {
-  background-color: rgba(132, 40, 40, 0.5);
+  background-color: rgba(162, 64, 64, 0.5);
 }
 
 .odd-child-bg-danger-dark-opaque:nth-child(odd) {
-  background-color: rgba(132, 40, 40, 0.5);
+  background-color: rgba(162, 64, 64, 0.5);
 }
 
 .hover\:odd-child-bg-danger-dark-opaque:nth-child(odd):hover {
-  background-color: rgba(132, 40, 40, 0.5);
+  background-color: rgba(162, 64, 64, 0.5);
 }
 
 .bg-danger-light-opaque {
-  background-color: rgba(220, 92, 92, 0.5);
+  background-color: rgba(239, 121, 121, 0.5);
 }
 
 .hover\:bg-danger-light-opaque:hover {
-  background-color: rgba(220, 92, 92, 0.5);
+  background-color: rgba(239, 121, 121, 0.5);
 }
 
 .even-child-bg-danger-light-opaque:nth-child(even) {
-  background-color: rgba(220, 92, 92, 0.5);
+  background-color: rgba(239, 121, 121, 0.5);
 }
 
 .hover\:even-child-bg-danger-light-opaque:nth-child(even):hover {
-  background-color: rgba(220, 92, 92, 0.5);
+  background-color: rgba(239, 121, 121, 0.5);
 }
 
 .odd-child-bg-danger-light-opaque:nth-child(odd) {
-  background-color: rgba(220, 92, 92, 0.5);
+  background-color: rgba(239, 121, 121, 0.5);
 }
 
 .hover\:odd-child-bg-danger-light-opaque:nth-child(odd):hover {
-  background-color: rgba(220, 92, 92, 0.5);
+  background-color: rgba(239, 121, 121, 0.5);
 }
 
 .bg-smug-dark-opaque {
@@ -1823,6 +1926,102 @@ select {
 
 .hover\:odd-child-bg-contrast-light-opaque:nth-child(odd):hover {
   background-color: rgba(122, 129, 141, 0.5);
+}
+
+.bg-transparent-dark-opaque {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.hover\:bg-transparent-dark-opaque:hover {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.even-child-bg-transparent-dark-opaque:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.hover\:even-child-bg-transparent-dark-opaque:nth-child(even):hover {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.odd-child-bg-transparent-dark-opaque:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.hover\:odd-child-bg-transparent-dark-opaque:nth-child(odd):hover {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.bg-transparent-light-opaque {
+  background-color: rgba(77, 77, 77, 0);
+}
+
+.hover\:bg-transparent-light-opaque:hover {
+  background-color: rgba(77, 77, 77, 0);
+}
+
+.even-child-bg-transparent-light-opaque:nth-child(even) {
+  background-color: rgba(77, 77, 77, 0);
+}
+
+.hover\:even-child-bg-transparent-light-opaque:nth-child(even):hover {
+  background-color: rgba(77, 77, 77, 0);
+}
+
+.odd-child-bg-transparent-light-opaque:nth-child(odd) {
+  background-color: rgba(77, 77, 77, 0);
+}
+
+.hover\:odd-child-bg-transparent-light-opaque:nth-child(odd):hover {
+  background-color: rgba(77, 77, 77, 0);
+}
+
+.bg-transparent-light {
+  background-color: rgba(77, 77, 77, 0);
+}
+
+.hover\:bg-transparent-light:hover {
+  background-color: rgba(77, 77, 77, 0);
+}
+
+.even-child-bg-transparent-light:nth-child(even) {
+  background-color: rgba(77, 77, 77, 0);
+}
+
+.hover\:even-child-bg-transparent-light:nth-child(even):hover {
+  background-color: rgba(77, 77, 77, 0);
+}
+
+.odd-child-bg-transparent-light:nth-child(odd) {
+  background-color: rgba(77, 77, 77, 0);
+}
+
+.hover\:odd-child-bg-transparent-light:nth-child(odd):hover {
+  background-color: rgba(77, 77, 77, 0);
+}
+
+.bg-transparent-dark {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.hover\:bg-transparent-dark:hover {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.even-child-bg-transparent-dark:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.hover\:even-child-bg-transparent-dark:nth-child(even):hover {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.odd-child-bg-transparent-dark:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.hover\:odd-child-bg-transparent-dark:nth-child(odd):hover {
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .bg-contrast-light {
@@ -2114,51 +2313,51 @@ select {
 }
 
 .bg-danger-light {
-  background-color: #dc5c5c;
+  background-color: #ef7979;
 }
 
 .hover\:bg-danger-light:hover {
-  background-color: #dc5c5c;
+  background-color: #ef7979;
 }
 
 .even-child-bg-danger-light:nth-child(even) {
-  background-color: #dc5c5c;
+  background-color: #ef7979;
 }
 
 .hover\:even-child-bg-danger-light:nth-child(even):hover {
-  background-color: #dc5c5c;
+  background-color: #ef7979;
 }
 
 .odd-child-bg-danger-light:nth-child(odd) {
-  background-color: #dc5c5c;
+  background-color: #ef7979;
 }
 
 .hover\:odd-child-bg-danger-light:nth-child(odd):hover {
-  background-color: #dc5c5c;
+  background-color: #ef7979;
 }
 
 .bg-danger-dark {
-  background-color: #842828;
+  background-color: #a24040;
 }
 
 .hover\:bg-danger-dark:hover {
-  background-color: #842828;
+  background-color: #a24040;
 }
 
 .even-child-bg-danger-dark:nth-child(even) {
-  background-color: #842828;
+  background-color: #a24040;
 }
 
 .hover\:even-child-bg-danger-dark:nth-child(even):hover {
-  background-color: #842828;
+  background-color: #a24040;
 }
 
 .odd-child-bg-danger-dark:nth-child(odd) {
-  background-color: #842828;
+  background-color: #a24040;
 }
 
 .hover\:odd-child-bg-danger-dark:nth-child(odd):hover {
-  background-color: #842828;
+  background-color: #a24040;
 }
 
 .bg-warning-light {
@@ -2258,75 +2457,75 @@ select {
 }
 
 .bg-primary-light {
-  background-color: #2f5df1;
+  background-color: #5eece7;
 }
 
 .hover\:bg-primary-light:hover {
-  background-color: #2f5df1;
+  background-color: #5eece7;
 }
 
 .even-child-bg-primary-light:nth-child(even) {
-  background-color: #2f5df1;
+  background-color: #5eece7;
 }
 
 .hover\:even-child-bg-primary-light:nth-child(even):hover {
-  background-color: #2f5df1;
+  background-color: #5eece7;
 }
 
 .odd-child-bg-primary-light:nth-child(odd) {
-  background-color: #2f5df1;
+  background-color: #5eece7;
 }
 
 .hover\:odd-child-bg-primary-light:nth-child(odd):hover {
-  background-color: #2f5df1;
+  background-color: #5eece7;
 }
 
 .bg-primary-dark {
-  background-color: #0c277f;
+  background-color: #1b9e9a;
 }
 
 .hover\:bg-primary-dark:hover {
-  background-color: #0c277f;
+  background-color: #1b9e9a;
 }
 
 .even-child-bg-primary-dark:nth-child(even) {
-  background-color: #0c277f;
+  background-color: #1b9e9a;
 }
 
 .hover\:even-child-bg-primary-dark:nth-child(even):hover {
-  background-color: #0c277f;
+  background-color: #1b9e9a;
 }
 
 .odd-child-bg-primary-dark:nth-child(odd) {
-  background-color: #0c277f;
+  background-color: #1b9e9a;
 }
 
 .hover\:odd-child-bg-primary-dark:nth-child(odd):hover {
-  background-color: #0c277f;
+  background-color: #1b9e9a;
 }
 
 .bg-primary {
-  background-color: #0c34b5;
+  background-color: #1be1db;
 }
 
 .hover\:bg-primary:hover {
-  background-color: #0c34b5;
+  background-color: #1be1db;
 }
 
 .even-child-bg-primary:nth-child(even) {
-  background-color: #0c34b5;
+  background-color: #1be1db;
 }
 
 .hover\:even-child-bg-primary:nth-child(even):hover {
-  background-color: #0c34b5;
+  background-color: #1be1db;
 }
 
 .odd-child-bg-primary:nth-child(odd) {
-  background-color: #0c34b5;
+  background-color: #1be1db;
 }
 
 .hover\:odd-child-bg-primary:nth-child(odd):hover {
-  background-color: #0c34b5;
+  background-color: #1be1db;
 }
 
 .bg-secondary {
@@ -2378,27 +2577,27 @@ select {
 }
 
 .bg-danger {
-  background-color: #bc2828;
+  background-color: #e84040;
 }
 
 .hover\:bg-danger:hover {
-  background-color: #bc2828;
+  background-color: #e84040;
 }
 
 .even-child-bg-danger:nth-child(even) {
-  background-color: #bc2828;
+  background-color: #e84040;
 }
 
 .hover\:even-child-bg-danger:nth-child(even):hover {
-  background-color: #bc2828;
+  background-color: #e84040;
 }
 
 .odd-child-bg-danger:nth-child(odd) {
-  background-color: #bc2828;
+  background-color: #e84040;
 }
 
 .hover\:odd-child-bg-danger:nth-child(odd):hover {
-  background-color: #bc2828;
+  background-color: #e84040;
 }
 
 .bg-smug {
@@ -2543,6 +2742,54 @@ select {
 
 .hover\:odd-child-bg-contrast:nth-child(odd):hover {
   background-color: rgb(73, 77, 85);
+}
+
+.bg-transparent {
+  background-color: transparent;
+}
+
+.hover\:bg-transparent:hover {
+  background-color: transparent;
+}
+
+.even-child-bg-transparent:nth-child(even) {
+  background-color: transparent;
+}
+
+.hover\:even-child-bg-transparent:nth-child(even):hover {
+  background-color: transparent;
+}
+
+.odd-child-bg-transparent:nth-child(odd) {
+  background-color: transparent;
+}
+
+.hover\:odd-child-bg-transparent:nth-child(odd):hover {
+  background-color: transparent;
+}
+
+.text-transparent-opaque {
+  color: rgba(0, 0, 0, 0);
+}
+
+.hover\:text-transparent-opaque:hover {
+  color: rgba(0, 0, 0, 0);
+}
+
+.odd-child-text-transparent-opaque:nth-child(odd) {
+  color: rgba(0, 0, 0, 0);
+}
+
+.hover\:odd-child-text-transparent-opaque:nth-child(odd):hover {
+  color: rgba(0, 0, 0, 0);
+}
+
+.even-child-text-transparent-opaque:nth-child(even) {
+  color: rgba(0, 0, 0, 0);
+}
+
+.hover\:even-child-text-transparent-opaque:nth-child(even):hover {
+  color: rgba(0, 0, 0, 0);
 }
 
 .text-contrast-opaque {
@@ -2690,27 +2937,27 @@ select {
 }
 
 .text-danger-opaque {
-  color: rgba(188, 40, 40, 0.5);
+  color: rgba(232, 64, 64, 0.5);
 }
 
 .hover\:text-danger-opaque:hover {
-  color: rgba(188, 40, 40, 0.5);
+  color: rgba(232, 64, 64, 0.5);
 }
 
 .odd-child-text-danger-opaque:nth-child(odd) {
-  color: rgba(188, 40, 40, 0.5);
+  color: rgba(232, 64, 64, 0.5);
 }
 
 .hover\:odd-child-text-danger-opaque:nth-child(odd):hover {
-  color: rgba(188, 40, 40, 0.5);
+  color: rgba(232, 64, 64, 0.5);
 }
 
 .even-child-text-danger-opaque:nth-child(even) {
-  color: rgba(188, 40, 40, 0.5);
+  color: rgba(232, 64, 64, 0.5);
 }
 
 .hover\:even-child-text-danger-opaque:nth-child(even):hover {
-  color: rgba(188, 40, 40, 0.5);
+  color: rgba(232, 64, 64, 0.5);
 }
 
 .text-warning-opaque {
@@ -2762,75 +3009,75 @@ select {
 }
 
 .text-primary-opaque {
-  color: rgba(12, 52, 181, 0.5);
+  color: rgba(27, 225, 219, 0.5);
 }
 
 .hover\:text-primary-opaque:hover {
-  color: rgba(12, 52, 181, 0.5);
+  color: rgba(27, 225, 219, 0.5);
 }
 
 .odd-child-text-primary-opaque:nth-child(odd) {
-  color: rgba(12, 52, 181, 0.5);
+  color: rgba(27, 225, 219, 0.5);
 }
 
 .hover\:odd-child-text-primary-opaque:nth-child(odd):hover {
-  color: rgba(12, 52, 181, 0.5);
+  color: rgba(27, 225, 219, 0.5);
 }
 
 .even-child-text-primary-opaque:nth-child(even) {
-  color: rgba(12, 52, 181, 0.5);
+  color: rgba(27, 225, 219, 0.5);
 }
 
 .hover\:even-child-text-primary-opaque:nth-child(even):hover {
-  color: rgba(12, 52, 181, 0.5);
+  color: rgba(27, 225, 219, 0.5);
 }
 
 .text-primary-dark-opaque {
-  color: rgba(12, 39, 127, 0.5);
+  color: rgba(27, 158, 154, 0.5);
 }
 
 .hover\:text-primary-dark-opaque:hover {
-  color: rgba(12, 39, 127, 0.5);
+  color: rgba(27, 158, 154, 0.5);
 }
 
 .odd-child-text-primary-dark-opaque:nth-child(odd) {
-  color: rgba(12, 39, 127, 0.5);
+  color: rgba(27, 158, 154, 0.5);
 }
 
 .hover\:odd-child-text-primary-dark-opaque:nth-child(odd):hover {
-  color: rgba(12, 39, 127, 0.5);
+  color: rgba(27, 158, 154, 0.5);
 }
 
 .even-child-text-primary-dark-opaque:nth-child(even) {
-  color: rgba(12, 39, 127, 0.5);
+  color: rgba(27, 158, 154, 0.5);
 }
 
 .hover\:even-child-text-primary-dark-opaque:nth-child(even):hover {
-  color: rgba(12, 39, 127, 0.5);
+  color: rgba(27, 158, 154, 0.5);
 }
 
 .text-primary-light-opaque {
-  color: rgba(47, 93, 241, 0.5);
+  color: rgba(94, 236, 231, 0.5);
 }
 
 .hover\:text-primary-light-opaque:hover {
-  color: rgba(47, 93, 241, 0.5);
+  color: rgba(94, 236, 231, 0.5);
 }
 
 .odd-child-text-primary-light-opaque:nth-child(odd) {
-  color: rgba(47, 93, 241, 0.5);
+  color: rgba(94, 236, 231, 0.5);
 }
 
 .hover\:odd-child-text-primary-light-opaque:nth-child(odd):hover {
-  color: rgba(47, 93, 241, 0.5);
+  color: rgba(94, 236, 231, 0.5);
 }
 
 .even-child-text-primary-light-opaque:nth-child(even) {
-  color: rgba(47, 93, 241, 0.5);
+  color: rgba(94, 236, 231, 0.5);
 }
 
 .hover\:even-child-text-primary-light-opaque:nth-child(even):hover {
-  color: rgba(47, 93, 241, 0.5);
+  color: rgba(94, 236, 231, 0.5);
 }
 
 .text-secondary-dark-opaque {
@@ -2930,51 +3177,51 @@ select {
 }
 
 .text-danger-dark-opaque {
-  color: rgba(132, 40, 40, 0.5);
+  color: rgba(162, 64, 64, 0.5);
 }
 
 .hover\:text-danger-dark-opaque:hover {
-  color: rgba(132, 40, 40, 0.5);
+  color: rgba(162, 64, 64, 0.5);
 }
 
 .odd-child-text-danger-dark-opaque:nth-child(odd) {
-  color: rgba(132, 40, 40, 0.5);
+  color: rgba(162, 64, 64, 0.5);
 }
 
 .hover\:odd-child-text-danger-dark-opaque:nth-child(odd):hover {
-  color: rgba(132, 40, 40, 0.5);
+  color: rgba(162, 64, 64, 0.5);
 }
 
 .even-child-text-danger-dark-opaque:nth-child(even) {
-  color: rgba(132, 40, 40, 0.5);
+  color: rgba(162, 64, 64, 0.5);
 }
 
 .hover\:even-child-text-danger-dark-opaque:nth-child(even):hover {
-  color: rgba(132, 40, 40, 0.5);
+  color: rgba(162, 64, 64, 0.5);
 }
 
 .text-danger-light-opaque {
-  color: rgba(220, 92, 92, 0.5);
+  color: rgba(239, 121, 121, 0.5);
 }
 
 .hover\:text-danger-light-opaque:hover {
-  color: rgba(220, 92, 92, 0.5);
+  color: rgba(239, 121, 121, 0.5);
 }
 
 .odd-child-text-danger-light-opaque:nth-child(odd) {
-  color: rgba(220, 92, 92, 0.5);
+  color: rgba(239, 121, 121, 0.5);
 }
 
 .hover\:odd-child-text-danger-light-opaque:nth-child(odd):hover {
-  color: rgba(220, 92, 92, 0.5);
+  color: rgba(239, 121, 121, 0.5);
 }
 
 .even-child-text-danger-light-opaque:nth-child(even) {
-  color: rgba(220, 92, 92, 0.5);
+  color: rgba(239, 121, 121, 0.5);
 }
 
 .hover\:even-child-text-danger-light-opaque:nth-child(even):hover {
-  color: rgba(220, 92, 92, 0.5);
+  color: rgba(239, 121, 121, 0.5);
 }
 
 .text-smug-dark-opaque {
@@ -3263,6 +3510,102 @@ select {
 
 .hover\:even-child-text-contrast-light-opaque:nth-child(even):hover {
   color: rgba(122, 129, 141, 0.5);
+}
+
+.text-transparent-dark-opaque {
+  color: rgba(0, 0, 0, 0);
+}
+
+.hover\:text-transparent-dark-opaque:hover {
+  color: rgba(0, 0, 0, 0);
+}
+
+.odd-child-text-transparent-dark-opaque:nth-child(odd) {
+  color: rgba(0, 0, 0, 0);
+}
+
+.hover\:odd-child-text-transparent-dark-opaque:nth-child(odd):hover {
+  color: rgba(0, 0, 0, 0);
+}
+
+.even-child-text-transparent-dark-opaque:nth-child(even) {
+  color: rgba(0, 0, 0, 0);
+}
+
+.hover\:even-child-text-transparent-dark-opaque:nth-child(even):hover {
+  color: rgba(0, 0, 0, 0);
+}
+
+.text-transparent-light-opaque {
+  color: rgba(77, 77, 77, 0);
+}
+
+.hover\:text-transparent-light-opaque:hover {
+  color: rgba(77, 77, 77, 0);
+}
+
+.odd-child-text-transparent-light-opaque:nth-child(odd) {
+  color: rgba(77, 77, 77, 0);
+}
+
+.hover\:odd-child-text-transparent-light-opaque:nth-child(odd):hover {
+  color: rgba(77, 77, 77, 0);
+}
+
+.even-child-text-transparent-light-opaque:nth-child(even) {
+  color: rgba(77, 77, 77, 0);
+}
+
+.hover\:even-child-text-transparent-light-opaque:nth-child(even):hover {
+  color: rgba(77, 77, 77, 0);
+}
+
+.text-transparent-light {
+  color: rgba(77, 77, 77, 0);
+}
+
+.hover\:text-transparent-light:hover {
+  color: rgba(77, 77, 77, 0);
+}
+
+.odd-child-text-transparent-light:nth-child(odd) {
+  color: rgba(77, 77, 77, 0);
+}
+
+.hover\:odd-child-text-transparent-light:nth-child(odd):hover {
+  color: rgba(77, 77, 77, 0);
+}
+
+.even-child-text-transparent-light:nth-child(even) {
+  color: rgba(77, 77, 77, 0);
+}
+
+.hover\:even-child-text-transparent-light:nth-child(even):hover {
+  color: rgba(77, 77, 77, 0);
+}
+
+.text-transparent-dark {
+  color: rgba(0, 0, 0, 0);
+}
+
+.hover\:text-transparent-dark:hover {
+  color: rgba(0, 0, 0, 0);
+}
+
+.odd-child-text-transparent-dark:nth-child(odd) {
+  color: rgba(0, 0, 0, 0);
+}
+
+.hover\:odd-child-text-transparent-dark:nth-child(odd):hover {
+  color: rgba(0, 0, 0, 0);
+}
+
+.even-child-text-transparent-dark:nth-child(even) {
+  color: rgba(0, 0, 0, 0);
+}
+
+.hover\:even-child-text-transparent-dark:nth-child(even):hover {
+  color: rgba(0, 0, 0, 0);
 }
 
 .text-contrast-light {
@@ -3554,51 +3897,51 @@ select {
 }
 
 .text-danger-light {
-  color: #dc5c5c;
+  color: #ef7979;
 }
 
 .hover\:text-danger-light:hover {
-  color: #dc5c5c;
+  color: #ef7979;
 }
 
 .odd-child-text-danger-light:nth-child(odd) {
-  color: #dc5c5c;
+  color: #ef7979;
 }
 
 .hover\:odd-child-text-danger-light:nth-child(odd):hover {
-  color: #dc5c5c;
+  color: #ef7979;
 }
 
 .even-child-text-danger-light:nth-child(even) {
-  color: #dc5c5c;
+  color: #ef7979;
 }
 
 .hover\:even-child-text-danger-light:nth-child(even):hover {
-  color: #dc5c5c;
+  color: #ef7979;
 }
 
 .text-danger-dark {
-  color: #842828;
+  color: #a24040;
 }
 
 .hover\:text-danger-dark:hover {
-  color: #842828;
+  color: #a24040;
 }
 
 .odd-child-text-danger-dark:nth-child(odd) {
-  color: #842828;
+  color: #a24040;
 }
 
 .hover\:odd-child-text-danger-dark:nth-child(odd):hover {
-  color: #842828;
+  color: #a24040;
 }
 
 .even-child-text-danger-dark:nth-child(even) {
-  color: #842828;
+  color: #a24040;
 }
 
 .hover\:even-child-text-danger-dark:nth-child(even):hover {
-  color: #842828;
+  color: #a24040;
 }
 
 .text-warning-light {
@@ -3698,75 +4041,75 @@ select {
 }
 
 .text-primary-light {
-  color: #2f5df1;
+  color: #5eece7;
 }
 
 .hover\:text-primary-light:hover {
-  color: #2f5df1;
+  color: #5eece7;
 }
 
 .odd-child-text-primary-light:nth-child(odd) {
-  color: #2f5df1;
+  color: #5eece7;
 }
 
 .hover\:odd-child-text-primary-light:nth-child(odd):hover {
-  color: #2f5df1;
+  color: #5eece7;
 }
 
 .even-child-text-primary-light:nth-child(even) {
-  color: #2f5df1;
+  color: #5eece7;
 }
 
 .hover\:even-child-text-primary-light:nth-child(even):hover {
-  color: #2f5df1;
+  color: #5eece7;
 }
 
 .text-primary-dark {
-  color: #0c277f;
+  color: #1b9e9a;
 }
 
 .hover\:text-primary-dark:hover {
-  color: #0c277f;
+  color: #1b9e9a;
 }
 
 .odd-child-text-primary-dark:nth-child(odd) {
-  color: #0c277f;
+  color: #1b9e9a;
 }
 
 .hover\:odd-child-text-primary-dark:nth-child(odd):hover {
-  color: #0c277f;
+  color: #1b9e9a;
 }
 
 .even-child-text-primary-dark:nth-child(even) {
-  color: #0c277f;
+  color: #1b9e9a;
 }
 
 .hover\:even-child-text-primary-dark:nth-child(even):hover {
-  color: #0c277f;
+  color: #1b9e9a;
 }
 
 .text-primary {
-  color: #0c34b5;
+  color: #1be1db;
 }
 
 .hover\:text-primary:hover {
-  color: #0c34b5;
+  color: #1be1db;
 }
 
 .odd-child-text-primary:nth-child(odd) {
-  color: #0c34b5;
+  color: #1be1db;
 }
 
 .hover\:odd-child-text-primary:nth-child(odd):hover {
-  color: #0c34b5;
+  color: #1be1db;
 }
 
 .even-child-text-primary:nth-child(even) {
-  color: #0c34b5;
+  color: #1be1db;
 }
 
 .hover\:even-child-text-primary:nth-child(even):hover {
-  color: #0c34b5;
+  color: #1be1db;
 }
 
 .text-secondary {
@@ -3818,27 +4161,27 @@ select {
 }
 
 .text-danger {
-  color: #bc2828;
+  color: #e84040;
 }
 
 .hover\:text-danger:hover {
-  color: #bc2828;
+  color: #e84040;
 }
 
 .odd-child-text-danger:nth-child(odd) {
-  color: #bc2828;
+  color: #e84040;
 }
 
 .hover\:odd-child-text-danger:nth-child(odd):hover {
-  color: #bc2828;
+  color: #e84040;
 }
 
 .even-child-text-danger:nth-child(even) {
-  color: #bc2828;
+  color: #e84040;
 }
 
 .hover\:even-child-text-danger:nth-child(even):hover {
-  color: #bc2828;
+  color: #e84040;
 }
 
 .text-smug {
@@ -3985,6 +4328,30 @@ select {
   color: rgb(73, 77, 85);
 }
 
+.text-transparent {
+  color: transparent;
+}
+
+.hover\:text-transparent:hover {
+  color: transparent;
+}
+
+.odd-child-text-transparent:nth-child(odd) {
+  color: transparent;
+}
+
+.hover\:odd-child-text-transparent:nth-child(odd):hover {
+  color: transparent;
+}
+
+.even-child-text-transparent:nth-child(even) {
+  color: transparent;
+}
+
+.hover\:even-child-text-transparent:nth-child(even):hover {
+  color: transparent;
+}
+
 .font-sm {
   font-size: 0.6rem;
 }
@@ -4023,6 +4390,10 @@ select {
 
 .text-end {
   text-align: end;
+}
+
+.text-underline {
+  text-decoration: underline;
 }
 
 .p-0 {
@@ -6970,6 +7341,18 @@ select {
   place-self: right right;
 }
 
+.shadow-transparent-opaque {
+  box-shadow: 2px 1px 2px rgba(0, 0, 0, 0);
+}
+
+.hover\:shadow-transparent-opaque:hover {
+  box-shadow: 2px 1px 2px rgba(0, 0, 0, 0);
+}
+
+.border-transparent-opaque {
+  border-color: rgba(0, 0, 0, 0);
+}
+
 .shadow-contrast-opaque {
   box-shadow: 2px 1px 2px rgba(73, 77, 85, 0.5);
 }
@@ -7043,15 +7426,15 @@ select {
 }
 
 .shadow-danger-opaque {
-  box-shadow: 2px 1px 2px rgba(188, 40, 40, 0.5);
+  box-shadow: 2px 1px 2px rgba(232, 64, 64, 0.5);
 }
 
 .hover\:shadow-danger-opaque:hover {
-  box-shadow: 2px 1px 2px rgba(188, 40, 40, 0.5);
+  box-shadow: 2px 1px 2px rgba(232, 64, 64, 0.5);
 }
 
 .border-danger-opaque {
-  border-color: rgba(188, 40, 40, 0.5);
+  border-color: rgba(232, 64, 64, 0.5);
 }
 
 .shadow-warning-opaque {
@@ -7079,39 +7462,39 @@ select {
 }
 
 .shadow-primary-opaque {
-  box-shadow: 2px 1px 2px rgba(12, 52, 181, 0.5);
+  box-shadow: 2px 1px 2px rgba(27, 225, 219, 0.5);
 }
 
 .hover\:shadow-primary-opaque:hover {
-  box-shadow: 2px 1px 2px rgba(12, 52, 181, 0.5);
+  box-shadow: 2px 1px 2px rgba(27, 225, 219, 0.5);
 }
 
 .border-primary-opaque {
-  border-color: rgba(12, 52, 181, 0.5);
+  border-color: rgba(27, 225, 219, 0.5);
 }
 
 .shadow-primary-dark-opaque {
-  box-shadow: 2px 1px 2px rgba(12, 39, 127, 0.5);
+  box-shadow: 2px 1px 2px rgba(27, 158, 154, 0.5);
 }
 
 .hover\:shadow-primary-dark-opaque:hover {
-  box-shadow: 2px 1px 2px rgba(12, 39, 127, 0.5);
+  box-shadow: 2px 1px 2px rgba(27, 158, 154, 0.5);
 }
 
 .border-primary-dark-opaque {
-  border-color: rgba(12, 39, 127, 0.5);
+  border-color: rgba(27, 158, 154, 0.5);
 }
 
 .shadow-primary-light-opaque {
-  box-shadow: 2px 1px 2px rgba(47, 93, 241, 0.5);
+  box-shadow: 2px 1px 2px rgba(94, 236, 231, 0.5);
 }
 
 .hover\:shadow-primary-light-opaque:hover {
-  box-shadow: 2px 1px 2px rgba(47, 93, 241, 0.5);
+  box-shadow: 2px 1px 2px rgba(94, 236, 231, 0.5);
 }
 
 .border-primary-light-opaque {
-  border-color: rgba(47, 93, 241, 0.5);
+  border-color: rgba(94, 236, 231, 0.5);
 }
 
 .shadow-secondary-dark-opaque {
@@ -7163,27 +7546,27 @@ select {
 }
 
 .shadow-danger-dark-opaque {
-  box-shadow: 2px 1px 2px rgba(132, 40, 40, 0.5);
+  box-shadow: 2px 1px 2px rgba(162, 64, 64, 0.5);
 }
 
 .hover\:shadow-danger-dark-opaque:hover {
-  box-shadow: 2px 1px 2px rgba(132, 40, 40, 0.5);
+  box-shadow: 2px 1px 2px rgba(162, 64, 64, 0.5);
 }
 
 .border-danger-dark-opaque {
-  border-color: rgba(132, 40, 40, 0.5);
+  border-color: rgba(162, 64, 64, 0.5);
 }
 
 .shadow-danger-light-opaque {
-  box-shadow: 2px 1px 2px rgba(220, 92, 92, 0.5);
+  box-shadow: 2px 1px 2px rgba(239, 121, 121, 0.5);
 }
 
 .hover\:shadow-danger-light-opaque:hover {
-  box-shadow: 2px 1px 2px rgba(220, 92, 92, 0.5);
+  box-shadow: 2px 1px 2px rgba(239, 121, 121, 0.5);
 }
 
 .border-danger-light-opaque {
-  border-color: rgba(220, 92, 92, 0.5);
+  border-color: rgba(239, 121, 121, 0.5);
 }
 
 .shadow-smug-dark-opaque {
@@ -7328,6 +7711,54 @@ select {
 
 .border-contrast-light-opaque {
   border-color: rgba(122, 129, 141, 0.5);
+}
+
+.shadow-transparent-dark-opaque {
+  box-shadow: 2px 1px 2px rgba(0, 0, 0, 0);
+}
+
+.hover\:shadow-transparent-dark-opaque:hover {
+  box-shadow: 2px 1px 2px rgba(0, 0, 0, 0);
+}
+
+.border-transparent-dark-opaque {
+  border-color: rgba(0, 0, 0, 0);
+}
+
+.shadow-transparent-light-opaque {
+  box-shadow: 2px 1px 2px rgba(77, 77, 77, 0);
+}
+
+.hover\:shadow-transparent-light-opaque:hover {
+  box-shadow: 2px 1px 2px rgba(77, 77, 77, 0);
+}
+
+.border-transparent-light-opaque {
+  border-color: rgba(77, 77, 77, 0);
+}
+
+.shadow-transparent-light {
+  box-shadow: 2px 1px 2px rgba(77, 77, 77, 0);
+}
+
+.hover\:shadow-transparent-light:hover {
+  box-shadow: 2px 1px 2px rgba(77, 77, 77, 0);
+}
+
+.border-transparent-light {
+  border-color: rgba(77, 77, 77, 0);
+}
+
+.shadow-transparent-dark {
+  box-shadow: 2px 1px 2px rgba(0, 0, 0, 0);
+}
+
+.hover\:shadow-transparent-dark:hover {
+  box-shadow: 2px 1px 2px rgba(0, 0, 0, 0);
+}
+
+.border-transparent-dark {
+  border-color: rgba(0, 0, 0, 0);
 }
 
 .shadow-contrast-light {
@@ -7475,27 +7906,27 @@ select {
 }
 
 .shadow-danger-light {
-  box-shadow: 2px 1px 2px #dc5c5c;
+  box-shadow: 2px 1px 2px #ef7979;
 }
 
 .hover\:shadow-danger-light:hover {
-  box-shadow: 2px 1px 2px #dc5c5c;
+  box-shadow: 2px 1px 2px #ef7979;
 }
 
 .border-danger-light {
-  border-color: #dc5c5c;
+  border-color: #ef7979;
 }
 
 .shadow-danger-dark {
-  box-shadow: 2px 1px 2px #842828;
+  box-shadow: 2px 1px 2px #a24040;
 }
 
 .hover\:shadow-danger-dark:hover {
-  box-shadow: 2px 1px 2px #842828;
+  box-shadow: 2px 1px 2px #a24040;
 }
 
 .border-danger-dark {
-  border-color: #842828;
+  border-color: #a24040;
 }
 
 .shadow-warning-light {
@@ -7547,39 +7978,39 @@ select {
 }
 
 .shadow-primary-light {
-  box-shadow: 2px 1px 2px #2f5df1;
+  box-shadow: 2px 1px 2px #5eece7;
 }
 
 .hover\:shadow-primary-light:hover {
-  box-shadow: 2px 1px 2px #2f5df1;
+  box-shadow: 2px 1px 2px #5eece7;
 }
 
 .border-primary-light {
-  border-color: #2f5df1;
+  border-color: #5eece7;
 }
 
 .shadow-primary-dark {
-  box-shadow: 2px 1px 2px #0c277f;
+  box-shadow: 2px 1px 2px #1b9e9a;
 }
 
 .hover\:shadow-primary-dark:hover {
-  box-shadow: 2px 1px 2px #0c277f;
+  box-shadow: 2px 1px 2px #1b9e9a;
 }
 
 .border-primary-dark {
-  border-color: #0c277f;
+  border-color: #1b9e9a;
 }
 
 .shadow-primary {
-  box-shadow: 2px 1px 2px #0c34b5;
+  box-shadow: 2px 1px 2px #1be1db;
 }
 
 .hover\:shadow-primary:hover {
-  box-shadow: 2px 1px 2px #0c34b5;
+  box-shadow: 2px 1px 2px #1be1db;
 }
 
 .border-primary {
-  border-color: #0c34b5;
+  border-color: #1be1db;
 }
 
 .shadow-secondary {
@@ -7607,15 +8038,15 @@ select {
 }
 
 .shadow-danger {
-  box-shadow: 2px 1px 2px #bc2828;
+  box-shadow: 2px 1px 2px #e84040;
 }
 
 .hover\:shadow-danger:hover {
-  box-shadow: 2px 1px 2px #bc2828;
+  box-shadow: 2px 1px 2px #e84040;
 }
 
 .border-danger {
-  border-color: #bc2828;
+  border-color: #e84040;
 }
 
 .shadow-smug {
@@ -7688,6 +8119,18 @@ select {
 
 .border-contrast {
   border-color: rgb(73, 77, 85);
+}
+
+.shadow-transparent {
+  box-shadow: 2px 1px 2px transparent;
+}
+
+.hover\:shadow-transparent:hover {
+  box-shadow: 2px 1px 2px transparent;
+}
+
+.border-transparent {
+  border-color: transparent;
 }
 
 .border-rounder {
@@ -7890,15 +8333,16 @@ select {
   width: 80%;
   display: initial;
   transition: 0.2s;
+  padding-left: 3px;
 }
 .input input::placeholder, .input select::placeholder, .input textarea::placeholder {
   color: transparent;
 }
 .input input:focus + label, .input select:focus + label, .input textarea:focus + label {
-  top: -1.2rem;
+  top: -1.3rem;
 }
 .input input:valid:not(:placeholder-shown) + label, .input select:valid:not(:placeholder-shown) + label, .input textarea:valid:not(:placeholder-shown) + label {
-  top: -1.2rem;
+  top: -1.3rem;
 }
 
 .transition-1 {

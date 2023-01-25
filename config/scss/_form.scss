@@ -7,6 +7,7 @@
     width: 80%;
     display: initial;
     transition: 0.2s;
+    padding-left: 3px;
   }
 
   input, select, textarea{
@@ -16,10 +17,10 @@
 
     @extend .w-full, .border-b-1, .border-l-0, .border-t-0, .border-r-0;
     &:focus + label {
-      top: -1.2rem;
+      top: -1.3rem;
     }
     &:valid:not(:placeholder-shown) + label {
-      top: -1.2rem;
+      top: -1.3rem;
     }
 
 

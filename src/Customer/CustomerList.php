@@ -15,8 +15,16 @@ class CustomerList implements Routable
     {
         $page = Request::getQuery('page') ?? 1;
         $sort = Request::getQuery('sort') ?? 'title';
+        $filter = Request::getQuery('filter') ?? '';
+
+        $sortDirection = 'ascending';
+        if(str_starts_with($sort, '-')){
+            $sort = substr($sort, 1);
+            $sortDirection = 'descending';
+        }
         return CustomerModel::paginate($page, 30)
-            ->ascending($sort)
+            ->{$sortDirection}($sort)
+            ->where(['title' => $filter . '%'])
             ->get();
     }
 }

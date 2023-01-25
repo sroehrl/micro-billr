@@ -1,0 +1,26 @@
+<div class="absolute bg-body-dark-opaque left-0 top-0 right-0 bottom-0 none" id="note-modal">
+  <div class="relative w-3/5 h-3/5 bg-white mx-auto mt-20">
+    <div class="bg-secondary p-3 grid">
+      <button class="place-end-end text-danger bg-transparent border-rounder border-transparent cursor-pointer" data-toggle-show="#note-modal">
+        <svg class="w-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="p-3">
+      <form class="grid grid-cols-2" method="post" action="/note/{{noteType}}/{{relationId}}">
+        <div class="input span-x-2">
+          <textarea name="content" id="content" required></textarea>
+          <label for="content">Content</label>
+        </div>
+        <div class="input">
+          <input type="date" name="remindAt" id="remindAt" placeholder="Reminder">
+          <label for="remindAt">Reminder ?</label>
+        </div>
+        <div class="place-end">
+          <button class="button-primary">create</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

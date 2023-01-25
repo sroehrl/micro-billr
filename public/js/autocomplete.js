@@ -5,8 +5,18 @@ export default class Autocomplete{
         this.input.addEventListener('input', this.search())
         this.results = [];
         this.resultContainer = document.createElement('div')
+        this.resultContainer.className = 'absolute bg-white left-0 right-0'
         this.input.parentNode.append(this.resultContainer)
-        this.whenSelected = ()=>{}
+        this.whenSelected = ()=>{ this.resultContainer.innerHTML = '' }
+        this.input.addEventListener('keydown', ev => {
+            if (ev.keyCode === 13){
+                ev.preventDefault()
+                if(this.results.length > 0){
+                    this.select(this.results[0])
+                }
+            }
+
+        })
     }
     setEndpoint(url){
         this.endpoint = url;
@@ -28,23 +38,30 @@ export default class Autocomplete{
         }
     }
     onSelect(fn){
-        this.whenSelected = () => fn.call();
+        this.whenSelected = () => {
+            this.resultContainer.innerHTML = ''
+            fn.call()
+        };
     }
     render(){
         this.resultContainer.childNodes.forEach(child => this.resultContainer.removeChild(child))
 
-        this.results.forEach(result => {
+        this.results.forEach((result,i) => {
             const div = document.createElement('div');
-            div.className = 'p-2 pt-1 pb-1 hover:text-white hover:bg-neutral-light border-l-1 mb-1 cursor-pointer';
+            div.className = 'p-2 pt-1 pb-1 hover:text-white hover:bg-neutral-light border-l-1 border-b-1 mb-1 cursor-pointer';
+            if(i === 0){
+                div.classList.add('text-underline')
+            }
             div.textContent = result[this.displayProperty];
-            div.addEventListener('click', ()=> {
-                this.target.value = result.id
-                this.input.value = result[this.displayProperty]
-                this.resultContainer.childNodes.forEach(child => this.resultContainer.removeChild(child))
-                this.whenSelected()
-            })
+            div.addEventListener('click', ()=> this.select(result))
             this.resultContainer.append(div)
         })
+    }
+    select(result){
+        this.target.value = result.id
+        this.input.value = result[this.displayProperty]
+        this.resultContainer.childNodes.forEach(child => this.resultContainer.removeChild(child))
+        this.whenSelected()
     }
 
 }

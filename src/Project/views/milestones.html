@@ -1,0 +1,44 @@
+<article class="mt-3 mb-3">
+    <div class="grid grid-cols-2">
+        <h2>Milestones</h2>
+        <button data-toggle-show="#milestone-modal" class="button-primary flex gap-x-2 place-center-end">
+            <svg class="w-2 place-center" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            milestone
+        </button>
+    </div>
+    <div class="mt-3">
+        <div class="grid grid-cols-5 gap-3 bg-body-light-opaque p-2">
+            <div class="text-center">Title</div>
+            <div>Target Date</div>
+            <div class="text-center">Estimated hours</div>
+            <div class="text-center">Actuals</div>
+            <div>Actions</div>
+        </div>
+        <div class="grid grid-cols-5 gap-3 odd-child-bg-body-light odd-child-text-secondary-light p-1" n-for="details as milestone" n-if="details.length > 0">
+            <div class="border-r-1">{{milestone.title}}</div>
+            <div class="border-r-1" i18n-date="">{{milestone.targetDate}}</div>
+            <div class="border-r-1 place-end pr-2" decimal i18n-number>{{milestone.estimatedHours}}</div>
+            <div class="border-r-1 text-right pr-2" decimal i18n-number>{{milestone.actualHours}}</div>
+            <div class="flex gap-x-2">
+                <a href="/milestone/{{milestone.id}}" class="button-secondary relative">
+
+                    <svg class="w-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"></path>
+                    </svg>
+                    <div class="absolute -top-1 -right-1 border-rounder font-sm bg-warning pl-1 pr-1" n-if="milestone.notes.length > 0">{{milestone.notes.length}}</div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+    <div partial="/Milestone/views/create.html"></div>
+
+    <script>
+        function getNote(mileStoneId){
+            fetch('/note/milestone/' + mileStoneId)
+        }
+    </script>
+
+</article>

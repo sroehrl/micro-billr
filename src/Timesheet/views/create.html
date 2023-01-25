@@ -1,0 +1,41 @@
+<div class="absolute bg-body-dark-opaque left-0 top-0 right-0 bottom-0 none" id="timesheet-modal">
+    <div class="relative w-3/5 h-3/5 bg-white mx-auto mt-20">
+        <div class="bg-secondary p-3 grid">
+            <button class="place-end-end text-danger bg-transparent border-rounder border-transparent cursor-pointer" data-toggle-show="#timesheet-modal">
+                <svg class="w-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="p-3">
+            <form class="" method="post" action="/timesheet">
+                <input type="hidden" name="projectId" value="{{project.id}}">
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="input">
+                        <select name="milestoneId" id="milestoneId" required>
+                            <option value="{{milestone.id}}" n-for="details.milestones as milestone">{{milestone.title}} </option>
+                        </select>
+                        <label for="milestoneId">Milestone</label>
+                    </div>
+                    <div class="input">
+                        <select name="productId" id="productId" required>
+                            <option value="{{product.id}}" n-for="details.products as product">{{product.name}}</option>
+                        </select>
+                        <label for="productId">Product</label>
+                    </div>
+                    <div class="input">
+                        <input type="date" id="workedAt" name="workedAt" placeholder="date">
+                        <label for="workedAt">Workday</label>
+                    </div>
+                    <div class="input">
+                        <input type="number" step=".25" id="hours" name="hours" required>
+                        <label for="hours">Hours</label>
+                    </div>
+                    <div class="span-x-2 place-end-end">
+                        <button class="button-primary">save new entry</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

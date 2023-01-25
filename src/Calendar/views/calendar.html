@@ -1,0 +1,31 @@
+<section>
+  <script type='importmap'>
+      {
+        "imports": {
+          "@fullcalendar/core": "https://cdn.skypack.dev/@fullcalendar/core@6.0.3",
+          "@fullcalendar/daygrid": "https://cdn.skypack.dev/@fullcalendar/daygrid@6.0.3",
+          "@fullcalendar/interaction": "https://cdn.skypack.dev/@fullcalendar/interaction@6.0.3"
+        }
+      }
+    </script>
+  <script type='module'>
+    import { Calendar } from '@fullcalendar/core'
+    import dayGridPlugin from '@fullcalendar/daygrid'
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const calendarEl = document.getElementById('calendar')
+      const calendar = new Calendar(calendarEl, {
+        plugins: [dayGridPlugin],
+        initialView: 'dayGridWeek',
+        events: JSON.parse(`{{events}}`),
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,dayGridWeek,dayGridDay'
+        }
+      })
+      calendar.render()
+    })
+  </script>
+  <div id="calendar"></div>
+</section>

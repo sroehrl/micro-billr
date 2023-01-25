@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eef6f6ebe6f32ba84841cd8252d9add9",
+    "content-hash": "c3f9f5a9885ce658eaa6f39d03be7bd1",
     "packages": [
         {
             "name": "brick/math",
@@ -825,16 +825,16 @@
         },
         {
             "name": "neoan.io/core",
-            "version": "v0.2.3",
+            "version": "v0.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sroehrl/neoan.io-lenkrad-core.git",
-                "reference": "38fc06f86b880bec674e76226a29743c95ca7630"
+                "reference": "fd9a0164c000f0167ba1443806e27c9a9ede8532"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sroehrl/neoan.io-lenkrad-core/zipball/38fc06f86b880bec674e76226a29743c95ca7630",
-                "reference": "38fc06f86b880bec674e76226a29743c95ca7630",
+                "url": "https://api.github.com/repos/sroehrl/neoan.io-lenkrad-core/zipball/fd9a0164c000f0167ba1443806e27c9a9ede8532",
+                "reference": "fd9a0164c000f0167ba1443806e27c9a9ede8532",
                 "shasum": ""
             },
             "require": {
@@ -872,9 +872,9 @@
             "description": "Neoan.io Lenkrad Framework",
             "support": {
                 "issues": "https://github.com/sroehrl/neoan.io-lenkrad-core/issues",
-                "source": "https://github.com/sroehrl/neoan.io-lenkrad-core/tree/v0.2.3"
+                "source": "https://github.com/sroehrl/neoan.io-lenkrad-core/tree/v0.3.2"
             },
-            "time": "2023-01-14T03:22:53+00:00"
+            "time": "2023-01-25T02:29:01+00:00"
         },
         {
             "name": "neoan.io/legacy-db-adapter",
@@ -921,16 +921,16 @@
         },
         {
             "name": "neoan3-apps/db",
-            "version": "v0.3.8",
+            "version": "v0.3.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sroehrl/neoan3-db.git",
-                "reference": "b35975a0990f4bde36db1599ba840042da5e21cb"
+                "reference": "e82e387b43e5358d03e50f49a63d72ce3e84fc80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sroehrl/neoan3-db/zipball/b35975a0990f4bde36db1599ba840042da5e21cb",
-                "reference": "b35975a0990f4bde36db1599ba840042da5e21cb",
+                "url": "https://api.github.com/repos/sroehrl/neoan3-db/zipball/e82e387b43e5358d03e50f49a63d72ce3e84fc80",
+                "reference": "e82e387b43e5358d03e50f49a63d72ce3e84fc80",
                 "shasum": ""
             },
             "require": {
@@ -954,15 +954,15 @@
             "authors": [
                 {
                     "name": "Stefan Roehrl",
-                    "homepage": "http://neoan.us"
+                    "homepage": "https://neoan.us"
                 }
             ],
             "description": "neoan3 mysqli class",
             "support": {
                 "issues": "https://github.com/sroehrl/neoan3-db/issues",
-                "source": "https://github.com/sroehrl/neoan3-db/tree/v0.3.8"
+                "source": "https://github.com/sroehrl/neoan3-db/tree/v0.3.10"
             },
-            "time": "2022-10-26T03:55:17+00:00"
+            "time": "2023-01-18T12:56:14+00:00"
         },
         {
             "name": "neoan3-apps/session",
@@ -1000,16 +1000,16 @@
         },
         {
             "name": "neoan3-apps/template",
-            "version": "v2.1.4",
+            "version": "v2.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sroehrl/neoan3-template.git",
-                "reference": "62228b360d0be335b9e92b1faf1aed9dfbdbec29"
+                "reference": "442ea43a2eaf063f870cc244efab01bc63cd9517"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sroehrl/neoan3-template/zipball/62228b360d0be335b9e92b1faf1aed9dfbdbec29",
-                "reference": "62228b360d0be335b9e92b1faf1aed9dfbdbec29",
+                "url": "https://api.github.com/repos/sroehrl/neoan3-template/zipball/442ea43a2eaf063f870cc244efab01bc63cd9517",
+                "reference": "442ea43a2eaf063f870cc244efab01bc63cd9517",
                 "shasum": ""
             },
             "require": {
@@ -1035,9 +1035,84 @@
             "description": "PHP DOMDocument-based minimal template engine",
             "support": {
                 "issues": "https://github.com/sroehrl/neoan3-template/issues",
-                "source": "https://github.com/sroehrl/neoan3-template/tree/v2.1.4"
+                "source": "https://github.com/sroehrl/neoan3-template/tree/v2.1.6"
             },
-            "time": "2022-10-09T04:46:59+00:00"
+            "time": "2023-01-24T01:33:35+00:00"
+        },
+        {
+            "name": "php-curl-class/php-curl-class",
+            "version": "9.13.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-curl-class/php-curl-class.git",
+                "reference": "1fa71f639275987092c60ac117ff5c8a3771898d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/1fa71f639275987092c60ac117ff5c8a3771898d",
+                "reference": "1fa71f639275987092c60ac117ff5c8a3771898d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "*",
+                "ext-gd": "*",
+                "phpcompatibility/php-compatibility": "dev-develop",
+                "phpcsstandards/phpcsutils": "@alpha",
+                "phpunit/phpunit": "*",
+                "squizlabs/php_codesniffer": "*",
+                "vimeo/psalm": "*"
+            },
+            "suggest": {
+                "ext-mbstring": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Curl\\": "src/Curl/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Unlicense"
+            ],
+            "authors": [
+                {
+                    "name": "Zach Borboa"
+                }
+            ],
+            "description": "PHP Curl Class makes it easy to send HTTP requests and integrate with web APIs.",
+            "homepage": "https://github.com/php-curl-class/php-curl-class",
+            "keywords": [
+                "API-Client",
+                "api",
+                "class",
+                "client",
+                "curl",
+                "framework",
+                "http",
+                "http-client",
+                "http-proxy",
+                "json",
+                "php",
+                "php-curl",
+                "php-curl-library",
+                "proxy",
+                "requests",
+                "restful",
+                "web-scraper",
+                "web-scraping ",
+                "web-service",
+                "xml"
+            ],
+            "support": {
+                "issues": "https://github.com/php-curl-class/php-curl-class/issues",
+                "source": "https://github.com/php-curl-class/php-curl-class/tree/9.13.1"
+            },
+            "time": "2023-01-16T01:29:25+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -1649,16 +1724,16 @@
         },
         {
             "name": "sroehrl/php-i18n-translate",
-            "version": "v2.0.1",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sroehrl/php-i18n-translate.git",
-                "reference": "532c81dd4a7896c46b1191fa2f9349ea1f4d77f3"
+                "reference": "81819dfc8997bd6ce1411b304682e2960f01596b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sroehrl/php-i18n-translate/zipball/532c81dd4a7896c46b1191fa2f9349ea1f4d77f3",
-                "reference": "532c81dd4a7896c46b1191fa2f9349ea1f4d77f3",
+                "url": "https://api.github.com/repos/sroehrl/php-i18n-translate/zipball/81819dfc8997bd6ce1411b304682e2960f01596b",
+                "reference": "81819dfc8997bd6ce1411b304682e2960f01596b",
                 "shasum": ""
             },
             "require": {
@@ -1682,22 +1757,22 @@
             "description": "Simple yet powerful i18n support for PHP projects",
             "support": {
                 "issues": "https://github.com/sroehrl/php-i18n-translate/issues",
-                "source": "https://github.com/sroehrl/php-i18n-translate/tree/v2.0.1"
+                "source": "https://github.com/sroehrl/php-i18n-translate/tree/v2.0.2"
             },
-            "time": "2022-08-21T23:16:33+00:00"
+            "time": "2023-01-17T01:32:39+00:00"
         },
         {
             "name": "symfony/console",
-            "version": "v6.2.3",
+            "version": "v6.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "0f579613e771dba2dbb8211c382342a641f5da06"
+                "reference": "3e294254f2191762c1d137aed4b94e966965e985"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/0f579613e771dba2dbb8211c382342a641f5da06",
-                "reference": "0f579613e771dba2dbb8211c382342a641f5da06",
+                "url": "https://api.github.com/repos/symfony/console/zipball/3e294254f2191762c1d137aed4b94e966965e985",
+                "reference": "3e294254f2191762c1d137aed4b94e966965e985",
                 "shasum": ""
             },
             "require": {
@@ -1764,7 +1839,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v6.2.3"
+                "source": "https://github.com/symfony/console/tree/v6.2.5"
             },
             "funding": [
                 {
@@ -1780,7 +1855,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-28T14:26:22+00:00"
+            "time": "2023-01-01T08:38:09+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -1851,16 +1926,16 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v6.2.0",
+            "version": "v6.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "50b2523c874605cf3d4acf7a9e2b30b6a440a016"
+                "reference": "e59e8a4006afd7f5654786a83b4fcb8da98f4593"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/50b2523c874605cf3d4acf7a9e2b30b6a440a016",
-                "reference": "50b2523c874605cf3d4acf7a9e2b30b6a440a016",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/e59e8a4006afd7f5654786a83b4fcb8da98f4593",
+                "reference": "e59e8a4006afd7f5654786a83b4fcb8da98f4593",
                 "shasum": ""
             },
             "require": {
@@ -1894,7 +1969,7 @@
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/filesystem/tree/v6.2.0"
+                "source": "https://github.com/symfony/filesystem/tree/v6.2.5"
             },
             "funding": [
                 {
@@ -1910,20 +1985,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-11-20T13:01:27+00:00"
+            "time": "2023-01-20T17:45:48+00:00"
         },
         {
             "name": "symfony/finder",
-            "version": "v6.2.3",
+            "version": "v6.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "81eefbddfde282ee33b437ba5e13d7753211ae8e"
+                "reference": "c90dc446976a612e3312a97a6ec0069ab0c2099c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/81eefbddfde282ee33b437ba5e13d7753211ae8e",
-                "reference": "81eefbddfde282ee33b437ba5e13d7753211ae8e",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/c90dc446976a612e3312a97a6ec0069ab0c2099c",
+                "reference": "c90dc446976a612e3312a97a6ec0069ab0c2099c",
                 "shasum": ""
             },
             "require": {
@@ -1958,7 +2033,7 @@
             "description": "Finds files and directories via an intuitive fluent interface",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/finder/tree/v6.2.3"
+                "source": "https://github.com/symfony/finder/tree/v6.2.5"
             },
             "funding": [
                 {
@@ -1974,7 +2049,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-22T17:55:15+00:00"
+            "time": "2023-01-20T17:45:48+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -2549,16 +2624,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v6.2.0",
+            "version": "v6.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "ba6e55359f8f755fe996c58a81e00eaa67a35877"
+                "reference": "9ead139f63dfa38c4e4a9049cc64a8b2748c83b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/ba6e55359f8f755fe996c58a81e00eaa67a35877",
-                "reference": "ba6e55359f8f755fe996c58a81e00eaa67a35877",
+                "url": "https://api.github.com/repos/symfony/process/zipball/9ead139f63dfa38c4e4a9049cc64a8b2748c83b7",
+                "reference": "9ead139f63dfa38c4e4a9049cc64a8b2748c83b7",
                 "shasum": ""
             },
             "require": {
@@ -2590,7 +2665,7 @@
             "description": "Executes commands in sub-processes",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/process/tree/v6.2.0"
+                "source": "https://github.com/symfony/process/tree/v6.2.5"
             },
             "funding": [
                 {
@@ -2606,7 +2681,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-11-02T09:08:04+00:00"
+            "time": "2023-01-01T08:38:09+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -2695,16 +2770,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v6.2.2",
+            "version": "v6.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "863219fd713fa41cbcd285a79723f94672faff4d"
+                "reference": "b2dac0fa27b1ac0f9c0c0b23b43977f12308d0b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/863219fd713fa41cbcd285a79723f94672faff4d",
-                "reference": "863219fd713fa41cbcd285a79723f94672faff4d",
+                "url": "https://api.github.com/repos/symfony/string/zipball/b2dac0fa27b1ac0f9c0c0b23b43977f12308d0b0",
+                "reference": "b2dac0fa27b1ac0f9c0c0b23b43977f12308d0b0",
                 "shasum": ""
             },
             "require": {
@@ -2761,7 +2836,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v6.2.2"
+                "source": "https://github.com/symfony/string/tree/v6.2.5"
             },
             "funding": [
                 {
@@ -2777,7 +2852,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-14T16:11:27+00:00"
+            "time": "2023-01-01T08:38:09+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -2872,8 +2947,9 @@
     "prefer-lowest": false,
     "platform": {
         "ext-dom": "*",
-        "ext-libxml": "*"
+        "ext-libxml": "*",
+        "ext-intl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }

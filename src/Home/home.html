@@ -1,3 +1,17 @@
-<section>
+<section class="w-4/5 mx-auto">
   <h1>Welcome home {{name}}</h1>
+  <div class="grid grid-cols-3 gap-3">
+    <div>
+      <h2 class="bg-secondary p-1 text-white mt-0 mb-1 border-rounded">
+        Projects
+      </h2>
+      <div class="grid grid-cols-2 p-3">
+        <div>active:</div>
+        <a href="/project?filter=in%20progress" class="place-end">{{openProjects}}</a>
+        <div>planned:</div>
+        <a href="/project?filter=planned" class="place-end">{{plannedProjects}}</a>
+      </div>
+    </div>
+    <div  class="span-x-2" partial="Calendar/views/calendar.html"></div>
+  </div>
 </section>

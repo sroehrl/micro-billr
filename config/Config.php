@@ -15,6 +15,7 @@ use Neoan3\Apps\Session;
 use Neoan3\Apps\Template\Constants;
 use Neoan3\Apps\Template\Template;
 use NeoanIo\MarketPlace\DatabaseAdapter;
+use NumberFormatter;
 
 class Config
 {
@@ -42,8 +43,12 @@ class Config
                 Store::write('pageTitle', 'Billr');
             }
         });
+        Constants::addCustomFunction('pureDate', function ($input){
+            return preg_replace('/\s\d{2}:\d{2}:\d{2}/', '', $input);
+        });
         Constants::addCustomAttribute('partial', fn(\DOMAttr &$attr, $context) => $this->renderPartial($attr, $context));
         Constants::addCustomAttribute('gender-title', fn(\DOMAttr &$attr, $context) => $this->gender($attr, $context));
+        Constants::addCustomAttribute('decimal', fn(\DOMAttr &$attr, $context) => $this->renderDecimal($attr, $context));
     }
 
     private function typeSetup(Setup $setup): Setup
@@ -81,6 +86,15 @@ class Config
             $imported = $attr->ownerDocument->importNode($fresh->documentElement, true);
             $attr->parentNode->appendChild($imported);
         }
+    }
+    private function renderDecimal(\DOMAttr &$attr, $contextData = []): void
+    {
+        $fmt = new NumberFormatter($_SERVER['HTTP_ACCEPT_LANGUAGE'], NumberFormatter::DECIMAL );
+        $fmt->setAttribute(NumberFormatter::FRACTION_DIGITS, 2);
+        if(is_numeric($attr->parentNode->nodeValue)){
+            $attr->parentNode->nodeValue = $fmt->format((float) $attr->parentNode->nodeValue);
+        }
+
     }
     private function gender(\DOMAttr &$attr, $contextData = []):void
     {
