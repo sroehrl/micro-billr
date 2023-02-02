@@ -2,13 +2,24 @@
     <form class="pl-4 pr-4 relative" action="/login" method="post">
         <h3 class="absolute -top-18 p-2 bg-white-light">Login</h3>
         <div class="input">
-            <input id="email" name="email" type="email" required>
+            <input id="email" name="email" value="{{email}}" type="email" required>
             <label for="email">Email</label>
         </div>
         <div class="input">
             <input id="password" name="password" type="password" required>
             <label for="password">Password</label>
         </div>
+        <div class="grid grid-cols-2">
+            <div class="place-center-start">
+                <label for="remember-me">Remember me?</label>
+            </div>
+
+            <div class="input">
+                <input id="remember-me" name="remember" type="checkbox" placeholder="remember me" data-checked="{{email}}">
+
+            </div>
+        </div>
+
         <div class="grid grid-cols-3">
             <div class="span-x-2 text-danger">{{error}}</div>
             <div class="place-end-end">

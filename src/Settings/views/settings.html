@@ -1,9 +1,9 @@
 <section class="flex gap-3">
     <nav class="border-r-1 border-secondary m-0">
-        <a href="/settings/company" class="block p-3 bg-secondary-light text-white border-b-1">Your company</a>
-        <a href="/settings/products" class="block p-3 bg-secondary-light text-white border-b-1">Your products</a>
-        <a href="/settings/billing" class="block p-3 bg-secondary-light text-white border-b-1">Billing</a>
-        <a href="/settings/mailing" class="block p-3 bg-secondary-light text-white border-b-1">Mailing</a>
+        <a href="/settings/company" class="block p-3 bg-secondary-light text-white border-b-1" data-class="{'shadow-primary border-primary': '{{tab}}' === 'company'}">Your company</a>
+        <a href="/settings/products" class="block p-3 bg-secondary-light text-white border-b-1" data-class="{'shadow-primary border-primary': '{{tab}}' === 'products'}">Your products</a>
+        <a href="/settings/billing" class="block p-3 bg-secondary-light text-white border-b-1" data-class="{'shadow-primary border-primary': '{{tab}}' === 'billing'}">Billing</a>
+        <a href="/settings/mailing" class="block p-3 bg-secondary-light text-white border-b-1" data-class="{'shadow-primary border-primary': '{{tab}}' === 'mailing'}">Mailing</a>
 
     </nav>
     <div class="w-4/5 mx-auto mt-5 flex-1">
@@ -14,14 +14,10 @@
             <div n-if="tab == 'products'" partial="Settings/views/products.html"></div>
         </div>
         <div>
-            <div n-if="tab == 'billing'">
-                Kommt Zeit, kommt Rat
-            </div>
+            <div n-if="tab == 'billing'" partial="Settings/views/billing.html"></div>
         </div>
         <div>
-            <div n-if="tab == 'mailing'">
-                Kommt Zeit, kommt Rat : Mailing
-            </div>
+            <div n-if="tab == 'mailing'" partial="Settings/views/mailing.html"></div>
         </div>
 
     </div>

@@ -2,8 +2,10 @@
 
 namespace App\User;
 
+use App\Company\CompanyModel;
 use Neoan\Database\Database;
 use Neoan\Model\Attributes\IsEnum;
+use Neoan\Model\Attributes\IsForeignKey;
 use Neoan\Model\Attributes\IsPrimaryKey;
 use Neoan\Model\Attributes\IsUnique;
 use Neoan\Model\Attributes\Transform;
@@ -12,6 +14,9 @@ use Neoan\Model\Traits\TimeStamps;
 use Neoan\Model\Transformers\Hash;
 use Neoan3\Apps\Session;
 
+/**
+ * @method CompanyModel company();
+ */
 class UserModel extends Model
 {
     #[IsPrimaryKey]
@@ -22,6 +27,9 @@ class UserModel extends Model
 
     #[Transform(Hash::class)]
     public string $password;
+
+    #[IsForeignKey(CompanyModel::class)]
+    public ?int $companyId;
 
     #[IsEnum(Privilege::class)]
     public ?Privilege $privilege;

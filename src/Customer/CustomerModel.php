@@ -13,6 +13,7 @@ use Neoan\Model\Traits\TimeStamps;
 
 /**
  * @method CustomerModel withAddress
+ * @method AddressModel address
  */
 class CustomerModel extends Model
 {

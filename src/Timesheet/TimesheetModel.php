@@ -9,6 +9,7 @@ use App\Product\ProductModel;
 use App\Project\ProjectModel;
 use Neoan\Database\Database;
 use Neoan\Model\Attributes\Computed;
+use Neoan\Model\Attributes\Ignore;
 use Neoan\Model\Attributes\IsForeignKey;
 use Neoan\Model\Attributes\IsPrimaryKey;
 use Neoan\Model\Attributes\Transform;
@@ -22,6 +23,8 @@ use Neoan\Model\Transformers\LockedTimeIn;
  * @method TimesheetModel withMilestone
  * @method TimesheetModel withProduct
  * @method TimesheetModel withProject
+ * @method ProductModel Product
+ * @property ProductModel product
  */
 class TimesheetModel extends Model
 {
@@ -47,6 +50,12 @@ class TimesheetModel extends Model
     public ?int $billId;
 
     #[
+        Transform(PriceTransformation::class),
+        Type('int', 11)
+    ]
+    public ?float $taxPercent;
+
+    #[
         Type('date'),
         Transform(LockedTimeIn::class)
     ]
@@ -59,6 +68,15 @@ class TimesheetModel extends Model
     {
         return isset($this->productId) ? Database::easy('product_model.name', ['id' => $this->productId])[0]['name'] : '';
     }
+
+    #[Computed]
+    public function isBilled(): bool
+    {
+        return isset($this->billId);
+    }
+
+    #[Ignore]
+    public float $total;
 
     protected function afterStore(): void
     {

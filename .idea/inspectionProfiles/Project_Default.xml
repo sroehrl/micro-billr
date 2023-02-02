@@ -4,11 +4,15 @@
     <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="4">
+          <list size="8">
             <item index="0" class="java.lang.String" itemvalue="n-if" />
             <item index="1" class="java.lang.String" itemvalue="n-for" />
             <item index="2" class="java.lang.String" itemvalue="partial" />
             <item index="3" class="java.lang.String" itemvalue="gender-title" />
+            <item index="4" class="java.lang.String" itemvalue="i18n-date" />
+            <item index="5" class="java.lang.String" itemvalue="decimal" />
+            <item index="6" class="java.lang.String" itemvalue="i18n-number" />
+            <item index="7" class="java.lang.String" itemvalue="i18n-currency" />
           </list>
         </value>
       </option>

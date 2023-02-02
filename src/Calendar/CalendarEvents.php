@@ -4,6 +4,7 @@ namespace App\Calendar;
 
 use App\Milestone\MilestoneModel;
 use App\Note\NoteModel;
+use App\Note\NoteType;
 use App\Project\ProjectModel;
 use Neoan\Database\Database;
 
@@ -17,15 +18,35 @@ class CalendarEvents
             self::$allEvents[] = $project->calendarEvent();
         });
         // notes
-        NoteModel::retrieve(['^deletedAt'])->each(function(NoteModel $note){
+        self::notes();
+
+        // Milestones
+        self::milestones();
+        return self::$allEvents;
+    }
+
+    public static function forProject(int $projectId): array
+    {
+        self::$allEvents[] = ProjectModel::get($projectId)->calendarEvent();
+        self::notes(['relationId' => $projectId, 'noteType' => NoteType::PROJECT->value]);
+        self::milestones(['projectId' => $projectId]);
+        return self::$allEvents;
+    }
+    private static function notes(?array $conditions = []): void
+    {
+        NoteModel::retrieve([...$conditions, '^deletedAt'])->each(function(NoteModel $note){
             if($event = $note->calendarEvent()){
                 self::$allEvents[] = $event;
             }
         });
-        // Milestones
-        MilestoneModel::retrieve(['^deletedAt'])->each(function (MilestoneModel $milestone){
-           self::$allEvents[] = $milestone->calendarEvent();
+    }
+
+    private static function milestones(?array $conditions = []): void
+    {
+        MilestoneModel::retrieve([...$conditions, '^deletedAt'])->each(function(MilestoneModel $milestone){
+            if($event = $milestone->calendarEvent()){
+                self::$allEvents[] = $event;
+            }
         });
-        return self::$allEvents;
     }
 }

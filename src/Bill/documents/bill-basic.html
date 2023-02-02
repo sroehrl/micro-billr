@@ -1,0 +1,153 @@
+<page>
+    <style>
+        page {
+            color: #47474a;
+            width: calc(100% - 20mm);
+        }
+        .cols-2 td{
+            width: 50%;
+        }
+        .cols-3 td{
+            width: 33.3%;
+        }
+        .items td{
+            padding: 2mm 4mm;
+        }
+        .w-100{
+            width: 100%;
+        }
+        .w-50{
+            width: 50%;
+        }
+        .text-right{
+            text-align: right;
+        }
+    </style>
+    <table class="w-100">
+        <tr class="cols-3">
+            <td>
+                To:
+                <h3>{{customer.title}}</h3>
+                <div>{{customerAddress}}</div>
+                <span n-if="customer.registry">{{customer.registry}}</span>
+            </td>
+            <td></td>
+            <td>
+                <barcode dimension="1D" type="C39" value="{{bill.billNumber}}" label="label" style="height:8mm; color: #770000; font-size: 4mm; "></barcode>
+
+
+
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                From:
+                <h3>{{company.name}}</h3>
+                <div>{{companyAddress}}</div>
+                {{company.registry}}
+            </td>
+        </tr>
+
+    </table>
+
+    <h1>Invoice</h1>
+    <p>
+        Invoice number: {{bill.billNumber}} <br>
+        Date: {{invoiceDate}} <br>
+        <em>Invoice date is delivery date</em>
+    </p>
+
+    <table class="w-100">
+        <tr class="items" style="background: #ccc; ">
+            <td style="width: 30%">Product</td>
+            <td style="width: 15%">Type</td>
+            <td style="width: 10%">Hours</td>
+            <td style="width: 10%">Tax</td>
+            <td style="width: 15%">Price</td>
+            <td style="width: 15%">Total</td>
+        </tr>
+        <tr n-if="lineItems.length > 0" class="items" n-for="lineItems as i => item">
+            <td>{{item.product.productNumber}} <strong>{{item.product.name}}</strong></td>
+            <td>{{item.product.billingType}}</td>
+            <td i18n-number decimal>{{item.hours}}</td>
+            <td class="text-right">
+                <span>
+                    <span decimal n-if="item.product.taxable">{{item.taxPercent}}</span>
+                </span>
+                <span>
+                    <span n-if="!item.product.taxable">0</span>
+                </span>
+            %
+            </td>
+            <td class="text-right" i18n-currency="{{currency}}">{{item.product.price}}</td>
+            <td class="text-right" i18n-currency="{{currency}}">{{item.total}}</td>
+        </tr>
+
+    </table>
+    <table class="w-100" style="border-top: 1px #ccc">
+        <tr class="items">
+            <td style="width: 30%">
+                Subtotal
+            </td>
+            <td style="width: 15%"></td>
+            <td style="width: 10%"></td>
+            <td style="width: 10%"></td>
+            <td style="width: 15%"></td>
+            <td style="width: 15%" class="text-right" i18n-currency="{{currency}}">{{totalNet}}</td>
+        </tr>
+        <tr class="items">
+            <td>
+                Tax
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="text-right" i18n-currency="{{currency}}">{{totalTax}}</td>
+        </tr>
+        <tr class="items" style="background: #ccc; ">
+            <td>
+                Total amount
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td  class="text-right" i18n-currency="{{currency}}">{{totalGross}}</td>
+        </tr>
+    </table>
+
+    <div style="margin: 12mm 0">{{footer}}</div>
+
+    <table class="w-100 cols-3">
+        <tr>
+            <td>
+                <strong>Payable to: </strong><br>
+                {{company.accountName}} <br>
+                Bank: {{company.bankName}} <br>
+                Account #: {{company.accountNumber}} <br>
+                Routing #: {{company.routingNumber}} <br>
+                BIC/SWIFT : {{company.swiftBic}} <br>
+                Memo: {{bill.billNumber}}
+
+            </td>
+            <td></td>
+            <td>
+                <cert
+                        src="{{certificate}}"
+                        privkey="{{privateKey}}"
+                        name="Neoan-Coding"
+                        location="Farmington, USA"
+                        reason="Invoice validity"
+                        contactinfo="neoan@neoan.us"
+                >
+                    <qrcode value="This PDF is digitally signed" ec="H" style="width: 30mm; background-color: white; color: black;"></qrcode>
+                </cert>
+            </td>
+        </tr>
+    </table>
+
+
+</page>

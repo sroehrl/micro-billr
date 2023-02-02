@@ -23,8 +23,8 @@ class AddressSave implements Routable
             'state' => $address->state,
             'place' => $address->place,
             'postalCode' => $address->postalCode,
-            'country' => $address->country
         ] = Request::getInputs();
+        $address->country = Country::tryFrom(Request::getInput('country'));
         $address->store();
 
         // associate

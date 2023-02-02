@@ -17,6 +17,7 @@ class ProjectUpdate implements Routable
         $project = ProjectModel::get(Request::getParameter('id'));
         $project->status = ProjectStatus::from(Request::getInput('status'));
         $project->targetedAt->set(Request::getInput('targetedAt'));
+        $project->startedAt->set(Request::getInput('startedAt'));
         $project->store();
         FeedbackWrapper::redirectBack('Project updated');
     }

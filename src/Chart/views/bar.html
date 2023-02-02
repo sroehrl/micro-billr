@@ -1,0 +1,21 @@
+<section class="w-full">
+  <canvas class="w-full" style="height: 400px" id="chart-element"></canvas>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.0/dist/chart.umd.min.js"></script>
+  <script>
+    const chart = new Chart(document.getElementById('chart-element'), {
+      type: 'bar',
+      options: {
+        animation: false,
+        plugins: {
+          legend: {
+            display: true
+          },
+          tooltip: {
+            enabled: true
+          }
+        }
+    },
+    data: JSON.parse(`{{chartData}}`)
+    });
+  </script>
+</section>

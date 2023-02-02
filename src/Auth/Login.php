@@ -21,17 +21,26 @@ class Login implements Routable
 
         Store::write('pageTitle', 'Login');
         if(Request::getInput('email')){
+            if(Request::getInput('remember')){
+                setcookie('email', Request::getInput('email'));
+            }
             [
                 'email' => $email,
                 'password' => $password,
             ] = Request::getInputs();
             if(UserModel::login($email, $password)){
-                Response::redirect('/');
+                $afterLogin = $_COOKIE['afterLogin'] ?? '/';
+                unset($_COOKIE['afterLogin']);
+                Response::redirect($afterLogin);
             }
             Response::redirect('/login?error=Wrong credentials!');
         }
 
 
-        return ['name' => 'Login', 'error' => Request::getQuery('error') ?? ''];
+        return [
+            'name' => 'Login',
+            'email' => $_COOKIE['email'] ?? '',
+            'error' => Request::getQuery('error') ?? ''
+        ];
     }
 }

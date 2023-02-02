@@ -67,3 +67,18 @@ select{
 input[type="date"]{
   transform: translateY(-1px);
 }
+
+// calendar
+.fc{
+
+  .fc-button-primary{
+    background-color: map-get($colors, "secondary") !important;
+    border-color: map-get($colors, "white") !important;
+    &.fc-button-active{
+      background-color: map-get($colors, "secondary-dark") !important;
+    }
+    &:focus{
+      box-shadow: none !important;
+    }
+  }
+}

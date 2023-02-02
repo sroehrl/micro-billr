@@ -1,7 +1,16 @@
 const selectBoxes = document.querySelectorAll('[data-selected]')
 selectBoxes.forEach(selectBox => {
-    console.log({selected:selectBox.dataset.selected})
     selectBox.value = selectBox.dataset.selected
+})
+
+const checkBoxes = document.querySelectorAll('[data-checked]')
+checkBoxes.forEach( checkbox => {
+    checkbox.checked = checkbox.dataset.checked;
+})
+
+// js-href
+document.querySelectorAll('[data-href]').forEach(ele => {
+    ele.href = ele.dataset.href;
 })
 
 const deleteButtons = document.querySelectorAll('[data-delete]')

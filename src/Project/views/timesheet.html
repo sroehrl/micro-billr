@@ -24,8 +24,13 @@
             <div class="place-end pr-2 border-r-1" decimal i18n-number>{{timesheet.hours}}</div>
             <div class="span-x-2 border-r-1">{{timesheet.product.name}}</div>
             <div class="border-r-1">{{timesheet.milestone.title}}</div>
-            <div>
-                delete?
+            <div class="flex">
+                <div>
+                    <a n-if="!timesheet.isBilled" href="#" class="button-danger" data-delete="/api/timesheet" data-delete-id="{{timesheet.id}}">delete</a>
+                </div>
+                <div n-if="timesheet.isBilled">
+                    <a  href="/bill/{{timesheet.billId}}" class="button-secondary" >billed</a>
+                </div>
             </div>
         </div>
     </div>

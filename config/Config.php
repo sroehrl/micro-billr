@@ -80,6 +80,17 @@ class Config
     private function renderPartial(\DOMAttr &$attr, $contextData = []): void
     {
         if(!$attr->parentNode->hasChildNodes()){
+            foreach($attr->parentNode->attributes as $sibling){
+                if(str_starts_with($sibling->name, 'as-')){
+                    $candidate = $contextData;
+                    foreach(explode('.', $sibling->nodeValue) as $part){
+                        $candidate = $candidate[$part];
+                    }
+
+                    $contextData[substr($sibling->name,3)] = $candidate;
+                }
+            }
+
             $htmlString = Template::embraceFromFile($this->setup->get('templatePath') . $attr->nodeValue, $contextData);
             $fresh = new \DOMDocument();
             @$fresh->loadHTML( $htmlString, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);

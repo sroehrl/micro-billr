@@ -48,7 +48,7 @@
       <div class="input">
         <select id="country" name="country" data-selected="{{address.country}}" required>
           <option value="" disabled selected></option>
-          <option n-for="countries as country => name" value="{{country}}">{{name}}</option>
+          <option n-for="countries as country" value="{{country}}">{{country}}</option>
 
         </select>
         <label for="country">Country</label>

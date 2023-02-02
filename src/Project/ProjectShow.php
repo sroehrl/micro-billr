@@ -5,6 +5,8 @@ namespace App\Project;
 use App\Auth\BehindLogin;
 use App\Bill\BillModel;
 use App\Bill\CostCalculator;
+use App\Calendar\CalendarEvents;
+use App\Estimate\EstimateModel;
 use App\Milestone\MilestoneModel;
 use App\Product\ProductModel;
 use App\Timesheet\TimesheetModel;
@@ -24,7 +26,8 @@ class ProjectShow implements Routable
             'project' => $project->toArray(),
             'stati' => ProjectStatus::cases(),
             'tab' => Request::getParameter('tab') ?? 'overview',
-            'details' => $this->getDetails()
+            'details' => $this->getDetails(),
+            'events' => json_encode(CalendarEvents::forProject($project->id))
         ];
     }
 
@@ -34,6 +37,11 @@ class ProjectShow implements Routable
         return match (Request::getParameter('tab')){
             'milestones' => MilestoneModel::retrieve(['^deletedAt', 'projectId' => $projectId])->toArray(),
             'overview' => [],
+            'estimate' => [
+                'estimate' => $this->estimateDetails($projectId),
+                'milestones' => MilestoneModel::retrieve(['^deletedAt', 'projectId' => $projectId])->toArray(),
+                'products' => ProductModel::retrieve(['^deletedAt'])->toArray(),
+            ],
             'tracking' => [
                 'timesheets' =>TimesheetModel::retrieve(['^deletedAt', 'projectId' => $projectId],['orderBy' => ['workedAt', 'DESC']])
                     ->each(fn(TimesheetModel $timesheet) => $timesheet->withMilestone())
@@ -48,5 +56,16 @@ class ProjectShow implements Routable
             ],
             default => []
         };
+    }
+
+    private function estimateDetails(int $projectId): array
+    {
+        $estimate = EstimateModel::retrieveOneOrCreate(['projectId' => $projectId, '^deletedAt']);
+        $combined = [
+            ... $estimate->toArray(),
+            'createdStamp' => $estimate->createdAt->stamp,
+            'byMilestone' => $estimate->itemsByMilestones()
+        ];
+        return $combined;
     }
 }

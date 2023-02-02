@@ -1,0 +1,140 @@
+<section class="w-4/5 mx-auto mt-5 ">
+    <form method="post" class="border-border-neutral border-rounded border-1 p-3 relative">
+        <h3 class="absolute -top-11 p-2 bg-white-light">
+            Bill: {{bill.billNumber}} - {{bill.customer.title}}
+        </h3>
+        <div class="absolute -top-5 p-2 bg-white-light right-5">
+            <button type="button" class="button-danger" data-delete="/api/bill" data-delete-id="{{bill.id}}">revoke</button>
+        </div>
+        <div class="font-lg">
+            Project: <a href="/project/{{bill.projectId}}" class="">{{bill.project.title}}</a>
+        </div>
+        <div class="flex border-b border-body-opaque pb-3">
+            <div class="company">
+                <h3 class="font-lg mb-1">{{company.name}}</h3>
+                <div>{{companyAddress}}</div>
+                <p>
+                    <span n-if="registry">{{registry}}</span>
+                </p>
+            </div>
+            <div class="arrow flex-1 grid">
+                <div class="place-center text-center text-body-dark-opaque">
+                    <svg class="w-10 " fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                    </svg>
+                    {{bill.billStatus}} <br>
+
+                </div>
+
+            </div>
+            <div class="grid">
+                <div class="customer place-start-end">
+                    <h3 class="font-lg mb-1">{{customer.title}}</h3>
+                    <p>
+                        {{customer.registry}}
+                    </p>
+                    <div>{{customerAddress}}</div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div n-if="bill.billStatus === 'generated'">
+                <div class="grid grid-cols-5 gap-3 p-2 mt-4 border-b border-body-opaque">
+                    <div>
+                        <a target="_blank" href="{{downloadLink}}" class="button-primary inline-block">
+                            <svg class="w-3" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path clip-rule="evenodd" fill-rule="evenodd" d="M5.625 1.5H9a3.75 3.75 0 013.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 013.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 01-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875zm5.845 17.03a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V12a.75.75 0 00-1.5 0v4.19l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3z"></path>
+                                <path d="M14.25 5.25a5.23 5.23 0 00-1.279-3.434 9.768 9.768 0 016.963 6.963A5.23 5.23 0 0016.5 7.5h-1.875a.375.375 0 01-.375-.375V5.25z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="span-x-3 place-center" >
+                        <div partial="Person/views/contactCard.html" as-person="bill.project.person"></div>
+                    </div>
+                    <div class="place-start-end">
+                        <button class="button-primary">send bill</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-5">
+            <div class="grid grid-cols-8 gap-5 p-2">
+                <div>Tracking-ID</div>
+                <div>Hours</div>
+                <div>Type</div>
+                <div class="span-x-2">Product</div>
+                <div>Tax</div>
+                <div class="text-right">Price</div>
+                <div class="text-right">Total</div>
+            </div>
+            <div class="rows">
+                <div class="row" n-for="lineItems as i => item">
+                    <div class="grid grid-cols-8 gap-5 p-2" >
+                        <div>{{item.id}}</div>
+                        <div i18n-number decimal>{{item.hours}}</div>
+                        <div>{{item.product.billingType}}</div>
+                        <div class="span-x-2">{{item.product.productNumber}} <strong>{{item.product.name}}</strong></div>
+                        <div class="flex">
+                            <div>
+                                <div class="input" style="margin-top: 0" n-if="item.product.taxable && !item.taxPercent">
+                                    <input id="percent-{{item.id}}" step="0.1" type="number" name="percent[{{item.id}}]" required>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-body-dark-opaque" n-if="item.taxPercent">{{item.taxPercent}}</div>
+                            </div>
+                            <div>
+                                <div class="text-body-dark-opaque" n-if="!item.product.taxable">0</div>
+                            </div>
+
+                            %
+                        </div>
+                        <div class="text-right" i18n-currency="{{currency}}">{{item.product.price}}</div>
+                        <div class="text-right" i18n-currency="{{currency}}">{{item.total}}</div>
+                    </div>
+                    <div class="grid grid-cols-8 gap-5">
+                        <div class="span-x-2"></div>
+                        <div class="grid grid-cols-2 border-1 border-neutral-light-opaque pl-2 pr-2 font-md span-x-4">
+                            <div i18n-date>{{item.workedAt}}</div>
+                            <div>Milestone: {{item.milestone.title}}</div>
+                            <div class="span-x-2">{{item.product.description}}</div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="grid grid-cols-8 gap-5 p-2 mt-3">
+                <div class="span-x-7">Subtotal</div>
+                <div class="text-right" i18n-currency="{{currency}}">{{totalNet}}</div>
+            </div>
+            <div>
+                <div class="grid p-2" n-if="bill.billStatus == 'processing'">
+                    <button class="button-primary">generate bill</button>
+                </div>
+            </div>
+            <div>
+                <div n-if="bill.billStatus !== 'processing'">
+                    <div class="grid grid-cols-8 gap-5 p-2 ">
+                        <div class="span-x-7">Tax</div>
+                        <div class="text-right" i18n-currency="{{currency}}">{{totalTax}}</div>
+                    </div>
+                    <div class="grid grid-cols-8 gap-5 p-2 bg-neutral-light-opaque">
+                        <div class="span-x-7">Total amount</div>
+                        <div class="text-right" i18n-currency="{{currency}}">{{totalGross}}</div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+
+    <script type="module">
+        import Toast from "/js/toast.js";
+
+        new Toast(queryParameter.feedback).show(5)
+        window.history.pushState({}, null, window.location.pathname)
+    </script>
+</section>

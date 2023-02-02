@@ -1,0 +1,142 @@
+<page>
+    <style>
+        page {
+            color: #47474a;
+            width: calc(100% - 20mm);
+        }
+        table{
+            border-collapse: collapse;
+        }
+        .cols-2 td{
+            width: 50%;
+        }
+        .cols-3 td{
+            width: 33.3%;
+        }
+        .cols-4 td{
+            width: 25%;
+        }
+        .items td, .items th{
+            padding: 2mm 4mm;
+        }
+        .w-100{
+            width: 100%;
+        }
+        .w-50{
+            width: 50%;
+        }
+        .text-right{
+            text-align: right;
+        }
+    </style>
+    <table class="w-100">
+        <tr class="cols-3">
+            <td>
+                To:
+                <h3>{{customer.title}}</h3>
+                <div>{{customerAddress}}</div>
+                <div style="padding-top: 6mm" n-if="customer.registry">{{customer.registry}}</div>
+            </td>
+            <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                From:
+                <h3>{{company.name}}</h3>
+                <div>{{companyAddress}}</div>
+                {{company.registry}}
+            </td>
+        </tr>
+
+    </table>
+
+    <h1>Estimate <span i18n-date="yyMMd">{{estimate.createdAt}}</span>-{{estimate.id}}</h1>
+    <h2>Project title: {{project}}</h2>
+    <p>
+        Date: {{offerDate}} <br>
+        <em>This offer is valid until {{validUntil}}</em>
+    </p>
+
+    <table class="w-100">
+        <tr class="items">
+            <td>
+                <strong>Amount</strong>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="text-right" style="font-weight: bold; font-size: 120%" i18n-currency="{{currency}}">{{totalNet}}</td>
+        </tr>
+        <tr class="items" style="border-bottom: 2px solid #ccc; min-height: 20px">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr class="items" style="background: #ccc; ">
+            <td style="width: 30%">Milestone</td>
+            <td style="width: 30%">Product</td>
+            <td style="width: 10%">Hours</td>
+            <td class="text-right" style="width: 15%">Price</td>
+            <td class="text-right" style="width: 15%">Total</td>
+        </tr>
+
+        <tr n-if="lineItems.length > 0" class="items" n-for="lineItems as i => item">
+            <td>{{item.milestone.title}}</td>
+            <td>{{item.product.name}}</td>
+            <td i18n-number>{{item.estimatedHours}}</td>
+            <td class="text-right" i18n-currency="{{currency}}">{{item.product.price}}</td>
+            <td class="text-right" i18n-currency="{{currency}}">{{item.net}}</td>
+        </tr>
+
+    </table>
+
+
+    <div style="margin: 12mm 0">
+        Estimate prices are net prices in {{currency}}. Our terms apply.
+    </div>
+
+    <table class="w-100 cols-3">
+        <tr>
+            <td>
+
+            </td>
+            <td></td>
+            <td>
+                <cert
+                        src="{{certificate}}"
+                        privkey="{{privateKey}}"
+                        name="Neoan-Coding"
+                        location="Farmington, USA"
+                        reason="Invoice validity"
+                        contactinfo="neoan@neoan.us"
+                >
+                    <qrcode value="This PDF is digitally signed" ec="H" style="width: 30mm; background-color: white; color: black;"></qrcode>
+                </cert>
+            </td>
+        </tr>
+    </table>
+</page>
+<page>
+    <h1>Service List</h1>
+    <table class="cols-4">
+        <tr class="items">
+            <th>Product number</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th class="text-right">Unit price</th>
+        </tr>
+        <tr class="items" n-for="uniqueProducts as product" style="border: 3mm solid #767676">
+            <td>{{product.productNumber}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.description}}</td>
+            <td class="text-right" i18n-currency="{{currency}}">{{product.price}}</td>
+        </tr>
+    </table>
+
+</page>

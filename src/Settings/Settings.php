@@ -2,15 +2,12 @@
 
 namespace App\Settings;
 
-use App\Address\Support\Countries;
+use App\Address\Country;
 use App\Auth\BehindLogin;
 use App\Auth\RequiresAdmin;
-use App\Company\CompanyModel;
+use App\DocumentCreator\Create;
 use Config\FormPost;
-use Neoan\Enums\RequestMethod;
-use Neoan\Enums\ResponseOutput;
 use Neoan\Request\Request;
-use Neoan\Response\Response;
 use Neoan\Routing\Attributes\Web;
 use Neoan\Routing\Interfaces\Routable;
 use Neoan\Store\Store;
@@ -20,19 +17,24 @@ use Neoan\Store\Store;
 class Settings implements Routable
 {
     private string $feedback = '';
-    public function __invoke(RequiresAdmin $admin, Countries $countries): array
+    public function __invoke(RequiresAdmin $admin, Create $documentCreator): array
     {
         Store::write('pageTitle', 'Settings');
         $data = match (Request::getParameter('tab')){
             'products' => (new ProductSettings())($this->feedback),
-            'billing' => (new BillingSettings())($this->feedback),
+            'billing' => (new BillingSettings())($admin, $this->feedback),
+            'mailing' => (new MailSettings())($admin, $this->feedback),
             default => (new CompanySettings())($this->feedback)
         };
+        $countries = [];
+        foreach (Country::cases() as $case){
+            $countries[$case->value] = $case->value;
+        }
         return [
             'tab' => Request::getParameter('tab') ?? 'company',
             'data' => $data,
             'feedback' => $this->feedback,
-            'countries' => $countries->countries
+            'countries' => $countries
         ];
     }
 

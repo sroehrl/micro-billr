@@ -6,7 +6,9 @@
     "ext-dom": "*",
     "ext-libxml": "*",
     "ext-intl": "*",
-    "php-curl-class/php-curl-class": "^9.13"
+    "php-curl-class/php-curl-class": "^9.13",
+    "spipu/html2pdf": "dev-master",
+    "ext-openssl": "*"
   },
   "scripts": {
     "install-socket": "NeoanIo\\MarketPlace\\Broadcast\\NpmHandler::package"
@@ -16,6 +18,12 @@
       "App\\": "./src/",
       "Config\\": "./config/"
     }
-  }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/sroehrl/html2pdf"
+    }
+  ]
 
 }

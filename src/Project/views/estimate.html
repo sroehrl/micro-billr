@@ -1,0 +1,88 @@
+<section class="mt-3">
+    <h2>Estimate <strong><span i18n-date="yyMMd">{{details.estimate.createdAt}}</span>-{{details.estimate.id}}</strong></h2>
+    <div>
+        <div class="grid grid-cols-6 gap-2 p-4 border-t-1" n-for="details.estimate.byMilestone as item">
+            <div>{{item.milestone.title}}</div>
+            <div>{{item.product.name}}</div>
+            <div class="text-right" i18n-number>{{item.estimatedHours}}</div>
+            <div class="text-right" i18n-currency="{{currency}}">{{item.product.price}}</div>
+            <div class="text-right" i18n-currency="{{currency}}">{{item.net}}</div>
+            <div class="place-center-end">
+                <button class="button-danger" n-if="details.estimate.isEditable">
+                    <svg class="w-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div>
+        <form action="/estimate/{{details.estimate.projectId}}" method="post" n-if="!details.estimate.isLocked" class="border-rounded bg-secondary-light-opaque border-secondary border-1 p-2">
+            <div>
+                <input type="hidden" name="id" value="{{details.estimate.id}}">
+            </div>
+            <div class="grid grid-cols-4 gap-2 bg-white border-rounded p-2">
+                <div class="flex gap-x-2">
+                    <div class="input flex-1">
+                        <select name="milestoneId" id="milestone" required data-selected="{{details.milestones.0.id}}">
+                            <option n-for="details.milestones as milestone" value="{{milestone.id}}">{{milestone.title}}</option>
+                        </select>
+                        <label for="milestone">Milestone</label>
+                    </div>
+                    <button title="add milestone" type="button" data-toggle-show="#milestone-modal" class="button-primary flex gap-x-2 place-center-end">
+                        <svg class="w-2 place-center" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="input">
+                    <select name="productId" id="product" required data-selected="{{details.products.0.id}}">
+                        <option n-for="details.products as product" value="{{product.id}}">{{product.name}}</option>
+                    </select>
+                    <label for="product">Product</label>
+                </div>
+                <div class="input">
+                    <input type="number" name="estimatedHours" id="estimatedHours" required>
+                    <label for="estimatedHours">Estimated hours</label>
+                </div>
+                <div class="place-center-end">
+                    <button class="button-secondary">add line</button>
+                </div>
+
+            </div>
+        </form>
+        <div>
+            <form action="/estimate/{{details.estimate.projectId}}" method="post" n-if="!details.estimate.isLocked">
+                <input type="hidden" name="lockIn" value="true">
+                <input type="hidden" name="id" value="{{details.estimate.id}}">
+                <div class="grid mt-3">
+                    <div class="place-end">
+                        <button class="button-primary">Complete estimate</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div>
+            <form action="/estimate/{{details.estimate.projectId}}" method="post" n-if="details.estimate">
+                <input type="hidden" name="sendOut" value="true">
+                <input type="hidden" name="id" value="{{details.estimate.id}}">
+                <div class="grid grid-cols-3 gap-3 mt-3 border-t-2 border-primary pt-4">
+                    <div class="place-start">
+                        <a target="_blank" data-href="/documents/{{project.customerId}}/{{details.estimate.createdStamp}}/estimate.pdf" href="/documents/{{project.customerId}}/{{details.estimate.createdStamp}}/estimate.pdf" class="button-primary flex gap-x-2">
+                            <svg class="w-3" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path clip-rule="evenodd" fill-rule="evenodd" d="M5.625 1.5H9a3.75 3.75 0 013.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 013.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 01-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875zm5.845 17.03a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V12a.75.75 0 00-1.5 0v4.19l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3z"></path>
+                                <path d="M14.25 5.25a5.23 5.23 0 00-1.279-3.434 9.768 9.768 0 016.963 6.963A5.23 5.23 0 0016.5 7.5h-1.875a.375.375 0 01-.375-.375V5.25z"></path>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <div partial="Person/views/contactCard.html" as-person="project.person"></div>
+                    <div class="place-start-end">
+                        <button class="button-primary">Send out</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div partial="/Milestone/views/create.html"></div>
+</section>

@@ -11,7 +11,16 @@
         <div>planned:</div>
         <a href="/project?filter=planned" class="place-end">{{plannedProjects}}</a>
       </div>
+      <h2 class="bg-secondary p-1 text-white mt-0 mb-1 border-rounded">
+        Finances
+      </h2>
+      <div class="grid grid-cols-2 p-3">
+        <div>open bills:</div>
+        <div class="place-end"><a href="/finances">{{openBills}}</a></div>
+      </div>
+
     </div>
     <div  class="span-x-2" partial="Calendar/views/calendar.html"></div>
   </div>
+
 </section>

@@ -14,6 +14,7 @@ $publicPath = __DIR__;
 
 $setup = new Setup();
 $setup->setLibraryPath($pathToSourceFiles)
+    ->setDefault404('config/404.html')
     ->setPublicPath($publicPath);
 
 

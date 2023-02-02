@@ -1,0 +1,119 @@
+<section class="w-4/5 mx-auto mt-5 border-border-neutral border-rounded border-1 p-3">
+    <form method="post">
+        <input type="hidden" name="customerId" value="{{customer.id}}">
+        <div class="flex border-b border-body-opaque pb-3">
+            <div class="company">
+                <h3 class="font-lg mb-1">{{company.name}}</h3>
+                <p>
+                    {{company.street}} <br>
+                    {{company.place}}, {{company.state}} {{company.postalCode}} <br>
+                    {{company.country}}
+                </p>
+            </div>
+            <div class="arrow flex-1 grid">
+                <svg class="w-10 place-center text-body-dark-opaque" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+                </svg>
+            </div>
+            <div class="grid">
+                <div class="customer place-start-end">
+                    <h3 class="font-lg mb-1">{{customer.title}}</h3>
+                    <p>
+                        {{customer.registry}} <br>
+                        {{customer.address.street}} <br>
+                        {{customer.address.place}}, {{customer.address.state}} {{customer.address.postalCode}} <br>
+                        {{customer.address.country}}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="grid grid-cols-2 gap-3 mt-10">
+            <div class="header">
+                <div i18n-date=""></div>
+                <div class="input ">
+                    <input type="text" id="billNumber" name="billNumber" required>
+                    <label for="billNumber">Bill number</label>
+                </div>
+            </div>
+            <div>
+                <h3 class="mb-1 mt-0">Project: {{project.title}}</h3>
+                <p>
+                    {{project.person.firstName}} {{project.person.middleName}} {{project.person.lastName}} <br>
+                    {{project.person.email}}
+                </p>
+            </div>
+        </div>
+        <div class="input">
+            <select name="milestone" id="milestone">
+                <option value="{{milestone.id}}" n-for="milestones as milestone">{{milestone.title}}</option>
+                <option value="null" disabled selected>choose milestone</option>
+            </select>
+            <label for="milestone">Select milestone</label>
+        </div>
+        <div id="render-list"></div>
+        <div class="none" id="createBtn">
+            <button class="button-secondary place-end">generate</button>
+        </div>
+    </form>
+    <script>
+        const targetElement = _('#render-list')
+        let suggested = {};
+        _('#milestone').addEventListener('change', ev => {
+            _('#createBtn').className = 'grid'
+            if(!suggested[ev.target.value]){
+                fetch('/api/timesheet?billId=&milestoneId='+ev.target.value)
+                    .then(j => j.json()).then(d => renderSuggestions(d, ev.target.value))
+            }
+        })
+        const renderSuggestions = (fromApi, milestone) => {
+            targetElement.innerHTML = '';
+            if(typeof suggested[milestone] === 'undefined'){
+                suggested[milestone] = []
+            }
+            fromApi.forEach(data => {
+                suggested[milestone].push(data);
+            })
+            Object.keys(suggested).forEach(key => {
+                const header = document.createElement('div')
+                header.className = 'p-3 bg-secondary text-white mt-3 p-3'
+                header.innerText = suggested[key][0].milestone.title
+                targetElement.appendChild(header)
+                suggested[key].forEach(item => {
+                    const line = document.createElement('div')
+                    line.className = 'grid grid-cols-4 p-2'
+                    // what
+                    const col1 = document.createElement('div')
+                    col1.className = 'span-x-2 place-center-start'
+                    col1.innerText =  item.product.name + ' ( ' + item.hours + 'h )';
+                    line.appendChild(col1)
+                    // date
+                    const date = new Date(item.workedAt.value.replace(' ','T'))
+                    const col2 = document.createElement('div')
+                    col2.className = 'place-center-start'
+                    col2.innerText = (date.getMonth()+1) + '/' + date.getFullYear()
+                    line.appendChild(col2)
+
+                    // form
+                    const col3 = document.createElement('div');
+                    const container = document.createElement('div')
+                    container.className = 'input';
+                    col3.appendChild(container)
+                    const input = document.createElement('input')
+                    input.type = 'checkbox'
+                    input.name = 'timesheets[' + item.id +']'
+                    input.checked = true
+                    container.appendChild(input)
+                    line.appendChild(col3)
+
+
+
+                    targetElement.appendChild(line)
+                })
+
+            })
+            console.log({suggested})
+        }
+    </script>
+</section>

@@ -3,6 +3,7 @@
 namespace App\Home;
 
 use App\Auth\BehindLogin;
+use App\Bill\BillModel;
 use App\Calendar\CalendarEvents;
 use App\Project\ProjectModel;
 use App\Project\ProjectStatus;
@@ -25,6 +26,7 @@ class Home implements Routable
                 '^deletedAt',
                 'status' => ProjectStatus::PLANNED->value
             ])->count(),
+            'openBills' => BillModel::retrieve(['^deletedAt', '^paidAt'])->count(),
             'events' => json_encode(CalendarEvents::allEvents())
         ];
     }

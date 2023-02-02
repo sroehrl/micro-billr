@@ -2,17 +2,25 @@
 
 namespace App\Auth;
 
+use App\User\UserModel;
+use Neoan\Request\Request;
 use Neoan\Response\Response;
 use Neoan\Routing\Interfaces\Routable;
 use Neoan3\Apps\Session;
 
 class BehindLogin implements Routable
 {
-    public function __invoke(): array
+    public UserModel $user;
+    public function __invoke(): static
     {
+
         try{
-            return Session::restrict();
+            $session = Session::restrict();
+            $this->user = UserModel::get(Session::userId());
+            return $this;
         } catch (\Exception $e) {
+            setcookie('afterLogin', Request::getRequestUri(), time() + 3600, '/');
+            usleep(10);
             Response::redirect('/login');
         }
 

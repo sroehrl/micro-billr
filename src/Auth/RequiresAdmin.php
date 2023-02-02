@@ -14,7 +14,8 @@ class RequiresAdmin implements Routable
     public function __invoke(array $provided = []): static
     {
         try{
-            Session::restrict([Privilege::ADMIN]);
+            $session = Session::restrict([Privilege::ADMIN]);
+            $this->user = UserModel::get(Session::userId());
         } catch (\Exception $e) {
             Response::redirect('/login');
         }

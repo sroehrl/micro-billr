@@ -3,6 +3,7 @@
 namespace App\Customer;
 
 use App\Address\AddressModel;
+use App\Address\Country;
 use App\Address\Support\Countries;
 use App\Auth\BehindLogin;
 use Neoan\Enums\GenericEvent;
@@ -33,10 +34,14 @@ class CustomerShow implements Routable
             Response::redirect('/customer');
         }
 
+        $countries = [];
+        foreach (Country::cases() as $case){
+            $countries[$case->value] = $case->value;
+        }
 
         return [
             ...$customer->toArray(),
-            'countries' => $countries->countries,
+            'countries' => $countries,
             'feedback' => $this->comingFrom()
         ];
 

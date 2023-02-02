@@ -12,8 +12,8 @@ class Countries implements Routable
     {
         $this->countries = [
             'CA' => 'Canada',
-            'US' => 'USA',
-            'DE' => 'Germany',
+            'USA' => 'USA',
+            'GERMANY' => 'Germany',
             'CH' => 'Switzerland',
             'AT' => 'Austria'
         ];
