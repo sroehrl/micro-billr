@@ -4,6 +4,7 @@ namespace App\Note;
 
 use App\Auth\BehindLogin;
 use App\Helper\FeedbackWrapper;
+use Neoan\Enums\TimePeriod;
 use Neoan\Request\Request;
 use Neoan\Response\Response;
 use Neoan\Routing\Attributes\Post;
@@ -21,6 +22,7 @@ class NoteCreate implements Routable
         ]);
         if(Request::getInput('remindAt')){
             $noteModel->remindAt->set(Request::getInput('remindAt'));
+            $noteModel->remindAt->addTimePeriod(9, TimePeriod::HOURS);
         }
         $noteModel->store();
         FeedbackWrapper::redirectBack('Note saved!');

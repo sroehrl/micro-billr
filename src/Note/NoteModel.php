@@ -33,12 +33,14 @@ class NoteModel extends Model
     public function calendarEvent(): ?array
     {
         if(isset($this->remindAt->dateTime)){
+            $url = '/' . $this->noteType->value . '/' . $this->relationId;
+
             return [
                 'id' => 'note-' . $this->id,
                 'start' => $this->remindAt->dateTime->format("Y-m-d\\TH:i:sO"),
                 'allDay' => false,
                 'title' => substr($this->content, 0,12) . '...',
-                'url' =>  '/' . $this->noteType->value . '/' . $this->relationId,
+                'url' =>  $url,
                 'backgroundColor' => $this->noteType->color()
             ];
         }

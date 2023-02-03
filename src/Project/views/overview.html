@@ -1,3 +1,21 @@
 <div class="section mt-5">
-    <div partial="/Calendar/views/calendar.html"></div>
+    <div class="grid grid-cols-3 gap-3">
+        <div class="notes">
+            <div class="grid grid-cols-2 gap-x-2">
+                <h2 class="flex-1 mt-0">Notes</h2>
+                <button class="button-secondary place-start-end flex gap-x-2" data-toggle-show="#note-modal">
+                    <svg class="w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z"></path>
+                    </svg>
+                    new note
+                </button>
+            </div>
+            <div n-if="details.notes.length > 0">
+                <div n-for="details.notes as note" partial="Note/views/noteCard.html"></div>
+            </div>
+        </div>
+        <div class="span-x-2" partial="/Calendar/views/calendar.html"></div>
+    </div>
+    <div partial="Note/views/create.html"></div>
 </div>

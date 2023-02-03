@@ -2,6 +2,7 @@
 
 namespace App\Product;
 
+use Neoan\Model\Attributes\Computed;
 use Neoan\Model\Attributes\IsEnum;
 use Neoan\Model\Attributes\IsPrimaryKey;
 use Neoan\Model\Attributes\Transform;
@@ -20,6 +21,12 @@ class ProductModel extends Model
 
     #[Type('MEDIUMTEXT')]
     public string $description;
+
+    #[Computed]
+    public function htmlDescription(): ?string
+    {
+        return isset($this->description) ? '<p>' . nl2br($this->description) . '</p>' : '';
+    }
 
     #[IsEnum(BillingType::class)]
     public ?BillingType $billingType;

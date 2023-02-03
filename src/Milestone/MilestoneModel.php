@@ -63,7 +63,7 @@ class MilestoneModel extends Model
             'allDay' => true,
             'title' => $this->title,
             'url' =>  '/milestone/' . $this->id,
-            'backgroundColor' => NoteType::MILESTONE->color()
+            'backgroundColor' => NoteType::MILESTONE->color($this->project()->status)
         ];
         if(isset($this->startedAt->dateTime)){
             $event['start'] = $this->startedAt->dateTime->format("Y-m-d\\TH:i:sO");

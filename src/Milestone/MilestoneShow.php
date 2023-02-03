@@ -3,6 +3,7 @@
 namespace App\Milestone;
 
 use App\Auth\BehindLogin;
+use App\Product\ProductModel;
 use App\Timesheet\TimesheetModel;
 use Neoan\Request\Request;
 use Neoan\Routing\Attributes\Web;
@@ -32,6 +33,11 @@ class MilestoneShow implements Routable
         return [
             ...$milestone->toArray(),
             'noteType' => 'milestone',
+            'details' => [
+                'milestones' => [$milestone->toArray()],
+                'products' => ProductModel::retrieve(['^deletedAt'])->toArray()
+            ],
+            'project' => $milestone->project->toArray(),
             'relationId' => $milestoneId,
             'chartData' => json_encode($chartData),
             'timesheets' => $timeSheets->toArray()

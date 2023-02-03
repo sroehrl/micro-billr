@@ -4,20 +4,25 @@ namespace App\Timesheet;
 
 use App\Bill\BillModel;
 use App\Milestone\MilestoneModel;
+use App\Note\NoteModel;
 use App\Product\PriceTransformation;
 use App\Product\ProductModel;
 use App\Project\ProjectModel;
 use Neoan\Database\Database;
 use Neoan\Model\Attributes\Computed;
+use Neoan\Model\Attributes\HasMany;
 use Neoan\Model\Attributes\Ignore;
 use Neoan\Model\Attributes\IsForeignKey;
 use Neoan\Model\Attributes\IsPrimaryKey;
 use Neoan\Model\Attributes\Transform;
 use Neoan\Model\Attributes\Type;
+use Neoan\Model\Collection;
 use Neoan\Model\Helper\DateTimeProperty;
 use Neoan\Model\Model;
 use Neoan\Model\Traits\TimeStamps;
+use Neoan\Model\Transformers\Hash;
 use Neoan\Model\Transformers\LockedTimeIn;
+use Neoan\Model\Transformers\UUID;
 
 /**
  * @method TimesheetModel withMilestone
@@ -40,6 +45,9 @@ class TimesheetModel extends Model
     #[IsForeignKey(ProjectModel::class)]
     public int $projectId;
 
+    #[Transform(UUID::class)]
+    public string $hash;
+
     #[
         Transform(PriceTransformation::class),
         Type('int', 11)
@@ -54,6 +62,9 @@ class TimesheetModel extends Model
         Type('int', 11)
     ]
     public ?float $taxPercent;
+
+    #[HasMany(NoteModel::class, ['relationId' => 'id', 'noteType' => 'timesheet'])]
+    public ?Collection $notes;
 
     #[
         Type('date'),

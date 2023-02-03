@@ -10,6 +10,7 @@ use Neoan\Routing\Attributes\Post;
 use Neoan\Routing\Attributes\Web;
 use Neoan\Routing\Interfaces\Routable;
 use Neoan\Store\Store;
+use Neoan3\Apps\Session;
 
 #[Web('/login', 'Auth/views/login.html')]
 #[Post('/login')]

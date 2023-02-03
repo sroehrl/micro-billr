@@ -3,6 +3,7 @@
 namespace App\Project;
 
 use App\Customer\CustomerModel;
+use App\Note\NoteType;
 use App\Person\PersonModel;
 use Config\TargetDate;
 use Neoan\Model\Attributes\IsEnum;
@@ -37,7 +38,8 @@ class ProjectModel extends Model
             'id' => 'project-' . $this->id,
             'allDay' => true,
             'title' => $this->customer()->title . ' - ' . $this->title,
-            'url' => '/project/' . $this->id
+            'url' => '/project/' . $this->id,
+            'backgroundColor' => $this->status->color()
         ];
         if(isset($this->startedAt->dateTime)){
             $event['start'] = $this->startedAt->dateTime->format("Y-m-d\\TH:i:sO");

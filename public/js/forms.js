@@ -18,8 +18,9 @@ deleteButtons.forEach(button => {
     button.addEventListener('click', deleteEntity)
 })
 function deleteEntity(ev){
+    ev.preventDefault();
     const url = ev.target.dataset.delete + '/' + ev.target.dataset.deleteId;
     fetch(url,{
         method: 'delete'
-    }).then(() => window.location.reload())
+    }).then(j => j.json()).then(() => setTimeout(()=>window.location.reload(),100))
 }

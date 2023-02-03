@@ -8,6 +8,7 @@ use App\Bill\CostCalculator;
 use App\Calendar\CalendarEvents;
 use App\Estimate\EstimateModel;
 use App\Milestone\MilestoneModel;
+use App\Note\NoteModel;
 use App\Product\ProductModel;
 use App\Timesheet\TimesheetModel;
 use Neoan\Database\Database;
@@ -27,7 +28,9 @@ class ProjectShow implements Routable
             'stati' => ProjectStatus::cases(),
             'tab' => Request::getParameter('tab') ?? 'overview',
             'details' => $this->getDetails(),
-            'events' => json_encode(CalendarEvents::forProject($project->id))
+            'events' => json_encode(CalendarEvents::forProject($project->id)),
+            'noteType' => 'project',
+            'relationId' => $project->id
         ];
     }
 
@@ -36,7 +39,6 @@ class ProjectShow implements Routable
         $projectId = Request::getParameter('id');
         return match (Request::getParameter('tab')){
             'milestones' => MilestoneModel::retrieve(['^deletedAt', 'projectId' => $projectId])->toArray(),
-            'overview' => [],
             'estimate' => [
                 'estimate' => $this->estimateDetails($projectId),
                 'milestones' => MilestoneModel::retrieve(['^deletedAt', 'projectId' => $projectId])->toArray(),
@@ -54,7 +56,9 @@ class ProjectShow implements Routable
                 'outstandingTotalHours' => CostCalculator::unbilledHoursOnProject($projectId),
                 'outstandingTotalNet' => CostCalculator::unbilledNetOnProject($projectId)
             ],
-            default => []
+            default => [
+                'notes' => NoteModel::retrieve(['^deletedAt', 'relationId' => $projectId, 'noteType' => 'project'])->toArray(),
+            ]
         };
     }
 
@@ -68,4 +72,5 @@ class ProjectShow implements Routable
         ];
         return $combined;
     }
+
 }
