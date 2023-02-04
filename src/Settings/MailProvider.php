@@ -2,6 +2,9 @@
 
 namespace App\Settings;
 
+use App\Mailing\Mailjet;
+use App\Mailing\MailProviderInterface;
+
 enum MailProvider: string
 {
     case MAILJET = 'mailjet';
@@ -16,4 +19,11 @@ enum MailProvider: string
             ]
         };
     }
+    public function getProvider(): MailProviderInterface
+    {
+        return match ($this){
+            MailProvider::MAILJET => new Mailjet()
+        };
+    }
+
 }

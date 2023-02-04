@@ -5,6 +5,7 @@ namespace App\Estimate;
 use App\Auth\BehindLogin;
 use App\DocumentCreator\Create;
 use App\Helper\FeedbackWrapper;
+use App\Mailing\Mail;
 use Neoan\Helper\Setup;
 use Neoan\Request\Request;
 use Neoan\Routing\Attributes\Post;
@@ -13,7 +14,7 @@ use Neoan\Routing\Interfaces\Routable;
 #[Post('/estimate/:projectId', BehindLogin::class)]
 class EstimateUpdateOrCreate implements Routable
 {
-    public function __invoke(Create $documentCreator, Setup $setup): void
+    public function __invoke(Create $documentCreator, Setup $setup, Mail $mail): void
     {
         $projectId = Request::getParameter('projectId');
         try{
@@ -52,8 +53,14 @@ class EstimateUpdateOrCreate implements Routable
             $feedback = 'Estimate generated';
         }
         if(Request::getInput('sendOut')) {
-            $estimate->sentAt->set('now');
-            $feedback = 'Email sent';
+            $feedback = 'There was a problem with sending out the email automatically.';
+            if($mail->sendEstimate($estimate)){
+                $estimate->sentAt->set('now');
+                $estimate->store();
+                $feedback = 'Email sent';
+            }
+
+
         }
 
         FeedbackWrapper::redirectBack($feedback);

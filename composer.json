@@ -8,7 +8,8 @@
     "ext-intl": "*",
     "php-curl-class/php-curl-class": "^9.13",
     "spipu/html2pdf": "dev-master",
-    "ext-openssl": "*"
+    "ext-openssl": "*",
+    "mailjet/mailjet-apiv3-php": "^1.5"
   },
   "scripts": {
     "install-socket": "NeoanIo\\MarketPlace\\Broadcast\\NpmHandler::package"

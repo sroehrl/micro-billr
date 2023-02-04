@@ -29,6 +29,7 @@ class CompanySettings
                 'accountNumber' => '',
                 'routingNumber' => '',
                 'registry' => '',
+                'color' => '#2ed6a4'
             ]);
         }
         if(Request::getRequestMethod() === RequestMethod::POST) {
@@ -43,6 +44,9 @@ class CompanySettings
                 'swiftBic' => $company->swiftBic,
                 'accountNumber' => $company->accountNumber,
                 'routingNumber' => $company->routingNumber,
+                'phoneNumber' => $company->phoneNumber,
+                'website' => $company->website,
+                'color' => $company->color,
                 'registry' => $company->registry
             ] = Request::getInputs();
             $company->country = Country::from(Request::getInput('country'));

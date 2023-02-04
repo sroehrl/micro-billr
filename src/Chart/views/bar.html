@@ -6,6 +6,7 @@
       type: 'bar',
       options: {
         animation: false,
+        responsive:true,
         plugins: {
           legend: {
             display: true
@@ -15,7 +16,12 @@
           }
         }
     },
-    data: JSON.parse(`{{chartData}}`)
     });
+    fetch('/api/chart{{chartData}}')
+            .then(j => j.json())
+            .then(res => {
+              chart.data = res;
+              chart.update()
+            })
   </script>
 </section>

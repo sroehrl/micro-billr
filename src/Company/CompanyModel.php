@@ -32,6 +32,12 @@ class CompanyModel extends AddressModel
 
     public string $registry;
 
+    public ?string $phoneNumber;
+
+    public ?string $color;
+
+    public ?string $website;
+
     use TimeStamps;
 
 }

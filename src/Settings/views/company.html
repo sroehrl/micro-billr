@@ -34,6 +34,20 @@
         </select>
         <label for="country">Country</label>
       </div>
+      <div class="grid grid-cols-3 gap-3">
+        <div class="input">
+          <input id="phoneNumber" type="text" name="phoneNumber" value="{{data.phoneNumber}}" required>
+          <label for="phoneNumber">Phone number</label>
+        </div>
+        <div class="input">
+          <input id="website" type="url" name="website" value="{{data.website}}" placeholder="website">
+          <label for="website">Website</label>
+        </div>
+        <div class="input">
+          <input id="color" type="color" name="color" value="{{data.color}}" placeholder="color">
+          <label for="color">Color</label>
+        </div>
+      </div>
       <div class="input">
         <input id="registry" type="text" name="registry" value="{{data.registry}}"
                placeholder="registry">

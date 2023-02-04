@@ -21,14 +21,7 @@ class MilestoneShow implements Routable
 
 
 
-        $chartData = [
-            'labels' => array_map(fn($timeSheet) => $timeSheet['productName'], $timeSheets->toArray()),
-            'datasets' => [
-                ['label' => 'Estimate', 'data' => array_fill(0, $timeSheets->count(), $milestone->estimatedHours), 'type' => 'line'],
-                ['label' => 'Product', 'data' => array_map(fn ($timeSheet) => $timeSheet['hours'], $timeSheets->toArray())],
-                ['label' => 'Actual', 'data' => array_fill(0, $timeSheets->count(), $milestone->actualHours), $timeSheets->toArray(), 'type' => 'line'],
-            ]
-        ];
+
 
         return [
             ...$milestone->toArray(),
@@ -39,7 +32,7 @@ class MilestoneShow implements Routable
             ],
             'project' => $milestone->project->toArray(),
             'relationId' => $milestoneId,
-            'chartData' => json_encode($chartData),
+            'chartData' => '/milestone/' . $milestoneId,
             'timesheets' => $timeSheets->toArray()
         ];
     }
