@@ -23,7 +23,7 @@ class AddressModel extends Model
     public string $postalCode;
 
     #[IsEnum(Country::class)]
-    public Country $country;
+    public ?Country $country;
 
     #[Computed]
     public function printableAddress(): string

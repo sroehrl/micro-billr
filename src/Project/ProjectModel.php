@@ -15,6 +15,8 @@ use Neoan\Model\Traits\TimeStamps;
 /**
  * @method ProjectModel withCustomer()
  * @method ProjectModel withPerson()
+ * @method PersonModel person
+ * @method CustomerModel customer
  */
 class ProjectModel extends Model
 {

@@ -3,6 +3,11 @@ export default class Autocomplete{
         this.target = document.querySelector(targetElement)
         this.input = document.querySelector(searchElement)
         this.input.addEventListener('input', this.search())
+        this.input.addEventListener('focus', () => {
+            if(this.input.value.length < 1){
+                this.search()
+            }
+        })
         this.results = [];
         this.resultContainer = document.createElement('div')
         this.resultContainer.className = 'absolute bg-white left-0 right-0'

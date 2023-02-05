@@ -12,6 +12,7 @@ use App\Project\ProjectModel;
 use App\Settings\InvoiceSettingModel;
 use App\Timesheet\TimesheetModel;
 use App\User\UserModel;
+use Neoan\Errors\SystemError;
 use Neoan\Model\Collection;
 use Neoan\Request\Request;
 use Neoan\Response\Response;
@@ -30,7 +31,12 @@ class BillCreate implements Routable
     public function __invoke(Auth $auth): array
     {
         $this->user = $auth->user;
-        $this->invoiceSettings = InvoiceSettingModel::retrieveOne(['companyId' => $auth->user->companyId]);
+        try{
+            $this->invoiceSettings = InvoiceSettingModel::retrieveOne(['companyId' => $auth->user->companyId]);
+        } catch (\Exception $e) {
+            new SystemError('Invoice settings are not set up');
+        }
+
         // call get() or post()
         return $this->{strtolower(Request::getRequestMethod()->name)}(Request::getParameter('projectId'));
     }

@@ -5,6 +5,7 @@ namespace App\Bill;
 use App\Auth\Auth;
 use App\Auth\BehindLogin;
 use App\DocumentCreator\Create;
+use App\Mailing\Mail;
 use App\Timesheet\TimesheetModel;
 use Config\FormPost;
 use Neoan\Enums\RequestMethod;
@@ -21,9 +22,13 @@ class BillShow implements Routable
     private Setup $setup;
     private Create $documentCreator;
 
-    public function __invoke(Auth $auth, Setup $setup, Create $documentCreator): array
+    private Mail $mail;
+    private $feedback = '';
+
+    public function __invoke(Auth $auth, Setup $setup, Create $documentCreator, Mail $mail): array
     {
         $this->setup = $setup;
+        $this->mail = $mail;
         $this->documentCreator = $documentCreator;
         $this->bill = BillModel::get(Request::getParameter('id'))->withCustomer()->withProject();
         $this->bill->project->withPerson();
@@ -54,7 +59,8 @@ class BillShow implements Routable
             'totalNet' => $totalNet,
             'totalTax' => $totalTax,
             'totalGross' => $totalGross,
-            'downloadLink' => $downloadLink
+            'downloadLink' => $downloadLink,
+            'feedback' => $this->feedback
         ];
     }
     function update() :void
@@ -84,8 +90,12 @@ class BillShow implements Routable
                 $this->documentCreator->generateInvoice($this->bill,'F', $fileName);
                 break;
             case BillStatus::GENERATED:
+                if(!$this->mail->sendBill($this->bill)){
+                    $this->feedback = 'There was a problem sending the email';
+                } else {
+                    $this->bill->billStatus = BillStatus::SENT_OUT;
+                }
 
-                $this->bill->billStatus = BillStatus::SENT_OUT;
                 break;
 
         }

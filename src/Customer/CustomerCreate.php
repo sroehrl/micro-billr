@@ -5,11 +5,13 @@ namespace App\Customer;
 use App\Auth\BehindLogin;
 use Config\FormPost;
 use Neoan\Enums\RequestMethod;
+use Neoan\Helper\Str;
 use Neoan\Request\Request;
 use Neoan\Response\Response;
 use Neoan\Routing\Attributes\Web;
 use Neoan\Routing\Interfaces\Routable;
 use Neoan3\Apps\Session;
+use Ramsey\Uuid\Uuid;
 
 #[
     Web('/customer/new', 'Customer/views/create.html', BehindLogin::class),
@@ -30,6 +32,6 @@ class CustomerCreate implements Routable
             }
 
         }
-        return ['customerNumber' => 'suggest'];
+        return ['customerNumber' => Str::randomAlphaNumeric(6)];
     }
 }

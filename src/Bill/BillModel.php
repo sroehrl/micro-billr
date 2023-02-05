@@ -25,6 +25,7 @@ use Neoan\Model\Transformers\LockedTimeIn;
  * @method BillModel withCustomer()
  * @method CustomerModel customer()
  * @method BillModel withProject()
+ * @method ProjectModel project()
  * @property Collection lineItems
  */
 class BillModel extends Model

@@ -16,6 +16,10 @@ use Neoan\Model\Model;
 use Neoan\Model\Traits\TimeStamps;
 use Neoan\Model\Transformers\LockedTimeIn;
 
+/**
+ * @method ProjectModel project;
+ * */
+
 class EstimateModel extends Model
 {
     #[IsPrimaryKey]
