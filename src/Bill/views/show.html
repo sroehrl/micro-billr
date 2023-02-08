@@ -4,7 +4,7 @@
             Bill: {{bill.billNumber}} - {{bill.customer.title}}
         </h3>
         <div class="absolute -top-5 p-2 bg-white-light right-5">
-            <button type="button" class="button-danger" data-delete="/api/bill" data-delete-id="{{bill.id}}">revoke</button>
+            <button n-if="bill.billStatus !== 'revoked'" type="button" class="button-danger" data-delete="/api/bill" data-delete-id="{{bill.id}}">rescind</button>
         </div>
         <div class="font-lg">
             Project: <a href="/project/{{bill.projectId}}" class="">{{bill.project.title}}</a>
@@ -17,13 +17,13 @@
                     <span n-if="registry">{{registry}}</span>
                 </p>
             </div>
-            <div class="arrow flex-1 grid">
-                <div class="place-center text-center text-body-dark-opaque">
+            <div class="arrow flex-1 grid" data-class="{'text-danger': '{{bill.billStatus}}' === 'revoked', 'text-body-dark-opaque': '{{bill.billStatus}}' !== 'revoked'}">
+                <div class="place-center text-center">
                     <svg class="w-10 " fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
                     </svg>
                     {{bill.billStatus}} <br>
-
+                    <span n-if="bill.billStatus === 'sent out'" i18n-date>{{bill.sentDate}}</span>
                 </div>
 
             </div>
@@ -38,7 +38,7 @@
             </div>
         </div>
         <div>
-            <div n-if="bill.billStatus === 'generated'">
+            <div n-if="bill.billStatus === 'generated' || bill.billStatus === 'sent out'">
                 <div class="grid grid-cols-5 gap-3 p-2 mt-4 border-b border-body-opaque">
                     <div>
                         <a target="_blank" href="{{downloadLink}}" class="button-primary inline-block">
@@ -52,7 +52,12 @@
                         <div partial="Person/views/contactCard.html" as-person="bill.project.person"></div>
                     </div>
                     <div class="place-start-end">
-                        <button class="button-primary">send bill</button>
+                        <div n-if="bill.billStatus !== 'sent out'">
+                            <button class="button-primary">send bill</button>
+                        </div>
+                        <div n-if="bill.billStatus === 'sent out'">
+                            <button class="button-primary">resend bill</button>
+                        </div>
                     </div>
                 </div>
             </div>

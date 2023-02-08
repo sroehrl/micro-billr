@@ -52,7 +52,7 @@ class ProjectShow implements Routable
                 'milestones' => MilestoneModel::retrieve(['^deletedAt', 'projectId' => $projectId])->toArray()
             ],
             'bill' => [
-                'existing' => BillModel::retrieve(['projectId' => $projectId, '^deletedAt'],['orderBy' => ['paidAt', 'DESC']])->toArray(),
+                'existing' => BillModel::retrieve(['projectId' => $projectId],['orderBy' => ['paidAt', 'DESC']])->toArray(),
                 'outstandingTotalHours' => CostCalculator::unbilledHoursOnProject($projectId),
                 'outstandingTotalNet' => CostCalculator::unbilledNetOnProject($projectId)
             ],

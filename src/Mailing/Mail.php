@@ -56,13 +56,28 @@ class Mail implements Routable
         $customer = $project->customer();
         $attachmentPath = $this->app->publicPath . '/documents/'. $customer->id . '/' . $bill->createdAt->stamp;
         $this->addReceiver($receiver);
-        $this->provider->addAttachment($attachmentPath . '/estimate.pdf', 'estimate.pdf');
+        $this->provider->addAttachment($attachmentPath . '/invoice.pdf', 'invoice.pdf');
         $this->provider->setSubject('Invoice ' . $bill->billNumber);
         $html = Template::embraceFromFile('src/Mailing/documents/invoice.html', [
             'customer' => $customer->toArray(),
             'receiver' => $receiver->toArray(),
             'company' => $this->company->toArray(),
-            'companyAddress' => $this->company->printableAddress()
+            'companyAddress' => $this->company->printableAddress(),
+            'bill' => $bill->toArray()
+        ]);
+        $this->provider->setHtmlContent($html);
+        return $this->provider->send();
+    }
+
+    public function sendBillCancellation(BillModel $bill): bool
+    {
+        $receiver = $bill->project()->person();
+        $this->addReceiver($receiver);
+        $this->provider->setSubject('Rescinded invoice: ' . $bill->billNumber);
+        $html = Template::embraceFromFile('src/Mailing/documents/rescindInvoice.html', [
+            'company' => $this->company->toArray(),
+            'receiver' => $receiver->toArray(),
+            'bill' => $bill->toArray()
         ]);
         $this->provider->setHtmlContent($html);
         return $this->provider->send();

@@ -14,11 +14,11 @@ $publicPath = __DIR__;
 
 $setup = new Setup();
 $setup->setLibraryPath($pathToSourceFiles)
-    ->setDefault404('config/404.html')
+    ->setDefault404(dirname(__DIR__) .'/config/404.html')
     ->setPublicPath($publicPath);
 
 
-$app = new NeoanApp($setup);
+$app = new NeoanApp($setup, dirname(__DIR__));
 
 new \Config\Config($app);
 // enable attribute routing

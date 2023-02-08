@@ -94,6 +94,7 @@ class BillShow implements Routable
                     $this->feedback = 'There was a problem sending the email';
                 } else {
                     $this->bill->billStatus = BillStatus::SENT_OUT;
+                    $this->bill->store();
                 }
 
                 break;

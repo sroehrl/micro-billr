@@ -6,8 +6,19 @@
             <label for="email">Email</label>
         </div>
         <div class="input">
+            <input id="inviteCode" name="inviteCode" type="text" required>
+            <label for="inviteCode">Invite code</label>
+        </div>
+        <div class="input">
             <input id="password" name="password" type="password" required>
-            <label for="password">Password</label>
+            <label for="password">Choose password</label>
+        </div>
+        <div class="grid grid-cols-4">
+            <div>
+                <input id="tac" name="tac" type="checkbox" required>
+            </div>
+
+            <label class="span-x-3" for="tac">Accept <a href="/terms">Terms & Conditions</a></label>
         </div>
         <div class="grid grid-cols-3">
             <div class="span-x-2 text-danger">{{error}}</div>

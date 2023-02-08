@@ -23,7 +23,15 @@
             <div n-if="bill.existing.length > 0">
                 <a href="/bill/{{bill.id}}" class="grid grid-cols-3 gap-2 text-body" n-for="details.existing as bill">
                     <div>{{bill.billNumber}}</div>
-                    <p decimal i18n-currency="{{currency}}">{{bill.totalNet}}</p>
+                    <div>
+                        <div>
+                            <p n-if="bill.billStatus !== 'revoked'" decimal i18n-currency="{{currency}}">{{bill.totalNet}}</p>
+                        </div>
+                        <div>
+                            <p n-if="bill.billStatus === 'revoked'" class="text-danger">rescinded</p>
+                        </div>
+                    </div>
+
                     <div i18n-date>{{paidAt}}</div>
                 </a>
             </div>
