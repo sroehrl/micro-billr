@@ -28,15 +28,75 @@ class ChartData implements Routable
     private function singleMilestone(): array
     {
         $milestone = MilestoneModel::get(Request::getParameter('id'));
-        $timeSheets = TimesheetModel::retrieve(['^deletedAt', 'milestoneId' => $milestone->id],['orderBy'=> ['workedAt', 'DESC']]);
-        return [
-            'labels' => array_map(fn($timeSheet) => $timeSheet['productName'], $timeSheets->toArray()),
+//        $timeSheets = TimesheetModel::retrieve(['^deletedAt', 'milestoneId' => $milestone->id],['orderBy'=> ['workedAt', 'DESC']]);
+
+        $sql = '
+        SELECT sum(t.hours) as hours, p.name, t.workedAt
+            FROM timesheet_model t
+            JOIN product_model p ON p.id = t.productId
+            
+            WHERE t.milestoneId = 1 AND
+                  t.deletedAt IS NULL
+            GROUP BY t.workedAt, t.productId
+        ';
+        $actuals = [];
+        $results = Database::raw($sql, ['mId' => $milestone->id]);
+        $associated = [];
+        $knownProducts = [];
+        foreach ($results as $i => $row){
+            if(!in_array($row['name'], $knownProducts)) {
+                $knownProducts[] = $row['name'];
+            }
+            if(!isset($associated[$row['workedAt']])){
+                $associated[$row['workedAt']] = [
+                    $row['name'] => [
+                        'label' => $row['name'],
+                        'hours' => (int) $row['hours']
+                    ],
+                    'total' => 0,
+                    'date' => $row['workedAt']
+                ];
+                $actuals[] = (count($actuals) === 0 ? 0 : $actuals[count($actuals)-1]) + $row['hours'];
+            } elseif(isset($associated[$row['workedAt']][$row['name']])  ) {
+                $associated[$row['workedAt']][$row['name']]['hours'] += (int) $row['hours'];
+            } else {
+                $associated[$row['workedAt']][$row['name']] = [
+                    'label' => $row['name'],
+                    'hours' => (int) $row['hours']
+                ];
+            }
+            $associated[$row['workedAt']]['total'] += (int) $row['hours'];
+        }
+        $data = [
+            'labels' => array_keys($associated),
             'datasets' => [
-                ['label' => 'Estimate', 'data' => array_fill(0, $timeSheets->count(), $milestone->estimatedHours), 'type' => 'line'],
-                ['label' => 'Product', 'data' => array_map(fn ($timeSheet) => $timeSheet['hours'], $timeSheets->toArray())],
-                ['label' => 'Actual', 'data' => array_fill(0, $timeSheets->count(), $milestone->actualHours), $timeSheets->toArray(), 'type' => 'line'],
+                ['label' => 'Estimate', 'data' => array_fill(0, count($associated), $milestone->estimatedHours), 'type' => 'line'],
+                ['label' => 'Worked on date', 'data' => array_map(fn ($row) => $row['total']/100, $associated)],
+                ['label' => 'Accumulated work hours', 'data' => array_map(fn($actual) => $actual/100,$actuals), 'type' => 'line'],
             ]
         ];
+        $originalCount = count($data['datasets']);
+        foreach ($knownProducts as $knownProduct) {
+            $data['datasets'][] = [
+                'label' => $knownProduct,
+                'data' => array_fill(0, count($associated), 0),
+                'type' => 'line',
+                'hidden' => true,
+                'fill' => true
+            ];
+        }
+        $counter = 0;
+        foreach ($associated as $i => $stackedItem){
+            foreach ($stackedItem as $name => $item) {
+                if(!in_array($name,['total', 'date'])){
+                    $data['datasets'][array_search($name, $knownProducts) + $originalCount]['data'][$counter] = $item['hours'] / 100;
+
+                }
+
+            }
+            $counter++;
+        }
+        return $data;
     }
     private function allMilestones(): array
     {
