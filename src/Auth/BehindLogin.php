@@ -17,7 +17,6 @@ class BehindLogin implements Routable
         try{
             $session = Session::restrict();
             $this->user = UserModel::get(Session::userId());
-            setcookie(session_name(),session_id(),time()+3600);
             return $this;
         } catch (\Exception $e) {
             setcookie('afterLogin', Request::getRequestUri(), time() + 3600, '/');

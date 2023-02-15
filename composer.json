@@ -1,6 +1,6 @@
 {
   "require": {
-    "neoan.io/core": "^0.3",
+    "neoan.io/core": "^0.4",
     "neoan3-apps/session": "^1.0",
     "sroehrl/php-i18n-translate": "^2.0",
     "ext-dom": "*",

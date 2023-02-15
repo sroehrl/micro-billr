@@ -31,6 +31,7 @@ class FormPost implements RouteAttribute
     {
         $chain = [...$this->middleWare];
         $chain[] = $this->controllerClass;
+
         \Neoan\Routing\Route::request(RequestMethod::POST, $this->route, ...$chain)
             ->view($this->templateFile)
             ->response([Response::class, 'html']);

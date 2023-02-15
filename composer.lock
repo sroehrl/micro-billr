@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "de3a4d77185ad3abf4006f9c9b3782e3",
+    "content-hash": "762b46a80d5e7ea0c2df64e7a7490cb9",
     "packages": [
         {
             "name": "brick/math",
@@ -213,16 +213,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "2.5.2",
+            "version": "2.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "c76c013c555160410af47c03a0e173518e3f5796"
+                "reference": "6b67eeea4d72051c369ccdbfb2423a56e2ab51a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/c76c013c555160410af47c03a0e173518e3f5796",
-                "reference": "c76c013c555160410af47c03a0e173518e3f5796",
+                "url": "https://api.github.com/repos/composer/composer/zipball/6b67eeea4d72051c369ccdbfb2423a56e2ab51a9",
+                "reference": "6b67eeea4d72051c369ccdbfb2423a56e2ab51a9",
                 "shasum": ""
             },
             "require": {
@@ -306,7 +306,7 @@
             "support": {
                 "irc": "ircs://irc.libera.chat:6697/composer",
                 "issues": "https://github.com/composer/composer/issues",
-                "source": "https://github.com/composer/composer/tree/2.5.2"
+                "source": "https://github.com/composer/composer/tree/2.5.4"
             },
             "funding": [
                 {
@@ -322,7 +322,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-04T13:33:22+00:00"
+            "time": "2023-02-15T12:10:06+00:00"
         },
         {
             "name": "composer/metadata-minifier",
@@ -1213,16 +1213,16 @@
         },
         {
             "name": "neoan.io/core",
-            "version": "v0.3.2",
+            "version": "v0.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sroehrl/neoan.io-lenkrad-core.git",
-                "reference": "fd9a0164c000f0167ba1443806e27c9a9ede8532"
+                "reference": "ffc2f2c464b67b58f8a808b83144ad336db51a22"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sroehrl/neoan.io-lenkrad-core/zipball/fd9a0164c000f0167ba1443806e27c9a9ede8532",
-                "reference": "fd9a0164c000f0167ba1443806e27c9a9ede8532",
+                "url": "https://api.github.com/repos/sroehrl/neoan.io-lenkrad-core/zipball/ffc2f2c464b67b58f8a808b83144ad336db51a22",
+                "reference": "ffc2f2c464b67b58f8a808b83144ad336db51a22",
                 "shasum": ""
             },
             "require": {
@@ -1260,9 +1260,9 @@
             "description": "Neoan.io Lenkrad Framework",
             "support": {
                 "issues": "https://github.com/sroehrl/neoan.io-lenkrad-core/issues",
-                "source": "https://github.com/sroehrl/neoan.io-lenkrad-core/tree/v0.3.2"
+                "source": "https://github.com/sroehrl/neoan.io-lenkrad-core/tree/v0.4.1"
             },
-            "time": "2023-01-25T02:29:01+00:00"
+            "time": "2023-02-11T22:04:11+00:00"
         },
         {
             "name": "neoan.io/legacy-db-adapter",
@@ -3674,5 +3674,5 @@
         "ext-openssl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }

@@ -6,6 +6,7 @@ use App\Note\NoteModel;
 use App\Note\NoteType;
 use App\Project\ProjectModel;
 use App\Timesheet\TimesheetModel;
+use Config\Autowireable;
 use Config\TargetDate;
 use Neoan\Enums\GenericEvent;
 use Neoan\Enums\TimePeriod;
@@ -54,6 +55,7 @@ class MilestoneModel extends Model
     use TargetDate;
     use TimeStamps;
     use Setter;
+    use Autowireable;
 
     public function calendarEvent(): ?array
     {

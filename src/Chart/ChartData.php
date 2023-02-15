@@ -35,7 +35,7 @@ class ChartData implements Routable
             FROM timesheet_model t
             JOIN product_model p ON p.id = t.productId
             
-            WHERE t.milestoneId = 1 AND
+            WHERE t.milestoneId = {{mId}} AND
                   t.deletedAt IS NULL
             GROUP BY t.workedAt, t.productId
         ';

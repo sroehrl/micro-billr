@@ -22,7 +22,7 @@ class Config
     private Setup $setup;
     public function __construct(NeoanApp $app)
     {
-        new Session();
+        new Session('mircrobillr', 3600);
         Response::setDefaultRenderer(CustomRenderer::class);
         $skeletonVariables = [
             'pageTitle' => Store::dynamic('pageTitle'),

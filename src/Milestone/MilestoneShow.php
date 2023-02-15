@@ -12,10 +12,10 @@ use Neoan\Routing\Interfaces\Routable;
 #[Web('/milestone/:id', 'Milestone/views/show.html', BehindLogin::class)]
 class MilestoneShow implements Routable
 {
-    public function __invoke(): array
+    public function __invoke(MilestoneModel $milestone): array
     {
         $milestoneId =  Request::getParameter('id');
-        $milestone = MilestoneModel::get($milestoneId)->withProject();
+//        $milestone = MilestoneModel::get($milestoneId)->withProject();
 
         $timeSheets = TimesheetModel::retrieve(['^deletedAt', 'milestoneId' => $milestoneId],['orderBy'=> ['workedAt', 'DESC']]);
 
@@ -30,7 +30,7 @@ class MilestoneShow implements Routable
                 'milestones' => [$milestone->toArray()],
                 'products' => ProductModel::retrieve(['^deletedAt'])->toArray()
             ],
-            'project' => $milestone->project->toArray(),
+            'project' => $milestone->project()->toArray(),
             'relationId' => $milestoneId,
             'chartData' => '/milestone/' . $milestoneId,
             'timesheets' => $timeSheets->toArray()
