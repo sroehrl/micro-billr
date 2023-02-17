@@ -6,6 +6,8 @@ use App\Auth\BehindLogin;
 use App\DocumentCreator\Create;
 use App\Helper\FeedbackWrapper;
 use App\Mailing\Mail;
+use App\Timeline\TimelineActivity;
+use App\Timeline\TimelineModel;
 use Neoan\Helper\Setup;
 use Neoan\Request\Request;
 use Neoan\Routing\Attributes\Post;
@@ -14,7 +16,7 @@ use Neoan\Routing\Interfaces\Routable;
 #[Post('/estimate/:projectId', BehindLogin::class)]
 class EstimateUpdateOrCreate implements Routable
 {
-    public function __invoke(Create $documentCreator, Setup $setup, Mail $mail): void
+    public function __invoke(Create $documentCreator, Setup $setup, Mail $mail, TimelineModel $timeline): void
     {
         $projectId = Request::getParameter('projectId');
         try{
@@ -24,6 +26,10 @@ class EstimateUpdateOrCreate implements Routable
                 'projectId' => $projectId
             ]);
             $estimate->store();
+            $timeline->projectId = $projectId;
+            $timeline->activity = TimelineActivity::ESTIMATE_CREATED;
+            $timeline->store();
+
         }
         $feedback = 'Updated';
 
@@ -46,10 +52,11 @@ class EstimateUpdateOrCreate implements Routable
             }
             $fileName = $path . '/estimate.pdf';
             $documentCreator->setTemplatePath('src/Estimate/documents/basic-offer.html');
-//            $documentCreator->setOutputMode('I');
             $documentCreator->generateEstimate($estimate, $fileName);
             $estimate->lockedInAt->set('now');
             $estimate->store();
+
+
             $feedback = 'Estimate generated';
         }
         if(Request::getInput('sendOut')) {
@@ -57,6 +64,10 @@ class EstimateUpdateOrCreate implements Routable
             if($mail->sendEstimate($estimate)){
                 $estimate->sentAt->set('now');
                 $estimate->store();
+                $timeline->projectId = $projectId;
+                $timeline->activity = TimelineActivity::ESTIMATE_SENT;
+                $timeline->content = 'To: ' . $estimate->project()->person()->email;
+                $timeline->store();
                 $feedback = 'Email sent';
             }
 

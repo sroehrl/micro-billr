@@ -34,7 +34,7 @@
                         <div class="absolute -top-1 -right-1 border-rounder font-sm bg-warning pl-1 pr-1" n-if="timesheet.notes.length > 0">{{timesheet.notes.length}}</div>
                     </a>
                 </div>
-                <div>
+                <div class="relative">
                     <a n-if="!timesheet.isBilled" href="#" class="button-danger-light" data-delete="/api/timesheet" data-delete-id="{{timesheet.id}}">delete</a>
                 </div>
                 <div n-if="timesheet.isBilled">

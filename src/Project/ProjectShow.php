@@ -3,6 +3,7 @@
 namespace App\Project;
 
 use App\Auth\BehindLogin;
+use App\Auth\Permission\ProjectPermission;
 use App\Bill\BillModel;
 use App\Bill\CostCalculator;
 use App\Calendar\CalendarEvents;
@@ -10,18 +11,19 @@ use App\Estimate\EstimateModel;
 use App\Milestone\MilestoneModel;
 use App\Note\NoteModel;
 use App\Product\ProductModel;
+use App\Timeline\TimelineModel;
 use App\Timesheet\TimesheetModel;
 use Neoan\Database\Database;
 use Neoan\Request\Request;
 use Neoan\Routing\Attributes\Web;
 use Neoan\Routing\Interfaces\Routable;
 
-#[Web('/project/:id/:tab*', 'Project/views/show.html', BehindLogin::class)]
+#[Web('/project/:projectId/:tab*', 'Project/views/show.html', BehindLogin::class, ProjectPermission::class)]
 class ProjectShow implements Routable
 {
     public function __invoke(): array
     {
-        $project = ProjectModel::get(Request::getParameter('id'))->withCustomer()->withPerson();
+        $project = ProjectModel::get(Request::getParameter('projectId'))->withCustomer()->withPerson();
 
         return [
             'project' => $project->toArray(),
@@ -56,6 +58,7 @@ class ProjectShow implements Routable
                 'outstandingTotalHours' => CostCalculator::unbilledHoursOnProject($projectId),
                 'outstandingTotalNet' => CostCalculator::unbilledNetOnProject($projectId)
             ],
+            'timeline' => TimelineModel::retrieve(['projectId' => $projectId],['orderBy' => ['createdAt', 'DESC']])->toArray(),
             default => [
                 'notes' => NoteModel::retrieve(['^deletedAt', 'relationId' => $projectId, 'noteType' => 'project'])->toArray(),
             ]
@@ -66,6 +69,7 @@ class ProjectShow implements Routable
     {
         $estimate = EstimateModel::retrieveOneOrCreate(['projectId' => $projectId, '^deletedAt']);
         $combined = [
+            'id' => '?',
             ... $estimate->toArray(),
             'createdStamp' => $estimate->createdAt->stamp,
             'byMilestone' => $estimate->itemsByMilestones()

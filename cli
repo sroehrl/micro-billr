@@ -13,4 +13,5 @@ $setup->setPublicPath(__DIR__ . '/public')->setLibraryPath(__DIR__ . '/src');
 new \Config\Config($app = new NeoanApp($setup, __DIR__));
 
 $console = new Application($app);
+$console->add(new \Config\UpdateCommand($app));
 $console->run();

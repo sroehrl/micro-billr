@@ -34,3 +34,11 @@ $decorations: ("underline");
     text-decoration: unquote($name);
   }
 }
+
+$weights: ("light": 200, "normal": 400, "bold": 700, "bolder": 900);
+
+@each $key, $value in $weights{
+  .font-#{$key}{
+    font-weight: $value;
+  }
+}

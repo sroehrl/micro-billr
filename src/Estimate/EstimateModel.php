@@ -19,7 +19,6 @@ use Neoan\Model\Transformers\LockedTimeIn;
 /**
  * @method ProjectModel project;
  * */
-
 class EstimateModel extends Model
 {
     #[IsPrimaryKey]
@@ -55,18 +54,47 @@ class EstimateModel extends Model
         return isset($this->lockedInAt) && isset($this->lockedInAt->value);
     }
 
+    #[Computed]
+    public function totals(): array
+    {
+        $all = [
+            'hours' => 0,
+            'net' => 0
+        ];
+        $milestones = [];
+        $this->items->each(function (EstimateItemModel $item) use (&$all, &$milestones) {
+            if (!isset($milestones[$item->milestone()->title])) {
+                $milestones[$item->milestone()->title] = [
+                    'hours' => 0,
+                    'net' => 0
+                ];
+            }
+            $all['hours'] += $item->estimatedHours;
+            $milestones[$item->milestone()->title]['hours'] += $item->estimatedHours;
+            $product = $item->product();
+            $cost = $product->billingType === BillingType::HOURLY ? $product->price * $item->estimatedHours : $product->price;
+            $milestones[$item->milestone()->title]['net'] += $cost;
+            $all['net'] += $cost;
+
+        });
+        return [
+            'total' => $all,
+            'milestones' => [... $milestones]
+        ];
+    }
+
 
     public function itemsByMilestones(): array
     {
         $knownProducts = [];
         $milestones = [];
         $result = [];
-        $this->items->each(function(EstimateItemModel $item) use(&$milestones, &$knownProducts, &$result){
+        $this->items->each(function (EstimateItemModel $item) use (&$milestones, &$knownProducts, &$result) {
 
-            if(!array_key_exists($item->productId, $knownProducts)){
+            if (!array_key_exists($item->productId, $knownProducts)) {
                 $knownProducts[$item->productId] = $item->product();
             }
-            if(!array_key_exists($item->milestoneId, $milestones)){
+            if (!array_key_exists($item->milestoneId, $milestones)) {
                 $milestones[$item->milestoneId] = $item->milestone();
             }
             $product = $knownProducts[$item->productId];
@@ -78,8 +106,8 @@ class EstimateModel extends Model
             ];
 
         });
-        usort($result, function($a, $b){
-            if($a['milestoneId'] === $b['milestoneId'] ){
+        usort($result, function ($a, $b) {
+            if ($a['milestoneId'] === $b['milestoneId']) {
                 return 0;
             }
             return $a['milestoneId'] < $b['milestoneId'] ? -1 : 1;

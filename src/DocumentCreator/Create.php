@@ -119,6 +119,8 @@ class Create implements Routable
         $html = new Html2Pdf('P', 'A4', 'en', true, 'UTF-8', $margins);
         $t = new Translate();
         $billHtml =  $t->translate(Template::embraceFromFile($this->templatePath, $data->toArray()));
+        // clean up
+        $billHtml = preg_replace('/{{[^}]+}}/', '', $billHtml);
         $html->writeHTML($billHtml);
         return $html->output($name, $this->outputMode);
     }

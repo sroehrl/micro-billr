@@ -44,7 +44,8 @@ class Mail implements Routable
             'customer' => $customer->toArray(),
             'receiver' => $receiver->toArray(),
             'company' => $this->company->toArray(),
-            'companyAddress' => $this->company->printableAddress()
+            'companyAddress' => $this->company->printableAddress(),
+            'onlineDoc' => base . '/documents/'. $customer->id . '/' . $estimate->createdAt->stamp . '/estimate.pdf'
         ]);
         $this->provider->setHtmlContent($html);
         return $this->provider->send();

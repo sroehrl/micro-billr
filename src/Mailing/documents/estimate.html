@@ -74,6 +74,7 @@
 
     p {
       margin: 0;
+      padding: 5px 0;
     }
 
     .ie-container table,
@@ -164,14 +165,16 @@
                     <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:35px 10px;font-family:'Rubik',sans-serif;" align="left">
 
                       <div class="v-text-align v-font-size" style="line-height: 140%; text-align: left; word-wrap: break-word;">
-                        <p style="line-height: 140%;">Hello {{receiver.firstName}} {{receiver.lastName}},</p>
+                        <p style="line-height: 140%; padding-bottom: ">Hello {{receiver.firstName}} {{receiver.lastName}},</p>
                         <p style="line-height: 140%;"> </p>
                         <p style="line-height: 140%;">please find the requested estimate attached to this email.</p>
                         <p style="line-height: 140%;"> </p>
                         <p style="line-height: 140%;">Looking forward to your business,</p>
                         <p style="line-height: 140%;"> </p>
                         <p style="line-height: 140%;">{{company.name}}</p>
-                        <p style="line-height: 140%;"> </p>
+                        <p style="line-height: 140%;">
+                        <a href="{{onlineDoc}}">View estimate online</a>
+                        </p>
                       </div>
 
                     </td>

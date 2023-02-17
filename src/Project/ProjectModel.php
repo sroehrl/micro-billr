@@ -2,13 +2,17 @@
 
 namespace App\Project;
 
+use App\Company\CompanyModel;
 use App\Customer\CustomerModel;
-use App\Note\NoteType;
 use App\Person\PersonModel;
+use App\User\UserModel;
+use Config\ShortSlugTransformer;
 use Config\TargetDate;
 use Neoan\Model\Attributes\IsEnum;
 use Neoan\Model\Attributes\IsForeignKey;
 use Neoan\Model\Attributes\IsPrimaryKey;
+use Neoan\Model\Attributes\Transform;
+use Neoan\Model\Collection;
 use Neoan\Model\Model;
 use Neoan\Model\Traits\TimeStamps;
 
@@ -26,10 +30,16 @@ class ProjectModel extends Model
     #[IsForeignKey(CustomerModel::class)]
     public int $customerId;
 
+    #[IsForeignKey(CompanyModel::class)]
+    public int $companyId;
+
     #[IsForeignKey(PersonModel::class)]
     public ?int $personId;
 
     public string $title;
+
+    #[Transform(ShortSlugTransformer::class)]
+    public string $slug;
 
     #[IsEnum(ProjectStatus::class)]
     public ProjectStatus $status = ProjectStatus::PLANNED;
@@ -63,4 +73,5 @@ class ProjectModel extends Model
            $this->store();
        }
    }
+
 }

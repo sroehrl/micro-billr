@@ -1,0 +1,38 @@
+<section class="mt-5">
+    <div class="flex gap-x-5">
+        <article>
+            <div n-for="details as timelineItem" class="relative mb-3">
+                <div class="flex gap-x-2">
+                    <div class="border-l-1 border-neutral-light-opaque -shadow-body-light-opaque p-2 border-rounded">
+                        <span i18n-date>{{timelineItem.createdAt}}</span>
+                        <div class="border-b-1 border-neutral-light-opaque"></div>
+                        <span i18n-time>{{timelineItem.createdAt}}</span>
+                    </div>
+                    <div class="place-center" timeline-activity="{{timelineItem.activity}}"></div>
+                    <div class="border-r-1 shadow-body-light-opaque border-rounded p-2 border-neutral-light-opaque w-28">
+                        {{timelineItem.activity}}
+                        <div class="border-b-1 border-neutral-light-opaque"></div>
+                        <div class="font-md mt-1">{{timelineItem.content}}</div>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <div class="w-full">
+            <form method="post" action="/timeline/{{project.id}}" class="w-full m-1 border-neutral border-1 border-rounded p-3 relative">
+                <h3 class="absolute -top-11 p-2 bg-white-light">Write to timeline</h3>
+                <div class="input">
+                    <textarea id="content" name="content" rows="3"></textarea>
+                    <label for="content">Content</label>
+                </div>
+                <div class="grid">
+                    <div class="place-end">
+                        <button class="button-secondary">send</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+</section>

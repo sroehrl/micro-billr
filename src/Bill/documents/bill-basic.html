@@ -46,7 +46,7 @@
                 From:
                 <h3>{{company.name}}</h3>
                 <div>{{companyAddress}}</div>
-                {{company.registry}}
+                <span n-if="company.registry">{{company.registry}}</span>
             </td>
         </tr>
 
@@ -133,8 +133,14 @@
                 Memo: {{bill.billNumber}}
 
             </td>
-            <td></td>
             <td>
+                <div n-if="company.paypal">
+                    Pay with PayPal: <br>
+                    <qrcode value="{{company.paypal}}" ec="H" style="width: 30mm; background-color: white; color: black;"></qrcode>
+                </div>
+            </td>
+            <td>
+                Digital signature: <br>
                 <cert
                         src="{{certificate}}"
                         privkey="{{privateKey}}"

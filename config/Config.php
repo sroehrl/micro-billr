@@ -4,7 +4,6 @@ namespace Config;
 
 use Neoan\Database\SqLiteAdapter;
 use Neoan\Enums\GenericEvent;
-use Neoan\Enums\ResponseOutput;
 use Neoan\Event\Event;
 use Neoan\Helper\Env;
 use Neoan\Helper\Setup;
@@ -13,9 +12,7 @@ use Neoan\Response\Response;
 use Neoan\Store\Store;
 use Neoan3\Apps\Session;
 use Neoan3\Apps\Template\Constants;
-use Neoan3\Apps\Template\Template;
 use NeoanIo\MarketPlace\DatabaseAdapter;
-use NumberFormatter;
 
 class Config
 {
@@ -46,9 +43,10 @@ class Config
         Constants::addCustomFunction('pureDate', function ($input){
             return preg_replace('/\s\d{2}:\d{2}:\d{2}/', '', $input);
         });
-        Constants::addCustomAttribute('partial', fn(\DOMAttr &$attr, $context) => $this->renderPartial($attr, $context));
-        Constants::addCustomAttribute('gender-title', fn(\DOMAttr &$attr, $context) => $this->gender($attr, $context));
-        Constants::addCustomAttribute('decimal', fn(\DOMAttr &$attr, $context) => $this->renderDecimal($attr, $context));
+        Constants::addCustomAttribute('partial', fn(\DOMAttr &$attr, $context) => CustomAttributes::renderPartial($attr, $this->setup->get('templatePath'), $context));
+        Constants::addCustomAttribute('gender-title', fn(\DOMAttr &$attr, $context) => CustomAttributes::gender($attr, $context));
+        Constants::addCustomAttribute('decimal', fn(\DOMAttr &$attr, $context) => CustomAttributes::renderDecimal($attr, $context));
+        Constants::addCustomAttribute('timeline-activity', fn(\DOMAttr &$attr, $context) => CustomAttributes::timelineIcon($attr, $context));
     }
 
     private function typeSetup(Setup $setup): Setup
@@ -77,42 +75,4 @@ class Config
         ]);
     }
 
-    private function renderPartial(\DOMAttr &$attr, $contextData = []): void
-    {
-        if(!$attr->parentNode->hasChildNodes()){
-            foreach($attr->parentNode->attributes as $sibling){
-                if(str_starts_with($sibling->name, 'as-')){
-                    $candidate = $contextData;
-                    foreach(explode('.', $sibling->nodeValue) as $part){
-                        $candidate = $candidate[$part];
-                    }
-
-                    $contextData[substr($sibling->name,3)] = $candidate;
-                }
-            }
-
-            $htmlString = Template::embraceFromFile($this->setup->get('templatePath') . $attr->nodeValue, $contextData);
-            $fresh = new \DOMDocument();
-            @$fresh->loadHTML( $htmlString, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-            $imported = $attr->ownerDocument->importNode($fresh->documentElement, true);
-            $attr->parentNode->appendChild($imported);
-        }
-    }
-    private function renderDecimal(\DOMAttr &$attr, $contextData = []): void
-    {
-        $fmt = new NumberFormatter($_SERVER['HTTP_ACCEPT_LANGUAGE'], NumberFormatter::DECIMAL );
-        $fmt->setAttribute(NumberFormatter::FRACTION_DIGITS, 2);
-        if(is_numeric($attr->parentNode->nodeValue)){
-            $attr->parentNode->nodeValue = $fmt->format((float) $attr->parentNode->nodeValue);
-        }
-
-    }
-    private function gender(\DOMAttr &$attr, $contextData = []):void
-    {
-        $attr->parentNode->nodeValue = match ((int) $attr->nodeValue){
-            0 => 'Mrs.',
-            1 => 'Mr.',
-            2 => 'Mx.'
-        };
-    }
 }

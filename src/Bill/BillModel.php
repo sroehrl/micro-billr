@@ -7,6 +7,7 @@ use App\Product\BillingType;
 use App\Product\PriceTransformation;
 use App\Project\ProjectModel;
 use App\Timesheet\TimesheetModel;
+use Neoan\Database\Database;
 use Neoan\Model\Attributes\Computed;
 use Neoan\Model\Attributes\HasMany;
 use Neoan\Model\Attributes\IsEnum;
@@ -89,5 +90,13 @@ class BillModel extends Model
     public ?DateTimeProperty $generatedDate;
 
     use TimeStamps;
+
+    protected function afterDeletion(): void
+    {
+        parent::afterDeletion();
+        Database::raw('UPDATE timesheet_model SET billId = NULL WHERE billId = {{id}}', [
+            'id' => $this->id
+        ]);
+    }
 
 }

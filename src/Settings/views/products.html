@@ -34,19 +34,10 @@
         </td>
         <td class="text-center">{{product.billingType}}</td>
         <td class="text-center relative">
-          <button class="button-danger font-md" data-toggle-show="#confirm-{{i}}">delete</button>
-          <div id="confirm-{{i}}" class="text-danger p-2 bg-white absolute top-0 z-1 none"
-               style="min-width: 120px">
-            Are you sure? <br>
-            <div class="inline-flex gap-x-2">
-              <button class="button-danger font-md" data-delete-id="{{product.id}}"
-                      data-delete="/api/product">delete
-              </button>
-              <button class="button-primary font-md" data-toggle-show="#confirm-{{i}}">no!
-              </button>
-            </div>
+          <button class="button-danger font-md" data-delete-id="{{product.id}}"
+                  data-delete="/api/product">delete
+          </button>
 
-          </div>
         </td>
       </tr>
       </tbody>

@@ -8,6 +8,11 @@ use Neoan\Model\Attributes\IsForeignKey;
 use Neoan\Model\Attributes\IsPrimaryKey;
 use Neoan\Model\Model;
 
+/**
+ * @method ProductModel product
+ * @method MilestoneModel milestone
+ *
+ */
 class EstimateItemModel extends Model
 {
     #[IsPrimaryKey]

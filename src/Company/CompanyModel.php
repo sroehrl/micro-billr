@@ -38,6 +38,8 @@ class CompanyModel extends AddressModel
 
     public ?string $website;
 
+    public ?string $paypal;
+
     use TimeStamps;
 
 }

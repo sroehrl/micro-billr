@@ -3,21 +3,30 @@
 namespace App\Settings;
 
 use App\Address\Country;
+use App\Auth\BehindLogin;
+use App\Auth\RequiresAdmin;
 use App\Company\CompanyModel;
+use Config\FormPost;
 use Neoan\Enums\RequestMethod;
 use Neoan\Request\Request;
+use Neoan\Routing\Attributes\Web;
+use Neoan\Routing\Interfaces\Routable;
+use Neoan\Store\Store;
 
-class CompanySettings
+#[Web('/settings/company', 'Settings/views/settings.html', BehindLogin::class)]
+#[FormPost('/settings/company', 'Settings/views/settings.html', BehindLogin::class)]
+class CompanySettings implements Routable
 {
 
 
-    public function __invoke(&$feedback): array
+    public function __invoke(RequiresAdmin $admin): array
     {
+        Store::write('pageTitle', 'Company settings');
+        $feedback = '';
         try{
-            $company = CompanyModel::get(1);
+            $company = CompanyModel::get($admin->user->companyId);
         } catch (\Exception $e) {
             $company = new CompanyModel([
-                'id' => 1,
                 'name' => 'Acme Inc',
                 'street' => '',
                 'place' => '',
@@ -47,13 +56,22 @@ class CompanySettings
                 'phoneNumber' => $company->phoneNumber,
                 'website' => $company->website,
                 'color' => $company->color,
-                'registry' => $company->registry
+                'registry' => $company->registry,
+                'paypal' => $company->paypal
             ] = Request::getInputs();
             $company->country = Country::from(Request::getInput('country'));
             $company->store();
-            $feedback = 'Saved!';
+            $feedback = ' Company and bank data saved!';
         }
-
-        return $company->toArray();
+        $countries = [];
+        foreach (Country::cases() as $case){
+            $countries[$case->value] = $case->value;
+        }
+        return [
+            'tab' => 'company',
+            'data' => $company->toArray(),
+            'feedback' => $feedback,
+            'countries' => $countries
+        ];
     }
 }

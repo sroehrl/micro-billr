@@ -3,6 +3,8 @@
 namespace App\Project;
 
 use App\Auth\BehindLogin;
+use App\Timeline\TimelineActivity;
+use App\Timeline\TimelineModel;
 use Config\FormPost;
 use Neoan\Enums\RequestMethod;
 use Neoan\Request\Request;
@@ -16,13 +18,16 @@ use Neoan\Routing\Interfaces\Routable;
 ]
 class ProjectCreate implements Routable
 {
-    public function __invoke(): array
+    public function __invoke(TimelineModel $timeline): array
     {
         $feedback = '';
         if(Request::getRequestMethod() === RequestMethod::POST){
             $newProject = new ProjectModel(Request::getInputs());
             try{
                 $newProject->store();
+                $timeline->projectId = $newProject->id;
+                $timeline->activity = TimelineActivity::PROJECT_CREATED;
+                $timeline->store();
                 Response::redirect('/project/'. $newProject->id);
             } catch (\Exception $e){
                 $feedback = 'Error saving project';

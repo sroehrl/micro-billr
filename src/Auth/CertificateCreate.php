@@ -26,7 +26,8 @@ class CertificateCreate implements Routable
 
         $dn = [
             'countryName' => 'US',
-            'emailAddress' => 'verify@retech-software.de'
+            'emailAddress' => 'verify@microbillr.online',
+            'organizationName' => 'MICRO Billr'
         ];
 
         // sign request

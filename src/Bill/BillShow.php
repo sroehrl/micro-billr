@@ -6,6 +6,8 @@ use App\Auth\Auth;
 use App\Auth\BehindLogin;
 use App\DocumentCreator\Create;
 use App\Mailing\Mail;
+use App\Timeline\TimelineActivity;
+use App\Timeline\TimelineModel;
 use App\Timesheet\TimesheetModel;
 use Config\FormPost;
 use Neoan\Enums\RequestMethod;
@@ -69,6 +71,12 @@ class BillShow implements Routable
         // steps:
         switch ($this->bill->billStatus){
             case BillStatus::PROCESSING:
+                $timeline = new TimelineModel([
+                    'projectId' => $this->bill->projectId,
+                    'activity' => TimelineActivity::BILL_CREATED
+                ]);
+                $timeline->store();
+
                 // taxes & overview
                 if(Request::getInput('percent')){
                     foreach (Request::getInput('percent') as $id => $percent){
@@ -93,6 +101,11 @@ class BillShow implements Routable
                 if(!$this->mail->sendBill($this->bill)){
                     $this->feedback = 'There was a problem sending the email';
                 } else {
+                    $timeline = new TimelineModel([
+                        'projectId' => $this->bill->projectId,
+                        'activity' => TimelineActivity::BILL_SENT
+                    ]);
+                    $timeline->store();
                     $this->bill->billStatus = BillStatus::SENT_OUT;
                     $this->bill->store();
                 }
