@@ -59,6 +59,9 @@ class Register implements Routable
 
             }
         }
-        return ['error' => $feedback];
+        return [
+            'error' => $feedback,
+            ...Request::getQueries()
+        ];
     }
 }

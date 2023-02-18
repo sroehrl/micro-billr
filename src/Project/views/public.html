@@ -112,7 +112,7 @@
           </p>
 
           <div n-for="bill.lineItems as item" class=" even-child-bg-body-light p-1 even-child-text-white">
-            <a target="_blank" rel="noreferrer noopener" href="/timesheet/{{item.hash}}" class="grid grid-cols-3">
+            <a href="/timesheet/{{item.hash}}" class="grid grid-cols-3">
               <div>
                 <span i18n-date>{{item.workedAt}}</span> <br>
                 <span decimal>{{item.hours}}</span>h

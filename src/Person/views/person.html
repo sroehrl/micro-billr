@@ -1,9 +1,9 @@
 <section class="w-3/5 mx-auto mt-5">
-    <form action="/person/{{id}}" method="post" class="border-1 border-neutral border-rounded p-3 relative mt-5">
+    <form action="/person/{{person.id}}" method="post" class="border-1 border-neutral border-rounded p-3 relative mt-5">
         <h3 class="absolute -top-11 p-2 bg-white-light">{{firstName}} {{lastName}}</h3>
         <div class="grid grid-cols-5 gap-x-2">
             <div class="input">
-                <select id="gender" name="gender" data-selected="{{gender}}" required>
+                <select id="gender" name="gender" data-selected="{{person.gender}}" required>
                     <option value="0">Mrs.</option>
                     <option value="1">Mr.</option>
                     <option value="2">Mx.</option>
@@ -11,29 +11,29 @@
                 <label for="gender">Gender</label>
             </div>
             <div class="input span-x-2">
-                <input type="text" id="firstName" name="firstName" value="{{firstName}}" required>
+                <input type="text" id="firstName" name="firstName" value="{{person.firstName}}" required>
                 <label for="firstName">First Name</label>
             </div>
             <div class="input span-x-2">
-                <input type="text" id="middleName" name="middleName" placeholder="Middle name">
+                <input type="text" id="middleName" name="middleName" value="{{person.middleName}}" placeholder="Middle name">
                 <label for="middleName">Middle Name</label>
             </div>
             <div class="input span-x-3">
-                <input type="text" id="lastName" name="lastName" value="{{lastName}}" required>
+                <input type="text" id="lastName" name="lastName" value="{{person.lastName}}" required>
                 <label for="lastName">Last Name</label>
             </div>
             <div class="input span-x-2">
-                Customer: <a href="/customer/{{customer.id}}">{{customer.title}}</a>
+                Customer: <a href="/customer/{{person.customer.id}}">{{person.customer.title}}</a>
             </div>
         </div>
 
         <div class="grid grid-cols-2 gap-x-2">
             <div class="input">
-                <input type="email" id="email" name="email" value="{{email}}" placeholder="Email">
+                <input type="email" id="email" name="email" value="{{person.email}}" placeholder="Email">
                 <label for="email">Email</label>
             </div>
             <div class="input">
-                <input type="tel" id="phone" name="phone" value="{{phone}}" placeholder="phone">
+                <input type="tel" id="phone" name="phone" value="{{person.phone}}" placeholder="phone">
                 <label for="phone">Phone</label>
             </div>
 
@@ -42,4 +42,50 @@
             <button class="button-secondary place-center-end">save</button>
         </div>
     </form>
+    <div class="border-1 border-neutral border-rounded p-3 relative mt-5">
+        <div>
+            <div n-if="hasUser">
+                <svg class="w-3 inline" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"></path>
+                </svg>
+                <svg class="w-3 inline" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+                </svg>
+                This person has a user account
+            </div>
+        </div>
+        <div>
+            <div n-if="invitation === 'Array'">
+                There's an open invitation for this person! <br>
+                <a class="button-secondary" href="mailto:{{person.email}}?subject=Follow%20my%20progress&body=visit%20{{base}}register?inviteCode={{invitation.inviteCode}}%26email={{person.email}}">
+                    send invitation
+                </a>
+            </div>
+        </div>
+        <div>
+            <div n-if="!hasUser && !invitation">
+                <p>
+                    You can elect to invite this person to MICRO Billr customer transparency. <br>
+                    This will enable limited visibility on projects regarding <strong>{{person.customer.title}}</strong>. In particular, the person can then see:
+                </p>
+                <ul>
+                    <li>Project info & status</li>
+                    <li>Estimates & Invoices</li>
+                    <li>Timesheets / tracking</li>
+                    <li>Milestones</li>
+                    <li>Timeline</li>
+                    <li>Notes on timesheets, milestones & projects</li>
+                </ul>
+                <form class="mt-3" action="/invitation" method="post">
+                    <input type="hidden" name="privilege" value="customer">
+                    <input type="hidden" name="email" value="{{person.email}}">
+                    <button class="button-secondary">Generate invitation</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="module">
+        import Toast from "/js/toast.js";
+        new Toast(queryParameter.feedback).show(5)
+    </script>
 </section>
