@@ -2,6 +2,7 @@
 
 namespace App\Bill;
 
+use App\Company\CompanyModel;
 use App\Customer\CustomerModel;
 use App\Product\BillingType;
 use App\Product\PriceTransformation;
@@ -39,6 +40,9 @@ class BillModel extends Model
 
     #[IsForeignKey(CustomerModel::class)]
     public int $customerId;
+
+    #[IsForeignKey(CompanyModel::class)]
+    public int $companyId;
 
     public string $billNumber;
     #[

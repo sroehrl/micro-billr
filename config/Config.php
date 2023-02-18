@@ -25,6 +25,7 @@ class Config
             'pageTitle' => Store::dynamic('pageTitle'),
             'webPath' => $app->webPath,
             'loggedIn' => Session::isLoggedIn(),
+            'privilege' => Session::getUserSession() ? Session::getUserSession()['scope'][0]->name : 'GUEST',
             'currency' => Env::get('CURRENCY', 'USD')
         ];
 

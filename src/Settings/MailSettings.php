@@ -45,9 +45,10 @@ class MailSettings implements Routable
 
 
         return [
-            'tab' => 'company',
+            'tab' => 'mailing',
             'data' => [...$mailSettings->toArray(),
-                'api' => $mailSettings->mailProvider->requiredAuth()],
+                'api' => $mailSettings->mailProvider->requiredAuth()
+            ],
             'feedback' => $feedback,
         ];
     }

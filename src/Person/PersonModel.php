@@ -9,6 +9,10 @@ use Neoan\Model\Attributes\IsPrimaryKey;
 use Neoan\Model\Model;
 use Neoan\Model\Traits\TimeStamps;
 
+/**
+ * @method CustomerModel customer
+ * @method PersonModel withCustomer
+ */
 class PersonModel extends Model
 {
     #[IsPrimaryKey]

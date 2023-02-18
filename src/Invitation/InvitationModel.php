@@ -32,4 +32,9 @@ class InvitationModel extends Model
 
     use TimeStamps;
 
+    public function getInviter(): UserModel
+    {
+        return UserModel::get($this->inviterUserId);
+    }
+
 }

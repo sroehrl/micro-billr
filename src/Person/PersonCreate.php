@@ -3,6 +3,7 @@
 namespace App\Person;
 
 use App\Address\AddressModel;
+use App\Auth\Auth;
 use App\Auth\BehindLogin;
 use App\Customer\CustomerModel;
 use Config\FormPost;
@@ -20,7 +21,7 @@ use Neoan3\Apps\Session;
 ]
 class PersonCreate implements Routable
 {
-    public function __invoke(): array
+    public function __invoke(Auth $auth): array
     {
         if(Request::getRequestMethod() === RequestMethod::POST) {
             $customerData = explode(' | ', Request::getInput('customer'));
@@ -47,7 +48,10 @@ class PersonCreate implements Routable
         }
         return [
             'customer' => $customer,
-            'customers' => Database::easy('customer_model.customerNumber customer_model.title', ['^deletedAt'])
+            'customers' => Database::easy('customer_model.customerNumber customer_model.title', [
+                '^deletedAt',
+                'companyId' => $auth->user->companyId
+            ])
         ];
     }
 }

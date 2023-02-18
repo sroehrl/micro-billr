@@ -1,8 +1,61 @@
-<div class="flex gap-x-5 mx-auto w-4/5 mt-5">
-  <div class="w-full">
-    <h1>{{project.title}}</h1>
+<div class="grid grid-cols-2 gap-x-5 mx-auto w-4/5 mt-5">
+  <h1>{{project.title}} </h1>
+
+  <h2>Timeline</h2>
+  <div>
+
+    <div class="border-body-light-opaque border-r-1 border-rounded shadow-body-light-opaque p-3 grid grid-cols-2">
+      <svg class="w-5 text-accent-dark" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z"></path>
+      </svg>
+      <div class="place-center-start">
+        Target date: <span i18n-date>{{project.targetedAt}}</span>
+      </div>
+      <svg class="w-5 text-accent-dark" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"></path>
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z"></path>
+      </svg>
+      <div class="place-center-start">
+        Status: {{project.status}}
+      </div>
+    </div>
+    <div class="border-body-light-opaque border-r-1 border-rounded shadow-body-light-opaque p-3 mt-5 relative">
+      <h3 class="pt-0 mt-0">Info</h3>
+      <div  n-if="documents.estimates.length > 0">
+        <div n-for="documents.estimates as estimate" class="grid grid-cols-4">
+          <div>Estimate <span i18n-date="yyMMd">{{estimate.createdAt}}</span>-{{estimate.id}}</div>
+          <div><span decimal>{{estimate.totals.total.hours}}</span>h</div>
+          <div i18n-currency="{{currency}}">{{estimate.totals.total.net}}</div>
+          <div>
+            <button class="button-secondary border-rounder" data-toggle-show="#estimate-{{estimate.id}}">
+              <svg class="w-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div n-if="documents.bills.length > 0">
+        <div n-for="documents.bills as bill" class="grid grid-cols-4">
+          <div  class="span-x-2">Invoice {{bill.billNumber}} </div>
+          <div i18n-currency="{{currency}}">{{bill.totalNet}}</div>
+          <div>
+            <button class="button-secondary border-rounder" data-toggle-show="#invoice-{{bill.id}}">
+              <svg class="w-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
   </div>
   <article>
+
     <div n-for="timelineItems as timelineItem" class="relative mb-3">
       <div class="flex gap-x-2">
         <div class="border-l-1 border-neutral-light-opaque -shadow-body-light-opaque p-2 border-rounded">
@@ -14,10 +67,64 @@
         <div class="border-r-1 shadow-body-light-opaque border-rounded p-2 border-neutral-light-opaque w-28">
           {{timelineItem.activity}}
           <div class="border-b-1 border-neutral-light-opaque"></div>
+          <div class="font-md mt-1">{{timelineItem.content}}</div>
         </div>
       </div>
     </div>
   </article>
+  <div n-for="documents.estimates as estimate">
+    <div id="estimate-{{estimate.id}}" class="modal absolute bg-body-dark-opaque left-0 top-0 right-0 bottom-0 none">
+      <div class="relative w-3/5 h-3/5 bg-white mx-auto mt-20">
+        <div class="bg-secondary p-3 grid">
+          <button class="place-end-end text-danger bg-transparent border-rounder border-transparent cursor-pointer" data-toggle-show="#estimate-{{estimate.id}}">
+            <svg class="w-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="p-3">
+          <p class="mb-3">
+            Detailed estimates are delivered via email. This is merely an overview.
+          </p>
 
+          <div n-for="estimate.items as item" class="grid grid-cols-3 even-child-bg-body-light p-1 even-child-text-white">
+            <div><span decimal>{{item.estimatedHours}}</span>h</div>
+            <div>{{item.product.name}}</div>
+            <div>{{item.milestone.title}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div n-for="documents.bills as bill">
+    <div id="invoice-{{bill.id}}" class="modal absolute bg-body-dark-opaque left-0 top-0 right-0 bottom-0 none">
+      <div class="relative w-3/5 h-3/5 bg-white mx-auto mt-20">
+        <div class="bg-secondary p-3 grid">
+          <button class="place-end-end text-danger bg-transparent border-rounder border-transparent cursor-pointer" data-toggle-show="#invoice-{{bill.id}}">
+            <svg class="w-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="p-3">
+          <p class="mb-3">
+            Official invoices are delivered via email.
+          </p>
+
+          <div n-for="bill.lineItems as item" class=" even-child-bg-body-light p-1 even-child-text-white">
+            <a target="_blank" rel="noreferrer noopener" href="/timesheet/{{item.hash}}" class="grid grid-cols-3">
+              <div>
+                <span i18n-date>{{item.workedAt}}</span> <br>
+                <span decimal>{{item.hours}}</span>h
+              </div>
+              <div>{{item.product.name}} <br>{{item.milestone.title}}</div>
+              <div class="text-right" i18n-currency="{{currency}}">{{item.total}}</div>
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>

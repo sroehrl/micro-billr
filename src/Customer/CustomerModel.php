@@ -3,6 +3,7 @@
 namespace App\Customer;
 
 use App\Address\AddressModel;
+use App\Company\CompanyModel;
 use App\Person\PersonModel;
 use Neoan\Model\Attributes\HasMany;
 use Neoan\Model\Attributes\IsForeignKey;
@@ -19,6 +20,9 @@ class CustomerModel extends Model
 {
     #[IsPrimaryKey]
     public int $id;
+
+    #[IsForeignKey(CompanyModel::class)]
+    public int $companyId;
 
     public string $title;
 

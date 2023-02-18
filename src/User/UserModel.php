@@ -3,6 +3,7 @@
 namespace App\User;
 
 use App\Company\CompanyModel;
+use App\Person\PersonModel;
 use Neoan\Database\Database;
 use Neoan\Model\Attributes\IsEnum;
 use Neoan\Model\Attributes\IsForeignKey;
@@ -16,6 +17,7 @@ use Neoan3\Apps\Session;
 
 /**
  * @method CompanyModel company();
+ * @method PersonModel|null person();
  */
 class UserModel extends Model
 {
@@ -30,6 +32,9 @@ class UserModel extends Model
 
     #[IsForeignKey(CompanyModel::class)]
     public ?int $companyId;
+
+    #[IsForeignKey(PersonModel::class)]
+    public ?int $personId;
 
     #[IsEnum(Privilege::class)]
     public ?Privilege $privilege;

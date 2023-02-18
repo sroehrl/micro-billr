@@ -2,7 +2,7 @@
   <h1>Projects</h1>
   <div class="grid">
 
-    <a href="/project/new" class="button-primary flex gap-x-2 place-center-end">
+    <a n-if="privilege != 'CUSTOMER'" href="/project/new" class="button-primary flex gap-x-2 place-center-end">
       <svg class="w-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
       </svg>
@@ -28,12 +28,17 @@
   </div>
   <div n-if="collection.length>0">
     <div class="grid grid-cols-5 border-t-1 pt-2 pb-2" n-if="collection.length>0" n-for="collection as project">
-      <div>{{project.id}}</div>
+      <div>{{project.slug}}</div>
       <div>{{project.title}} </div>
       <div>{{project.projectStatus}}</div>
       <div i18n-date>{{project.targetedAt}}</div>
-      <div class="grid">
-        <a href="/project/{{project.id}}" class="button-secondary font-md place-start-end">Open</a>
+      <div class="flex gap-x-2">
+        <div>
+          <a n-if="privilege != 'CUSTOMER'" href="/project/{{project.id}}" class="button-secondary font-md place-start-end">Open</a>
+        </div>
+        <div>
+          <a n-if="privilege === 'CUSTOMER'" href="/customer-project/{{project.slug}}" class="button-secondary font-md place-start-end">Open</a>
+        </div>
       </div>
     </div>
   </div>

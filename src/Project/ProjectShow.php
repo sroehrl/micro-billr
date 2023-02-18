@@ -38,7 +38,7 @@ class ProjectShow implements Routable
 
     private function getDetails(): array
     {
-        $projectId = Request::getParameter('id');
+        $projectId = Request::getParameter('projectId');
         return match (Request::getParameter('tab')){
             'milestones' => MilestoneModel::retrieve(['^deletedAt', 'projectId' => $projectId])->toArray(),
             'estimate' => [

@@ -25,7 +25,7 @@ class BillingSettings implements Routable
         $feedback = '';
         if(!$invoiceSettings){
             $invoiceSettings = new InvoiceSettingModel();
-            $invoiceSettings->invoiceNumberFormat = 'Invoice-[[fullYear]]-[[number]]';
+            $invoiceSettings->invoiceNumberFormat = 'I-[[fullYear]]-[[number]]';
             $invoiceSettings->invoiceNumber = 1;
             $invoiceSettings->companyId = $admin->user->companyId;
             $invoiceSettings->invoiceNumberPadding = 4;

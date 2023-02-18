@@ -6,6 +6,7 @@ use App\Address\AddressModel;
 use App\Address\Country;
 use App\Address\Support\Countries;
 use App\Auth\BehindLogin;
+use App\Auth\Permission\CustomerPermission;
 use Neoan\Enums\GenericEvent;
 use Neoan\Enums\RequestMethod;
 use Neoan\Event\Event;
@@ -16,14 +17,14 @@ use Neoan\Routing\Attributes\Web;
 use Neoan\Routing\Interfaces\Routable;
 use Neoan3\Apps\Session;
 
-#[Web('/customer/:id', 'Customer/views/show.html', BehindLogin::class)]
+#[Web('/customer/:customerId', 'Customer/views/show.html', BehindLogin::class, CustomerPermission::class)]
 class CustomerShow implements Routable
 {
     public function __invoke(Countries $countries): array
     {
 
         try{
-            $customer = CustomerModel::get(Request::getParameter('id'));
+            $customer = CustomerModel::get(Request::getParameter('customerId'));
             if(isset($customer->addressId)){
                 $customer->withAddress();
             } else {

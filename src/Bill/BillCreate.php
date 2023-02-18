@@ -4,6 +4,7 @@ namespace App\Bill;
 
 use App\Auth\Auth;
 use App\Auth\BehindLogin;
+use App\Auth\Permission\ProjectPermission;
 use App\Company\CompanyModel;
 use App\Customer\CustomerModel;
 use App\Helper\FeedbackWrapper;
@@ -20,8 +21,8 @@ use Neoan\Routing\Attributes\Post;
 use Neoan\Routing\Attributes\Web;
 use Neoan\Routing\Interfaces\Routable;
 
-#[Web('/new-bill/:projectId', 'Bill/views/create.html', BehindLogin::class)]
-#[Post('/new-bill/:projectId', BehindLogin::class)]
+#[Web('/new-bill/:projectId', 'Bill/views/create.html', BehindLogin::class, ProjectPermission::class)]
+#[Post('/new-bill/:projectId', BehindLogin::class, ProjectPermission::class)]
 class BillCreate implements Routable
 {
     private Collection $milestones;
@@ -65,6 +66,7 @@ class BillCreate implements Routable
             'billNumber' => $bill->billNumber,
         ] = Request::getInputs();
         $bill->projectId = $projectId;
+        $bill->companyId = $this->user->companyId;
         $timeSheets = new Collection();
         foreach (Request::getInput('timesheets') as $id => $status) {
             if($status === 'on'){

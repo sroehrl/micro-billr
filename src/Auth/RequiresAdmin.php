@@ -17,7 +17,7 @@ class RequiresAdmin implements Routable
             $session = Session::restrict([Privilege::ADMIN]);
             $this->user = UserModel::get(Session::userId());
         } catch (\Exception $e) {
-            Response::redirect('/login');
+            Response::redirect('/');
         }
         return $this;
     }

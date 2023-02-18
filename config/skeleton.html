@@ -31,19 +31,38 @@
     </div>
 </header>
 <nav id="main-menu" class="absolute right-0 block none transition-5 z-2">
-    <a n-if="!loggedIn" href="/login" class="block pr-5 pl-5 bg-secondary-light text-white border-b-1">Login</a>
+    <div>
+        <a n-if="!loggedIn" href="/login" class="block pr-5 pl-5 bg-secondary-light text-white border-b-1">Login</a>
+    </div>
+
+    <div>
+        <div n-if="loggedIn">
+            <a href="/" class="block pt-3 pb-3 pr-5 pl-5 bg-secondary-light text-white border-b-1">Home</a>
+            <a href="/project" class="block pt-3 pb-3 pr-5 pl-5 bg-secondary-light text-white border-b-1">Projects</a>
+
+        </div>
+    </div>
+    <div>
+        <div n-if="loggedIn && privilege != 'CUSTOMER'">
+            <a href="/finances" class="block pt-3 pb-3 pr-5 pl-5 bg-secondary-light text-white border-b-1">Finances</a>
+            <a href="/customer" class="block pt-3 pb-3 pr-5 pl-5 bg-secondary-light text-white border-b-1">Customers</a>
+        </div>
+    </div>
+    <div>
+        <div n-if="loggedIn && privilege === 'ADMIN'">
+            <a href="/settings/company" class="block pt-3 pb-3 pr-5 pl-5 bg-secondary-light text-white border-b-1">Settings</a>
+        </div>
+    </div>
+
     <div n-if="loggedIn">
-        <a href="/" class="block pt-3 pb-3 pr-5 pl-5 bg-secondary-light text-white border-b-1">Home</a>
-        <a href="/project" class="block pt-3 pb-3 pr-5 pl-5 bg-secondary-light text-white border-b-1">Projects</a>
-        <a href="/finances" class="block pt-3 pb-3 pr-5 pl-5 bg-secondary-light text-white border-b-1">Finances</a>
-        <a href="/customer" class="block pt-3 pb-3 pr-5 pl-5 bg-secondary-light text-white border-b-1">Customers</a>
-        <a href="/settings/company" class="block pt-3 pb-3 pr-5 pl-5 bg-secondary-light text-white border-b-1">Settings</a>
-        <a href="/logout" class="block pt-1 pb-1 pr-5 pl-5 bg-warning text-white border-b-1">LOGOUT</a>
+        <a href="/logout" class="block pt-1 pb-1 pr-5 pl-5 bg-warning text-white border-b-1">
+            LOGOUT
+        </a>
     </div>
 </nav>
 <div class="pb-15" id="layout-content">{{content}}</div>
 <footer class="bg-primary p-3 fixed bottom-0 left-0 right-0">
-    Prototype! This site is not for public consumption yet. <br>
+    Closed Beta - per invitation only<br>
 
 </footer>
 <script src="/js/toggle.js"></script>

@@ -2,6 +2,7 @@
 
 namespace App\Customer;
 
+use App\Auth\Auth;
 use App\Auth\BehindLogin;
 use Config\FormPost;
 use Neoan\Enums\RequestMethod;
@@ -19,10 +20,13 @@ use Ramsey\Uuid\Uuid;
 ]
 class CustomerCreate implements Routable
 {
-    public function __invoke(): array
+    public function __invoke(Auth $auth): array
     {
         if(Request::getRequestMethod() === RequestMethod::POST) {
-            $newCustomer = new CustomerModel(Request::getInputs());
+            $newCustomer = new CustomerModel([
+                ...Request::getInputs(),
+                'companyId' => $auth->user->companyId
+            ]);
             try{
                 $newCustomer->store();
                 Session::addToSession(['comingFrom' => 'customer']);

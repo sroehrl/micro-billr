@@ -2,13 +2,14 @@
 
 namespace App\Timesheet;
 
+use App\Auth\BehindLogin;
 use App\Note\NoteModel;
 use Neoan\Request\Request;
 use Neoan\Routing\Attributes\Web;
 use Neoan\Routing\Interfaces\Routable;
 use Neoan3\Apps\Session;
 
-#[Web('/timesheet/:hash', 'Timesheet/views/show.html')]
+#[Web('/timesheet/:hash', 'Timesheet/views/show.html', BehindLogin::class)]
 class TimesheetShow implements Routable
 {
     public function __invoke(): array

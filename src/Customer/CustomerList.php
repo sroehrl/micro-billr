@@ -2,6 +2,7 @@
 
 namespace App\Customer;
 
+use App\Auth\Auth;
 use App\Auth\BehindLogin;
 use Neoan\Request\Request;
 use Neoan\Routing\Attributes\Web;
@@ -11,7 +12,7 @@ use Neoan\Store\Store;
 #[Web('/customer', 'Customer/views/list.html', BehindLogin::class)]
 class CustomerList implements Routable
 {
-    public function __invoke(): array
+    public function __invoke(Auth $auth): array
     {
         $page = Request::getQuery('page') ?? 1;
         $sort = Request::getQuery('sort') ?? 'title';
@@ -24,7 +25,7 @@ class CustomerList implements Routable
         }
         return CustomerModel::paginate($page, 30)
             ->{$sortDirection}($sort)
-            ->where(['title' => $filter . '%'])
+            ->where(['title' => $filter . '%', 'companyId' => $auth->user->companyId])
             ->get();
     }
 }

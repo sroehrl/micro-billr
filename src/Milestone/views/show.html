@@ -1,10 +1,10 @@
 <div class="w-4/5 mx-auto mt-5 flex-1">
-    <h1>{{title}} <span class="font-lg">Project <a class="text-secondary hover:text-secondary-dark" href="/project/{{project.id}}/milestones">{{project.title}}</a></span></h1>
+    <h1>{{title}} <span n-if="privilege !== 'CUSTOMER'" class="font-lg">Project <a class="text-secondary hover:text-secondary-dark" href="/project/{{project.id}}/milestones">{{project.title}}</a></span></h1>
     <div class="border-1 border-secondary border-rounded p-2">
-        <form method="post" action="/milestone/{{id}}/update" class="grid grid-cols-4 gap-x-2 p-2">
+        <form n-if="privilege !== 'CUSTOMER'" method="post" action="/milestone/{{id}}/update" class="grid grid-cols-4 gap-x-2 p-2">
 
             <div class="input">
-                <input type="date" name="startedAt" id="startedAt" value="{{startDate}}">
+                <input type="date" name="startedAt" id="startedAt" value="{{startDate}}" >
                 <label for="startedAt">Start date</label>
             </div>
             <div class="input">
@@ -15,15 +15,20 @@
                 <input type="number" step="0.25" name="estimatedHours" id="estimatedHours" value="{{estimatedHours}}">
                 <label for="estimatedHours">Estimated hours</label>
             </div>
-            <div class="place-center-end">
+            <div class="place-center-end" >
                 <button class="button-secondary">update</button>
             </div>
         </form>
+
         <div class="grid grid-cols-2 gap-5">
             <div class="notes">
+                <div n-if="privilege === 'CUSTOMER'">
+                    Target date: <span i18n-date>{{targetDate}}</span> <br>
+                    Project: <a href="/customer-project/{{project.slug}}">{{project.title}}</a>
+                </div>
                 <div class="grid grid-cols-2 gap-x-2">
                     <h2 class="flex-1">Notes</h2>
-                    <button class="button-primary place-center-end flex gap-x-2" data-toggle-show="#note-modal">
+                    <button n-if="privilege !== 'CUSTOMER'" class="button-primary place-center-end flex gap-x-2" data-toggle-show="#note-modal">
                         <svg class="w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"></path>
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z"></path>
@@ -40,7 +45,7 @@
                 <div partial="/Chart/views/bar.html"></div>
                 <div class="grid grid-cols-2 gap-x-2">
                     <h2 class="flex-1">Worked on</h2>
-                    <button class="button-accent place-center flex gap-x-2" title="track time" data-toggle-show="#timesheet-modal">
+                    <button n-if="privilege !== 'CUSTOMER'" class="button-accent place-center flex gap-x-2" title="track time" data-toggle-show="#timesheet-modal">
                         <svg class="w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>

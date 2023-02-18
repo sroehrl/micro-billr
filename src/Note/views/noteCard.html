@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <div class="mt-3 relative">
+  <div n-if="privilege!=='CUSTOMER'" class="mt-3 relative">
     <button class="button-danger-opaque font-sm" data-delete="/api/note" data-delete-id="{{note.id}}">done</button>
   </div>
 

@@ -3,6 +3,7 @@
 namespace App\Estimate;
 
 use App\Auth\BehindLogin;
+use App\Auth\Permission\ProjectPermission;
 use App\DocumentCreator\Create;
 use App\Helper\FeedbackWrapper;
 use App\Mailing\Mail;
@@ -13,7 +14,7 @@ use Neoan\Request\Request;
 use Neoan\Routing\Attributes\Post;
 use Neoan\Routing\Interfaces\Routable;
 
-#[Post('/estimate/:projectId', BehindLogin::class)]
+#[Post('/estimate/:projectId', BehindLogin::class, ProjectPermission::class)]
 class EstimateUpdateOrCreate implements Routable
 {
     public function __invoke(Create $documentCreator, Setup $setup, Mail $mail, TimelineModel $timeline): void

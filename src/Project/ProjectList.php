@@ -4,6 +4,9 @@ namespace App\Project;
 
 use App\Auth\Auth;
 use App\Auth\BehindLogin;
+use App\Customer\CustomerModel;
+use App\Person\PersonModel;
+use App\User\Privilege;
 use Neoan\Request\Request;
 use Neoan\Routing\Attributes\Web;
 use Neoan\Routing\Interfaces\Routable;
@@ -21,6 +24,10 @@ class ProjectList implements Routable
             $sortDirection = 'descending';
         }
         $baseFilter = ['companyId' => $auth->user->companyId];
+        if($auth->user->privilege === Privilege::CUSTOMER){
+            $baseFilter['customerId'] = $auth->user->person()->customerId;
+
+        }
         $filter = Request::getQuery('filter') ? ['status' => Request::getQuery('filter')] : [];
         $pagination =  ProjectModel::paginate($page, 30)
             ->where([...$filter, ...$baseFilter])
