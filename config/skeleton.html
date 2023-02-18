@@ -44,12 +44,13 @@
     </div>
     <div>
         <div n-if="loggedIn && privilege != 'CUSTOMER'">
-            <a href="/finances" class="block pt-3 pb-3 pr-5 pl-5 bg-secondary-light text-white border-b-1">Finances</a>
+
             <a href="/customer" class="block pt-3 pb-3 pr-5 pl-5 bg-secondary-light text-white border-b-1">Customers</a>
         </div>
     </div>
     <div>
         <div n-if="loggedIn && privilege === 'ADMIN'">
+            <a href="/finances" class="block pt-3 pb-3 pr-5 pl-5 bg-secondary-light text-white border-b-1">Finances</a>
             <a href="/settings/company" class="block pt-3 pb-3 pr-5 pl-5 bg-secondary-light text-white border-b-1">Settings</a>
         </div>
     </div>

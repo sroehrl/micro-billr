@@ -11,10 +11,10 @@ use Neoan\Database\Database;
 class CalendarEvents
 {
     private static array $allEvents = [];
-    public static function allEvents(): array
+    public static function allEvents(int $companyId): array
     {
         // projects
-        ProjectModel::retrieve(['^deletedAt'])->each(function(ProjectModel $project){
+        ProjectModel::retrieve(['^deletedAt', 'companyId' => $companyId])->each(function(ProjectModel $project){
             self::$allEvents[] = $project->calendarEvent();
         });
         // notes

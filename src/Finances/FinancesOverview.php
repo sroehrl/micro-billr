@@ -17,7 +17,7 @@ class FinancesOverview implements Routable
 
         return [
             'chartData' => '/finances',
-            'unpaidBills' => BillModel::retrieve(['^deletedAt', 'generatedDate' => '!null', '^paidAt'],['orderBy' => ['generatedDate','ASC']])
+            'unpaidBills' => BillModel::retrieve(['^deletedAt', 'generatedDate' => '!null', '^paidAt', 'companyId' => $admin->user->companyId],['orderBy' => ['generatedDate','ASC']])
                 ->each(fn(BillModel $bill) => $bill->withCustomer()->withProject())
                 ->each(fn(BillModel $bill) => $bill->overdue = $bill->generatedDate->getTimeDifference(new DateHelper())->days)
                 ->toArray()

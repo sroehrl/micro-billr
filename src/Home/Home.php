@@ -55,7 +55,7 @@ class Home implements Routable
             ])->count(),
             'unbilledHours' => $unbilledHours,
             'openBills' => BillModel::retrieve(['^deletedAt', '^paidAt', 'companyId' => $auth->user->companyId])->count(),
-            'events' => json_encode(CalendarEvents::allEvents())
+            'events' => json_encode(CalendarEvents::allEvents($auth->user->companyId))
         ];
     }
 }
