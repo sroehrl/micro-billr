@@ -72,7 +72,8 @@ class Config
             'password' => Env::get('DB_PASSWORD', ''),
             'charset' => Env::get('DB_CHARSET', 'utf8mb4'),
             'casing' => Env::get('DB_CASING', 'camel'),
-            'assumes_uuid' => Env::get('DB_UUID', false)
+            'assumes_uuid' => Env::get('DB_UUID', false),
+            'dev_errors' => Env::get('DB_DEV_ERRORS', false)
         ]);
     }
 

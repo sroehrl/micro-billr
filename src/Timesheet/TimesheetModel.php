@@ -9,6 +9,7 @@ use App\Product\PriceTransformation;
 use App\Product\ProductModel;
 use App\Project\ProjectModel;
 use Neoan\Database\Database;
+use Neoan\Enums\TimePeriod;
 use Neoan\Model\Attributes\Computed;
 use Neoan\Model\Attributes\HasMany;
 use Neoan\Model\Attributes\Ignore;
@@ -88,6 +89,28 @@ class TimesheetModel extends Model
 
     #[Ignore]
     public float $total;
+
+    public function calendarEvent(): ?array
+    {
+        if(isset($this->workedAt->dateTime)){
+            $url = '/timesheet/' . $this->hash;
+
+            return [
+                'id' => 'timesheet-' . $this->id,
+                'start' => $this->workedAt->dateTime->format("Y-m-d\\TH:i:sO"),
+                'end' => $this->workedAt->addTimePeriod(round($this->hours), TimePeriod::HOURS),
+                'allDay' => false,
+                'title' => $this->hours . '* ' . $this->productName(),
+                'url' =>  $url,
+                'display' => 'list-item',
+                'displayEventTime' => false,
+                'backgroundColor' => '#cccccc',
+                'extendedProps' => $this->toArray()
+            ];
+        }
+
+        return null;
+    }
 
     protected function afterStore(): void
     {

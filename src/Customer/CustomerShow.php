@@ -2,15 +2,10 @@
 
 namespace App\Customer;
 
-use App\Address\AddressModel;
 use App\Address\Country;
 use App\Address\Support\Countries;
 use App\Auth\BehindLogin;
 use App\Auth\Permission\CustomerPermission;
-use Neoan\Enums\GenericEvent;
-use Neoan\Enums\RequestMethod;
-use Neoan\Event\Event;
-use Neoan\Helper\Terminate;
 use Neoan\Request\Request;
 use Neoan\Response\Response;
 use Neoan\Routing\Attributes\Web;

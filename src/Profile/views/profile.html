@@ -1,0 +1,52 @@
+<div class="mt-5 mx-auto w-4/5">
+    <div class="border-rounded border-body border-1 p-3">
+        <form method="post">
+            <div class="grid">
+                <div class="input">
+                    <input type="email" id="email" name="email" value="{{user.email}}" required>
+                    <label for="email">Email</label>
+                </div>
+                <div class="input none" id="email-confirmation">
+                    <input type="email" id="new-email" placeholder="email">
+                    <label for="new-email">Confirm new email</label>
+                </div>
+                <div class="input">
+                    <input type="password" id="password" name="password" minlength="8" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" placeholder="password">
+                    <label for="password">New password</label>
+                    <p class="font-md flex">
+                        <svg class="w-2 text-accent none" id="check" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+                        </svg>
+                        <span class="flex-1">Min. 8 characters, 1 uppercase, 1 lowercase & 1 number</span>
+
+                    </p>
+                </div>
+                <div class="input none" id="password-confirmation">
+                    <input type="password" id="new-password" placeholder="password">
+                    <label for="new-password">Confirm new password</label>
+                    <p>
+                        <svg class="w-2 text-accent none" id="confirm-check" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+                        </svg>
+                    </p>
+                </div>
+                <div class="place-end">
+                    <button class="button-primary">save</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <script>
+        _('#email').addEventListener('input', ev => {
+            ev.target.value !== '{{user.email}}' ? _('#email-confirmation').classList.remove('none') : _('#email-confirmation').classList.add('none');
+        })
+        _('#password').addEventListener('input', ev => {
+            ev.target.checkValidity() ? _('#check').classList.remove('none') : _('#check').classList.add('none');
+            ev.target.value.length>0 ? _('#password-confirmation').classList.remove('none') : _('#password-confirmation').classList.add('none');
+        });
+        _('#new-password').addEventListener('input', ev => {
+            ev.target.value === _('#password').value ? _('#confirm-check').classList.remove('none') : _('#confirm-check').classList.add('none');
+        });
+    </script>
+</div>

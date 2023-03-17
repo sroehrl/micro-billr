@@ -18,6 +18,10 @@
         plugins: [dayGridPlugin],
         initialView: 'dayGridMonth',
         events: JSON.parse(`{{events}}`),
+        eventMouseEnter(opt){
+          console.log(opt)
+        },
+        displayEventTime:false,
         headerToolbar: {
           left: 'prev,next today',
           center: 'title',

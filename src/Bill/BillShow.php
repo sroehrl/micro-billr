@@ -5,6 +5,7 @@ namespace App\Bill;
 use App\Auth\Auth;
 use App\Auth\BehindLogin;
 use App\DocumentCreator\Create;
+use App\Helper\FeedbackWrapper;
 use App\Mailing\Mail;
 use App\Timeline\TimelineActivity;
 use App\Timeline\TimelineModel;
@@ -13,6 +14,7 @@ use Config\FormPost;
 use Neoan\Enums\RequestMethod;
 use Neoan\Helper\Setup;
 use Neoan\Request\Request;
+use Neoan\Response\Response;
 use Neoan\Routing\Attributes\Web;
 use Neoan\Routing\Interfaces\Routable;
 
@@ -99,6 +101,7 @@ class BillShow implements Routable
                 break;
             case BillStatus::GENERATED:
                 if(!$this->mail->sendBill($this->bill)){
+                    Response::redirect(FeedbackWrapper::appendFeedback('/bill/'. $this->bill->id, 'There was a problem sending the email. Settings okay?'));
                     $this->feedback = 'There was a problem sending the email';
                 } else {
                     $timeline = new TimelineModel([

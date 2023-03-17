@@ -14,7 +14,7 @@ use Neoan\Routing\Interfaces\Routable;
 #[Post('/project/:id', BehindLogin::class)]
 class ProjectUpdate implements Routable
 {
-    public function __invoke(TimelineModel $timeline): array
+    public function __invoke(TimelineModel $timeline): void
     {
         $project = ProjectModel::get(Request::getParameter('id'));
         $status= ProjectStatus::from(Request::getInput('status'));

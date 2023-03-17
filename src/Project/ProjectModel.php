@@ -51,7 +51,8 @@ class ProjectModel extends Model
             'allDay' => true,
             'title' => $this->customer()->title . ' - ' . $this->title,
             'url' => '/project/' . $this->id,
-            'backgroundColor' => $this->status->color()
+            'backgroundColor' => $this->status->color(),
+            'extendedProps' => $this->toArray()
         ];
         if(isset($this->startedAt->dateTime)){
             $event['start'] = $this->startedAt->dateTime->format("Y-m-d\\TH:i:sO");

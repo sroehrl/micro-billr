@@ -4,6 +4,7 @@ namespace App\Mailing;
 
 use Mailjet\Client;
 use Mailjet\Resources;
+use Neoan\Errors\SystemError;
 
 class Mailjet implements MailProviderInterface
 {
@@ -65,6 +66,9 @@ class Mailjet implements MailProviderInterface
         ];
     }
 
+    /**
+     * @throws \Exception
+     */
     public function send(): bool
     {
         $body = [
