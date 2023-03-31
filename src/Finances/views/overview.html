@@ -9,20 +9,25 @@
       <div class="font-md">Amount</div>
       <div class="font-md">Outstanding</div>
     </div>
-    <div class="grid grid-cols-5 gap-2" n-for="unpaidBills as unpaidBill">
-      <div i18n-date>{{unpaidBill.generatedDate}}</div>
-      <div><a href="/project/{{unpaidBill.project.id}}">{{unpaidBill.project.title}}</a></div>
-      <div><a href="/customer/{{unpaidBill.customer.id}}">{{unpaidBill.customer.title}}</a></div>
-      <div class="flex gap-x-2">
-        <span i18n-currency="{{currency}}">{{unpaidBill.totalNet}}</span>
-        <a href="/bill/{{unpaidBill.id}}" title="open bill">
-          <svg class="w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 14.25l6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185zM9.75 9h.008v.008H9.75V9zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm4.125 4.5h.008v.008h-.008V13.5zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"></path>
-          </svg>
-        </a>
+    <div>
+      <div n-if="unpaidBills.length > 0">
+        <div class="grid grid-cols-5 gap-2" n-for="unpaidBills as unpaidBill">
+          <div i18n-date>{{unpaidBill.generatedDate}}</div>
+          <div><a href="/project/{{unpaidBill.project.id}}">{{unpaidBill.project.title}}</a></div>
+          <div><a href="/customer/{{unpaidBill.customer.id}}">{{unpaidBill.customer.title}}</a></div>
+          <div class="flex gap-x-2">
+            <span i18n-currency="{{currency}}">{{unpaidBill.totalNet}}</span>
+            <a href="/bill/{{unpaidBill.id}}" title="open bill">
+              <svg class="w-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 14.25l6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185zM9.75 9h.008v.008H9.75V9zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm4.125 4.5h.008v.008h-.008V13.5zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"></path>
+              </svg>
+            </a>
+          </div>
+          <div>{{unpaidBill.overdue}} days</div>
+        </div>
       </div>
-      <div>{{unpaidBill.overdue}} days</div>
     </div>
+
   </div>
 
 </div>

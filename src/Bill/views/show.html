@@ -4,7 +4,14 @@
             Bill: {{bill.billNumber}} - {{bill.customer.title}}
         </h3>
         <div class="absolute -top-5 p-2 bg-white-light right-5">
-            <button n-if="bill.billStatus !== 'revoked'" type="button" class="button-danger" data-delete="/api/bill" data-delete-id="{{bill.id}}">rescind</button>
+            <div n-if="!bill.paidAt">
+                <button n-if="bill.billStatus !== 'revoked'" type="button" class="button-danger" data-delete="/api/bill" data-delete-id="{{bill.id}}">rescind</button>
+            </div>
+        </div>
+        <div class="absolute -top-5 p-2 bg-white-light right-5">
+            <div n-if="bill.paidAt">
+                <span class="button-secondary">paid: <span i18n-date="">{{bill.paidAt}}</span></span>
+            </div>
         </div>
         <div class="font-lg">
             Project: <a href="/project/{{bill.projectId}}" class="">{{bill.project.title}}</a>
@@ -133,9 +140,26 @@
             </div>
 
 
+
         </div>
     </form>
-
+    <div>
+        <div n-if="bill.billStatus === 'sent out' && bill.paidAt === null">
+            <form class="mt-3 p-3" action="/bill/{{bill.id}}/mark-paid" method="post">
+                <div class="input">
+                    <input type="date" name="paidAt" id="paidAt" required>
+                    <label for="paidAt">Paid at</label>
+                </div>
+                <div class="input">
+                    <input type="text" name="transactionCode" id="transactionCode" required>
+                    <label for="transactionCode">Transaction code / note</label>
+                </div>
+                <div class="grid">
+                    <button class="button-primary">Mark paid</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <script type="module">
         import Toast from "/js/toast.js";
 
