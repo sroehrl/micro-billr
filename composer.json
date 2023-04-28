@@ -9,7 +9,8 @@
     "php-curl-class/php-curl-class": "^9.13",
     "spipu/html2pdf": "dev-master",
     "ext-openssl": "*",
-    "mailjet/mailjet-apiv3-php": "^1.5"
+    "mailjet/mailjet-apiv3-php": "^1.5",
+    "spatie/pdf-to-image": "^1.2"
   },
   "scripts": {
     "install-socket": "NeoanIo\\MarketPlace\\Broadcast\\NpmHandler::package"

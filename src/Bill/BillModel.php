@@ -69,7 +69,7 @@ class BillModel extends Model
             return new Collection();
         }
         $knownFlatrates = [];
-        return TimesheetModel::retrieve(['^deletedAt','billId'=>$this->id],['orderBy' =>['milestoneId','ASC']])
+        return TimesheetModel::retrieve(['^deletedAt','billId'=>$this->id],['orderBy' =>['workedAt','ASC']])
             ->each(fn(TimesheetModel $model) => $model->withProduct()->withMilestone())
             ->each(function(TimesheetModel $lineItem) use (&$knownFlatrates){
                 if($lineItem->product->billingType === BillingType::FLATRATE){

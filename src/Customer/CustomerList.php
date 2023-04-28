@@ -27,5 +27,6 @@ class CustomerList implements Routable
             ->{$sortDirection}($sort)
             ->where(['title' => $filter . '%', 'companyId' => $auth->user->companyId])
             ->get();
+        
     }
 }

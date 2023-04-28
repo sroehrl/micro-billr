@@ -93,10 +93,13 @@ class Create implements Routable
 
         $lineItems = $billModel->lineItems->toArray();
 
+
         $data = new DataNormalization([
             'privateKey' => $this->setup->get('libraryPath') . '/Auth/privKey.pem',
             'certificate' => $this->setup->get('libraryPath') . '/Auth/cert.pem',
             'lineItems' => $lineItems,
+            'workedFrom' => $lineItems[0]['workedAt'],
+            'workedTo' => $lineItems[array_key_last($lineItems)]['workedAt'],
             'totalNet' => $totalNet,
             'totalTax' => $totalTax,
             'totalGross' => $totalNet + $totalTax,
